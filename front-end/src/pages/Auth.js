@@ -10,6 +10,9 @@ import EmailIcon from '@material-ui/icons/Email'
 import VpnKeyIcon from '@material-ui/icons/VpnKey'
 import PersonIcon from '@material-ui/icons/Person'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import Typography from '@material-ui/core/Typography'
+
+
 
 export default function Auth() {
 
@@ -39,6 +42,8 @@ export default function Auth() {
     }
     return (
         <div>
+            <Typography variant='h1' align='center' className='primary-gray'>The Android's Dungeon</Typography>
+            <Typography variant='h3' align='center' style={{color: 'green'}}>Login:</Typography>
             <form onSubmit={handleLogin}>
             <FormControl>
                 <InputLabel htmlFor="username">Username or Email</InputLabel>
