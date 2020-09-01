@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Auth.scss";
+import axios from 'axios'
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
 import FormControl from "@material-ui/core/FormControl";
@@ -39,6 +40,7 @@ export default function Auth() {
       setPasswordsMatch(false);
     } else {
       setPasswordsMatch(true);
+      axios.post('register', {newUsername, email, newPassword})
     }
 
     console.log("registering");
@@ -117,6 +119,7 @@ export default function Auth() {
         <FormControl>
           <InputLabel htmlFor="email">Email</InputLabel>
           <Input
+            type='email'
             required
             value={email}
             id="email"
