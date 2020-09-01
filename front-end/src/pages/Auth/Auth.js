@@ -17,7 +17,7 @@ import Card from "@material-ui/core/Card";
 
 export default function Auth() {
   const [username, setUsername] = useState("");
-  const [password, setPassowrd] = useState("");
+  const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -41,6 +41,10 @@ export default function Auth() {
     } else {
       setPasswordsMatch(true);
       axios.post('register', {newUsername, email, newPassword})
+      .then( res => {
+
+      })
+      .catch( err => (alert))
     }
 
     console.log("registering");
@@ -84,7 +88,7 @@ export default function Auth() {
                     <LockIcon />
                   </InputAdornment>
                 }
-                onChange={(e) => setPassowrd(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
                 type="password"
               />
             </FormControl>
@@ -187,7 +191,6 @@ export default function Auth() {
           </Typography>
         </Card>
       </div>
-      
     </div>
   );
 }
