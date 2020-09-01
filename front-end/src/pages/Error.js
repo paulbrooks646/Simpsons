@@ -11,7 +11,10 @@ export default function Error() {
         marginTop: "200px",
       }}
     >
-      <img src="https://upload.wikimedia.org/wikipedia/en/7/79/The_Simpsons-Jeff_Albertson.png" />
+      <img
+        src="https://upload.wikimedia.org/wikipedia/en/7/79/The_Simpsons-Jeff_Albertson.png"
+        alt="Comic Book Guy"
+      />
       <h2> Worst Error Page Ever!!!</h2>
       <Link to="/dashboard">Return To Dashboard</Link>
     </div>
