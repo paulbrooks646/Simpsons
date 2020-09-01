@@ -4,3 +4,7 @@ body {
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: "SimpsonsFont";
+  src: local("SimpsonsFont"), url(./fonts/SimpsonsFont.otf) format("opentype");
+}
