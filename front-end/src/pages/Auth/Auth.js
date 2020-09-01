@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './Auth.scss'
 import Button from '@material-ui/core/Button'
 import Input from '@material-ui/core/Input'
 import FormControl from '@material-ui/core/FormControl'
@@ -11,6 +12,7 @@ import VpnKeyIcon from '@material-ui/icons/VpnKey'
 import PersonIcon from '@material-ui/icons/Person'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import Typography from '@material-ui/core/Typography'
+import Card from '@material-ui/core/Card'
 
 
 
@@ -41,10 +43,13 @@ export default function Auth() {
         console.log('registering')
     }
     return (
-        <div>
-            <Typography variant='h1' align='center' className='primary-gray'>The Android's Dungeon</Typography>
-            <Typography variant='h3' align='center' style={{color: 'green'}}>Login:</Typography>
-            <form onSubmit={handleLogin}>
+        <div className='auth-main'>
+            <Typography variant='h2' align='center' className='secondary-blue'>Simpson's Fan Page</Typography>
+            <Typography variant='h4' align='center'>The Android's Dungeon</Typography>
+            <div className='card-div'>
+            <Card className='auth-card'>
+            <Typography variant='h5'>Login</Typography>
+            <form onSubmit={handleLogin} className='login-form'>
             <FormControl>
                 <InputLabel htmlFor="username">Username or Email</InputLabel>
                 <Input required value={username} id="username" placeholder='Enter username or email' startAdornment={<InputAdornment position='start'><AccountCircle /></InputAdornment>} onChange={e => setUsername(e.target.value)} />
@@ -55,6 +60,8 @@ export default function Auth() {
             </FormControl>
             <Button variant='contained' color='primary' type='submit'>Login</Button>
             </form>
+            </Card>
+            </div>
             <form onSubmit={handleRegister}>
             <FormControl>
                 <InputLabel htmlFor='newUsername'>Username</InputLabel>
