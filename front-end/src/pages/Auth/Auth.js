@@ -25,6 +25,11 @@ export default function Auth() {
     const [newPassword, setNewPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
     const [passwordsMatch, setPasswordsMatch] = useState(true)
+    const [account, setAccount] = useState(true)
+
+    function toggleAccount() {
+        setAccount(!account)
+    }
 
     function handleLogin(event) {
         event.preventDefault()
@@ -44,8 +49,8 @@ export default function Auth() {
     }
     return (
         <div className='auth-main'>
-            <Typography variant='h2' align='center' className='secondary-blue'>Simpson's Fan Page</Typography>
-            <Typography variant='h4' align='center'>The Android's Dungeon</Typography>
+            <Typography variant='h2' align='center' className='secondary-blue'>The Android's Dungeon</Typography>
+            <Typography variant='h4' align='center'>A Simpsons Fan Page</Typography>
             <div className='card-div'>
             <Card className='auth-card'>
             <Typography variant='h5'>Login</Typography>
@@ -60,6 +65,7 @@ export default function Auth() {
             </FormControl>
             <Button variant='contained' color='primary' type='submit'>Login</Button>
             </form>
+            <Typography variant="h6" onClick={toggleAccount}>No account? Register Here</Typography>
             </Card>
             </div>
             <form onSubmit={handleRegister}>

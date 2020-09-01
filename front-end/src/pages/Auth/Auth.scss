@@ -27,7 +27,11 @@
             justify-content: space-evenly;
 
             .login-form {
-                
+
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                height: 60%;
 
             }
         }
