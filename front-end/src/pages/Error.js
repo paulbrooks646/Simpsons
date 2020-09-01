@@ -5,6 +5,7 @@ export default function Error() {
   return (
     <div
       style={{
+        fontFamily: "SimpsonsFont",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
