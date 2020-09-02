@@ -9,11 +9,16 @@
   background-position: center center;
   min-height: 100%;
 
-  .auth-title {
+  .auth-title,
+  .auth-subtitle {
     font-family: SimpsonsFont;
+  }
+
+  .auth-title {
     position: relative;
     top: 20px;
     margin-bottom: 20px;
+    color: $primary-yellow;
   }
 
   .login-card {
