@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./Auth.scss";
 import axios from "axios";
+import { connect } from "react-redux";
+import { loginUser, registerUser } from "../../redux/userReducer";
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
 import FormControl from "@material-ui/core/FormControl";
@@ -16,7 +18,7 @@ import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import Link from "@material-ui/core/Link";
 
-export default function Auth(props) {
+function Auth(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -36,7 +38,7 @@ export default function Auth(props) {
     axios
       .post("/login", { username, password })
       .then((res) => {
-        console.log(res.data);
+        props.loginUser(res.data);
         props.history.push("/Dashboard");
       })
       .catch((err) => {
@@ -53,7 +55,7 @@ export default function Auth(props) {
       axios
         .post("/register", { newUsername, email, newPassword })
         .then((res) => {
-          console.log(res.data);
+          props.registerUser(res.data);
           props.history.push("/Dashboard");
         })
         .catch((err) => {
@@ -214,3 +216,9 @@ export default function Auth(props) {
     </div>
   );
 }
+
+const mapStateToProps = (reduxState) => reduxState;
+
+const mapDispatchToProps = { loginUser, registerUser };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

@@ -10,7 +10,7 @@ const REGISTER_USER = "REGISTER_USER";
 const LOGOUT_USER = "LOGOUT_USER";
 const GET_USER = "GET_USER";
 
-export function loginUser() {
+export function loginUser(user) {
   return {
     type: LOGIN_USER,
     payload: user,
