@@ -23,9 +23,9 @@ app.delete('/logout', userController.logout)
 
 const port = 5000
 
-app.get('/', (req, res) => {
-    res.send('Hola Phil!')
-})
+// app.get('/', (req, res) => {
+//     res.send('Hola Phil!')
+// })
 
 massive({
     connectionString: CONNECTION_STRING,

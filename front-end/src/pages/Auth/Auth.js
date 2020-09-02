@@ -15,7 +15,7 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 
-export default function Auth() {
+export default function Auth(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -44,6 +44,7 @@ export default function Auth() {
       axios.post('/register', {newUsername, email, newPassword})
       .then( res => {
         console.log(res.data)
+        props.history.push('/Dashboard')
       })
       .catch( err => {
 
