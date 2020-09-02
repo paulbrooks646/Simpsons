@@ -64,14 +64,14 @@ export default function Auth(props) {
   return (
     <div className="auth-main">
       <Typography variant="h2" align="center" className="auth-title">
-        The Android's Dungeon
+        The Android<span style={{ fontFamily: "sans-serif" }}>'</span>s Dungeon
       </Typography>
-      <Typography variant="h4" align="center">
+      <Typography variant="h4" align="center" className="auth-subtitle">
         A Simpsons Fan Page
       </Typography>
       <div className={`${account ? "login-card" : "login-card-closed"}`}>
         <Card variant="outlined" className="auth-card">
-          <Typography variant="h5">Login</Typography>
+          <Typography variant="h4">Login</Typography>
           <form onSubmit={handleLogin} className="login-form">
             <FormControl>
               <InputLabel htmlFor="username">Username or Email</InputLabel>
@@ -105,7 +105,7 @@ export default function Auth(props) {
               />
             </FormControl>
             <Button variant="contained" color="primary" type="submit">
-              Login
+              Submit
             </Button>
           </form>
           <Typography variant="h6">
@@ -118,7 +118,7 @@ export default function Auth(props) {
       </div>
       <div className={`${account ? "register-card-closed" : "register-card"}`}>
         <Card variant="outlined" className="auth-card">
-          <Typography variant="h5">Register</Typography>
+          <Typography variant="h4">Register</Typography>
           <form onSubmit={handleRegister} className="register-form">
             <FormControl>
               <InputLabel htmlFor="newUsername">Username</InputLabel>
@@ -200,7 +200,7 @@ export default function Auth(props) {
               )}
             </FormControl>
             <Button variant="contained" color="primary" type="submit">
-              Register
+              Submit
             </Button>
           </form>
           <Typography variant="h6">
