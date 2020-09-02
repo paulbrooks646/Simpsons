@@ -35,19 +35,20 @@ export default function Auth() {
   }
 
   function handleRegister(event) {
+      
     event.preventDefault();
     if (newPassword !== confirmPassword) {
       setPasswordsMatch(false);
     } else {
-      setPasswordsMatch(true);
-      axios.post('register', {newUsername, email, newPassword})
+    //   setPasswordsMatch(true);
+      axios.post('/register', {newUsername, email, newPassword})
       .then( res => {
-
+        console.log(res.data)
       })
-      .catch( err => (alert))
-    }
+      .catch( err => {
 
-    console.log("registering");
+        (alert(err.response.data))})
+    }
   }
   return (
     <div className="auth-main">
