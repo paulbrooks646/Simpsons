@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Auth.scss";
-import axios from 'axios'
+import axios from "axios";
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
 import FormControl from "@material-ui/core/FormControl";
@@ -14,6 +14,7 @@ import PersonIcon from "@material-ui/icons/Person";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
+import Link from "@material-ui/core/Link";
 
 export default function Auth(props) {
   const [username, setUsername] = useState("");
@@ -25,7 +26,8 @@ export default function Auth(props) {
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const [account, setAccount] = useState(true);
 
-  function toggleAccount() {
+  function toggleAccount(event) {
+    event.preventDefault();
     setAccount(!account);
   }
 
@@ -35,20 +37,20 @@ export default function Auth(props) {
   }
 
   function handleRegister(event) {
-      
     event.preventDefault();
     if (newPassword !== confirmPassword) {
       setPasswordsMatch(false);
     } else {
-    //   setPasswordsMatch(true);
-      axios.post('/register', {newUsername, email, newPassword})
-      .then( res => {
-        console.log(res.data)
-        props.history.push('/Dashboard')
-      })
-      .catch( err => {
-
-        (alert(err.response.data))})
+      //   setPasswordsMatch(true);
+      axios
+        .post("/register", { newUsername, email, newPassword })
+        .then((res) => {
+          console.log(res.data);
+          props.history.push("/Dashboard");
+        })
+        .catch((err) => {
+          alert(err.response.data);
+        });
     }
   }
   return (
@@ -98,98 +100,106 @@ export default function Auth(props) {
               Login
             </Button>
           </form>
-          <Typography variant="h6" onClick={toggleAccount}>
-            No account? Register Here
+          <Typography variant="h6">
+            No account?{" "}
+            <Link href="#" onClick={toggleAccount}>
+              Register Here
+            </Link>
           </Typography>
         </Card>
       </div>
       <div className={`${account ? "register-card-closed" : "register-card"}`}>
         <Card variant="outlined" className="auth-card">
           <Typography variant="h5">Register</Typography>
-          <form onSubmit={handleRegister} className='register-form'>
-        <FormControl>
-          <InputLabel htmlFor="newUsername">Username</InputLabel>
-          <Input
-            required
-            value={newUsername}
-            id="newUsername"
-            placeholder="Enter username"
-            startAdornment={
-              <InputAdornment position="start">
-                <PersonIcon />
-              </InputAdornment>
-            }
-            onChange={(e) => setNewUsername(e.target.value)}
-          />
-        </FormControl>
-        <FormControl>
-          <InputLabel htmlFor="email">Email</InputLabel>
-          <Input
-            type='email'
-            required
-            value={email}
-            id="email"
-            placeholder="Enter email"
-            startAdornment={
-              <InputAdornment position="start">
-                <EmailIcon />
-              </InputAdornment>
-            }
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </FormControl>
-        <FormControl error={!passwordsMatch}>
-          <InputLabel htmlFor="newPassword">Password</InputLabel>
-          <Input
-            required
-            value={newPassword}
-            aria-describedby="new-password-helper-text"
-            id="newPassword"
-            placeholder="Enter password"
-            error={!passwordsMatch}
-            startAdornment={
-              <InputAdornment position="start">
-                <LockIcon />
-              </InputAdornment>
-            }
-            onChange={(e) => setNewPassword(e.target.value)}
-            type="password"
-          />
-          {!passwordsMatch && (
-            <FormHelperText id="new-password-helper-text">
-              Passwords Do Not Match
-            </FormHelperText>
-          )}
-        </FormControl>
-        <FormControl error={!passwordsMatch}>
-          <InputLabel htmlFor="confirmPassword">Confirm Password</InputLabel>
-          <Input
-            required
-            value={confirmPassword}
-            aria-describedby="confirm-password-helper-text"
-            id="confirm"
-            placeholder="Confirm password"
-            error={!passwordsMatch}
-            startAdornment={
-              <InputAdornment position="start">
-                <VpnKeyIcon />
-              </InputAdornment>
-            }
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            type="password"
-          />
-          {!passwordsMatch && (
-            <FormHelperText id="confirm-password-helper-text">
-              Passwords Do Not Match
-            </FormHelperText>
-          )}
-        </FormControl>
-        <Button variant="contained" color="primary" type="submit">
-          Register
-        </Button>
-      </form>
-          <Typography variant="h6" onClick={toggleAccount}>
-            Already have an account? Login Here
+          <form onSubmit={handleRegister} className="register-form">
+            <FormControl>
+              <InputLabel htmlFor="newUsername">Username</InputLabel>
+              <Input
+                required
+                value={newUsername}
+                id="newUsername"
+                placeholder="Enter username"
+                startAdornment={
+                  <InputAdornment position="start">
+                    <PersonIcon />
+                  </InputAdornment>
+                }
+                onChange={(e) => setNewUsername(e.target.value)}
+              />
+            </FormControl>
+            <FormControl>
+              <InputLabel htmlFor="email">Email</InputLabel>
+              <Input
+                type="email"
+                required
+                value={email}
+                id="email"
+                placeholder="Enter email"
+                startAdornment={
+                  <InputAdornment position="start">
+                    <EmailIcon />
+                  </InputAdornment>
+                }
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </FormControl>
+            <FormControl error={!passwordsMatch}>
+              <InputLabel htmlFor="newPassword">Password</InputLabel>
+              <Input
+                required
+                value={newPassword}
+                aria-describedby="new-password-helper-text"
+                id="newPassword"
+                placeholder="Enter password"
+                error={!passwordsMatch}
+                startAdornment={
+                  <InputAdornment position="start">
+                    <LockIcon />
+                  </InputAdornment>
+                }
+                onChange={(e) => setNewPassword(e.target.value)}
+                type="password"
+              />
+              {!passwordsMatch && (
+                <FormHelperText id="new-password-helper-text">
+                  Passwords Do Not Match
+                </FormHelperText>
+              )}
+            </FormControl>
+            <FormControl error={!passwordsMatch}>
+              <InputLabel htmlFor="confirmPassword">
+                Confirm Password
+              </InputLabel>
+              <Input
+                required
+                value={confirmPassword}
+                aria-describedby="confirm-password-helper-text"
+                id="confirm"
+                placeholder="Confirm password"
+                error={!passwordsMatch}
+                startAdornment={
+                  <InputAdornment position="start">
+                    <VpnKeyIcon />
+                  </InputAdornment>
+                }
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                type="password"
+              />
+              {!passwordsMatch && (
+                <FormHelperText id="confirm-password-helper-text">
+                  Passwords Do Not Match
+                </FormHelperText>
+              )}
+            </FormControl>
+            <Button variant="contained" color="primary" type="submit">
+              Register
+            </Button>
+          </form>
+          <Typography variant="h6">
+            Already have an account?{" "}
+            <Link href="#" onClick={toggleAccount}>
+              Login Here
+            </Link>
           </Typography>
         </Card>
       </div>

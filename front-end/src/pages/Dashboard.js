@@ -1,15 +1,22 @@
-import React from 'react'
-import Button from '@material-ui/core/Button'
+import React from "react";
+import Button from "@material-ui/core/Button";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 export default function Dashboard() {
+  const logout = () => {
+    console.log("Logout");
+  };
 
-    const logout = () => {
-        console.log('Logout')
-    }
-
-    return (
-        <div>
-            <Button variant='contained' color='secondary' onClick={logout}>Logout</Button>
-        </div>
-    )
+  return (
+    <div>
+      <Button
+        variant="contained"
+        color="secondary"
+        endIcon={<ExitToAppIcon />}
+        onClick={logout}
+      >
+        Logout
+      </Button>
+    </div>
+  );
 }
