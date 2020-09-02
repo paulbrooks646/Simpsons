@@ -30,32 +30,32 @@ module.exports = {
   login: async (req, res) => {
     const db = req.app.get("db");
     const { username, password } = req.body;
-    const user = await db.check_user([username, username])
+    const user = await db.check_user([username, username]);
 
-    console.log(user)
+    console.log(user);
 
     if (!user[0]) {
-        return res.status(409).send("User doesn't exist!")
-    }
-
-    else {
-        const authenticated = bcrypt.compareSync(password, user[0].password)
-        if (authenticated) {
-            req.session.user = {
-                id: user[0].user_id,
-                username: user[0].username,
-                email: user[0].email,
-                profile_pic: user[0].profile_pic
-            }
-            res.status(200).send(req.session.user)
-        }
-        else {
-            res.status(409).send("Username or password incorrect!")
-        }
+      return res.status(409).send("User doesn't exist!");
+    } else {
+      const authenticated = bcrypt.compareSync(password, user[0].password);
+      if (authenticated) {
+        req.session.user = {
+          id: user[0].user_id,
+          username: user[0].username,
+          email: user[0].email,
+          profile_pic: user[0].profile_pic,
+        };
+        res.status(200).send(req.session.user);
+      } else {
+        res.status(409).send("Username or password incorrect!");
+      }
     }
   },
 
   getUser: (req, res) => {},
 
-  logout: (req, res) => {},
+  logout: (req, res) => {
+    req.session.destroy();
+    res.sendStatus(200);
+  },
 };

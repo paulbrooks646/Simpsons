@@ -1,10 +1,14 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
+import axios from 'axios'
 
-export default function Dashboard() {
+export default function Dashboard(props) {
 
     const logout = () => {
-        console.log('Logout')
+        axios.delete('/logout')
+        .then( () => {
+            props.history.push('/')
+        })
     }
 
     return (
