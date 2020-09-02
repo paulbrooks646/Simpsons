@@ -33,7 +33,15 @@ export default function Auth(props) {
 
   function handleLogin(event) {
     event.preventDefault();
-    console.log("logging in");
+    axios
+      .post("/login", { username, password })
+      .then((res) => {
+        console.log(res.data);
+        props.history.push("/Dashboard");
+      })
+      .catch((err) => {
+        alert(err.response.data);
+      });
   }
 
   function handleRegister(event) {
