@@ -16,8 +16,6 @@ module.exports = {
 
     const newUser = await db.register_user([newUsername, email, hash]);
 
-    console.log(newUser);
-
     req.session.user = {
       id: newUser[0].user_id,
       username: newUser[0].username,
@@ -31,8 +29,6 @@ module.exports = {
     const db = req.app.get("db");
     const { username, password } = req.body;
     const user = await db.check_user([username, username]);
-
-    console.log(user);
 
     if (!user[0]) {
       return res.status(409).send("User doesn't exist!");
@@ -52,7 +48,13 @@ module.exports = {
     }
   },
 
-  getUser: (req, res) => {},
+  getUser: (req, res) => {
+    if (req.session.user) {
+      res.status(200).send(req.session.user);
+    } else {
+      res.sendStatus(404);
+    }
+  },
 
   logout: (req, res) => {
     req.session.destroy();
