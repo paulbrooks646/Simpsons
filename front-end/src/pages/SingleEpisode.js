@@ -1,12 +1,10 @@
-import React from 'react'
+import React from "react";
+import Page from "../components/Page";
 
 export default function SingleEpisode() {
-
-    return (
-        <div>
-        SingleEpisode
-        </div>
-    )
-
-
+  return (
+    <Page>
+      <div>SingleEpisode</div>
+    </Page>
+  );
 }

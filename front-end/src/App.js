@@ -1,17 +1,8 @@
 import React from "react";
 import Routes from "./routes";
-import Nav from "./components/Nav";
-// import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
-  return (
-    <div>
-      <Nav />
-      {/* <Router> */}
-      {Routes}
-      {/* </Router> */}
-    </div>
-  );
+  return <>{Routes}</>;
 }
 
 export default App;

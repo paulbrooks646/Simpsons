@@ -1,10 +1,10 @@
-import React from 'react'
+import React from "react";
+import Page from "../components/Page";
 
 export default function Profile() {
-
-    return (
-        <div>
-            Profile
-        </div>
-    )
+  return (
+    <Page>
+      <div>Profile</div>
+    </Page>
+  );
 }

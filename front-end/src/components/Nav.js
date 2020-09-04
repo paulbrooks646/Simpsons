@@ -18,49 +18,45 @@ function Nav(props) {
     });
   };
 
-  if (props.location.pathname === "/") {
-    return <div></div>;
-  } else {
-    return (
-      <nav
+  return (
+    <nav
+      style={{
+        backgroundColor: "blue",
+        display: "flex",
+        justifyContent: "space-between",
+        height: "75px",
+        alignItems: "center",
+      }}
+    >
+      <img src={Hamburger} alt="hamburger" style={{ marginLeft: "10px" }} />
+      <div
         style={{
-          backgroundColor: "blue",
           display: "flex",
-          justifyContent: "space-between",
-          height: "75px",
-          alignItems: "center",
+          justifyContent: "space-evenly",
+          width: "50%",
         }}
       >
-        <img src={Hamburger} alt="hamburger" style={{ marginLeft: "10px" }} />
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-evenly",
-            width: "50%",
-          }}
-        >
-          <Link to="/Dashboard">
-            <h1>Dashboard</h1>
-          </Link>
-          <Link to={`/Profile/${props.user.user.id}`}>
-            <h1>Profile</h1>
-          </Link>
-          <Link to="/Episodes">
-            <h1>Episodes</h1>
-          </Link>
-        </div>
-        <Button
-          variant="contained"
-          color="secondary"
-          endIcon={<ExitToAppIcon />}
-          onClick={logout}
-          style={{ marginRight: "20px" }}
-        >
-          Logout
-        </Button>
-      </nav>
-    );
-  }
+        <Link to="/Dashboard">
+          <h1>Dashboard</h1>
+        </Link>
+        <Link to={`/Profile/${props.user.user.id}`}>
+          <h1>Profile</h1>
+        </Link>
+        <Link to="/Episodes">
+          <h1>Episodes</h1>
+        </Link>
+      </div>
+      <Button
+        variant="contained"
+        color="secondary"
+        endIcon={<ExitToAppIcon />}
+        onClick={logout}
+        style={{ marginRight: "20px" }}
+      >
+        Logout
+      </Button>
+    </nav>
+  );
 }
 
 const mapStateToProps = (reduxState) => reduxState;
