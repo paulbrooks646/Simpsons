@@ -1,0 +1,44 @@
+nav {
+        background-color: blue;
+        display: flex;
+        justify-content: space-between;
+        height: 75px;
+        align-items: center
+}
+
+.nav-middle-div {
+          display: flex;
+          justify-content: space-evenly;
+          width: 50%
+}
+
+.hamburger-menu {
+    border: solid;
+    height: 200px;
+    width: 200px;
+    position: relative;
+    top: 300px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.hamburger-menu-open {
+    display: none;
+}
+
+@media (min-width: 600px) {
+
+    .hamburger-div {
+    display: none;
+}
+}
+
+@media (max-width: 600px) {
+
+    .nav-middle-div {
+
+        display: none;
+    }
+}

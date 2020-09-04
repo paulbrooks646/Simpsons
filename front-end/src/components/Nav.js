@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser, getUser } from "../redux/userReducer";
@@ -6,11 +6,20 @@ import axios from "axios";
 import Button from "@material-ui/core/Button";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Hamburger from "../images/icons8-hamburger-64.png";
+import "./Nav.scss";
+import ToolTip from '@material-ui/core/ToolTip'
+import Zoom from '@material-ui/core/Zoom'
 
 function Nav(props) {
+  const [hamburger, setHamburger] = useState(false);
+
   useEffect(() => {
     getUser();
   }, []);
+
+  const toggleHamburger = () => {
+    setHamburger(!hamburger);
+  };
 
   const logout = () => {
     axios.delete("/logout").then(() => {
@@ -19,23 +28,36 @@ function Nav(props) {
   };
 
   return (
-    <nav
-      style={{
-        backgroundColor: "blue",
-        display: "flex",
-        justifyContent: "space-between",
-        height: "75px",
-        alignItems: "center",
-      }}
-    >
-      <img src={Hamburger} alt="hamburger" style={{ marginLeft: "10px" }} />
+    <nav>
+      <div className="hamburger-div">
+        <ToolTip
+          title="Toggle Menu"
+          placement="right"
+          TransitionComponent={Zoom}
+          arrow
+        >
+          <img
+            src={Hamburger}
+            alt="hamburger"
+            style={{ marginLeft: "10px" }}
+            onClick={toggleHamburger}
+          />
+        </ToolTip>
+      </div>
       <div
-        style={{
-          display: "flex",
-          justifyContent: "space-evenly",
-          width: "50%",
-        }}
+        className={`${hamburger ? "hamburger-menu" : "hamburger-menu-open"}`}
       >
+        <Link to="/Dashboard">
+          <h2>Dashboard</h2>
+        </Link>
+        <Link to={`/Profile/${props.user.user_id}`}>
+          <h2>Profile</h2>
+        </Link>
+        <Link to="/Episodes">
+          <h2>Episodes</h2>
+        </Link>
+      </div>
+      <div className="nav-middle-div">
         <Link to="/Dashboard">
           <h1>Dashboard</h1>
         </Link>
