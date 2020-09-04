@@ -28,56 +28,68 @@ function Nav(props) {
   };
 
   return (
-    <nav>
-      <div className="hamburger-div">
-        <ToolTip
-          title="Toggle Menu"
-          placement="right"
-          TransitionComponent={Zoom}
-          arrow
+    <>
+      <nav>
+        <div className="hamburger-div">
+          <ToolTip
+            title="Toggle Menu"
+            placement="right"
+            TransitionComponent={Zoom}
+            arrow
+          >
+            <img
+              src={Hamburger}
+              alt="hamburger"
+              className="hamburger"
+              onClick={toggleHamburger}
+            />
+          </ToolTip>
+          <div
+            className={`${
+              hamburger ? "hamburger-menu" : "hamburger-menu-open"
+            }`}
+          >
+            <Link to="/Dashboard">
+              <h2>Dashboard</h2>
+            </Link>
+            <Link to={`/Profile/${props.user.user_id}`}>
+              <h2>Profile</h2>
+            </Link>
+            <Link to="/Episodes">
+              <h2>Episodes</h2>
+            </Link>
+            <Button
+              variant="contained"
+              color="secondary"
+              endIcon={<ExitToAppIcon />}
+              onClick={logout}
+            >
+              Logout
+            </Button>
+          </div>
+        </div>
+        <div className="nav-middle-div">
+          <Link to="/Dashboard">
+            <h1>Dashboard</h1>
+          </Link>
+          <Link to={`/Profile/${props.user.user.id}`}>
+            <h1>Profile</h1>
+          </Link>
+          <Link to="/Episodes">
+            <h1>Episodes</h1>
+          </Link>
+        </div>
+        <Button
+          variant="contained"
+          color="secondary"
+          endIcon={<ExitToAppIcon />}
+          onClick={logout}
+          id="nav-button-wide"
         >
-          <img
-            src={Hamburger}
-            alt="hamburger"
-            style={{ marginLeft: "10px" }}
-            onClick={toggleHamburger}
-          />
-        </ToolTip>
-      </div>
-      <div
-        className={`${hamburger ? "hamburger-menu" : "hamburger-menu-open"}`}
-      >
-        <Link to="/Dashboard">
-          <h2>Dashboard</h2>
-        </Link>
-        <Link to={`/Profile/${props.user.user_id}`}>
-          <h2>Profile</h2>
-        </Link>
-        <Link to="/Episodes">
-          <h2>Episodes</h2>
-        </Link>
-      </div>
-      <div className="nav-middle-div">
-        <Link to="/Dashboard">
-          <h1>Dashboard</h1>
-        </Link>
-        <Link to={`/Profile/${props.user.user.id}`}>
-          <h1>Profile</h1>
-        </Link>
-        <Link to="/Episodes">
-          <h1>Episodes</h1>
-        </Link>
-      </div>
-      <Button
-        variant="contained"
-        color="secondary"
-        endIcon={<ExitToAppIcon />}
-        onClick={logout}
-        style={{ marginRight: "20px" }}
-      >
-        Logout
-      </Button>
-    </nav>
+          Logout
+        </Button>
+      </nav>
+    </>
   );
 }
 

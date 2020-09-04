@@ -1,9 +1,23 @@
 nav {
         background-color: blue;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-evenly;
         height: 75px;
         align-items: center
+}
+
+.hamburger {
+    cursor: pointer;
+}
+
+.hamburger-div {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2;
+    left: 50px;
+    top: 0px;
 }
 
 .nav-middle-div {
@@ -12,16 +26,21 @@ nav {
           width: 50%
 }
 
+#nav-button-wide {
+    position: relative;
+}
+
 .hamburger-menu {
     border: solid;
-    height: 200px;
-    width: 200px;
-    position: relative;
-    top: 300px;
+    height: 250px;
+    width: 150px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
+    position: relative;
+    top: 10px;
+    background-color: white
 }
 
 .hamburger-menu-open {
@@ -33,12 +52,26 @@ nav {
     .hamburger-div {
     display: none;
 }
+
+.hamburger-menu {
+    display: none;
+}
 }
 
 @media (max-width: 600px) {
+
+    nav {
+        display: default;
+
+    }
 
     .nav-middle-div {
 
         display: none;
     }
+
+    #nav-button-wide {
+        display: none;
+    }
+
 }
