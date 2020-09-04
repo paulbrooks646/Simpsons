@@ -76,3 +76,32 @@
 .login-card-closed {
   display: none;
 }
+
+@media (max-width: 665px) {
+  .auth-main {
+    .auth-title {
+      font-size: 25px;
+    }
+
+    .auth-subtitle {
+      font-size: 20px;
+    }
+
+    .login-card {
+      .auth-card {
+        width: 300px;
+        height: 400px;
+      }
+    }
+  }
+
+  .register-card {
+    .auth-card {
+      width: 300px;
+      height: 400px;
+    }
+    .register-text {
+      font-size: 15px;
+    }
+  }
+}

@@ -205,7 +205,7 @@ function Auth(props) {
               Submit
             </Button>
           </form>
-          <Typography variant="h6">
+          <Typography variant="h6" className="register-text">
             Already have an account?{" "}
             <Link href="#" onClick={toggleAccount}>
               Login Here
