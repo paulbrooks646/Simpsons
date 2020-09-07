@@ -1,14 +1,14 @@
+
 .dashboard-main {
     height: calc(100vh - 75px);
-    width: 100vw;
+    width: auto;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url("https://vignette.wikia.nocookie.net/simpsons/images/b/b3/800px-Androidsdungeon.png/revision/latest?cb=20170101231226");
     text-align: center;
     overflow: hidden;
-    position: relative;
-    opacity: .7;
+    background-attachment: fixed;
+    background-clip: content-box;
 }
 
 .dashboard-title-div {
