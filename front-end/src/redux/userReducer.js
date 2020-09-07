@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const initialState = {
-  user: {},
+  info: {},
   isLoggedIn: false,
 };
 
@@ -10,17 +10,17 @@ const REGISTER_USER = "REGISTER_USER";
 const LOGOUT_USER = "LOGOUT_USER";
 const GET_USER = "GET_USER";
 
-export function loginUser(user) {
+export function loginUser(info) {
   return {
     type: LOGIN_USER,
-    payload: user,
+    payload: info,
   };
 }
 
-export function registerUser(user) {
+export function registerUser(info) {
   return {
     type: REGISTER_USER,
-    payload: user,
+    payload: info,
   };
 }
 
@@ -32,25 +32,25 @@ export function logoutUser() {
 }
 
 export function getUser() {
-  const user = axios.get("/user");
+  const info = axios.get("/user");
   return {
     type: GET_USER,
-    payload: user,
+    payload: info,
   };
 }
 
 export default function (state = initialState, action) {
   switch (action.type) {
     case LOGIN_USER:
-      return { ...state, user: action.payload, isLoggedIn: true };
+      return { ...state, info: action.payload, isLoggedIn: true };
     case LOGOUT_USER:
       return { ...state, ...action.payload };
     case REGISTER_USER:
-      return { ...state, user: action.payload, isLoggedIn: true };
+      return { ...state, info: action.payload, isLoggedIn: true };
     case GET_USER + "_PENDING":
       return state;
     case GET_USER + "_FULFILLED":
-      return { ...state, user: action.payload.data, isLoggedIn: true };
+      return { ...state, info: action.payload.data, isLoggedIn: true };
     case GET_USER + "_REJECTED":
       return state;
     default:

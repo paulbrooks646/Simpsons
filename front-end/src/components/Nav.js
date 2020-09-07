@@ -52,7 +52,7 @@ function Nav(props) {
             <Link to="/Dashboard">
               <h2>Dashboard</h2>
             </Link>
-            <Link to={`/Profile/${props.user.user_id}`}>
+            <Link to={`/Profile/${props.user.info.username}`}>
               <h2>Profile</h2>
             </Link>
             <Link to="/Episodes">
@@ -72,7 +72,7 @@ function Nav(props) {
           <Link to="/Dashboard">
             <h1>Dashboard</h1>
           </Link>
-          <Link to={`/Profile/${props.user.user.id}`}>
+          <Link to={`/Profile/${props.user.info.username}`}>
             <h1>Profile</h1>
           </Link>
           <Link to="/Episodes">
