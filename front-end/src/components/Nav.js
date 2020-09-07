@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link as RouterLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser, getUser } from "../redux/userReducer";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
+import Link from "@material-ui/core/Link";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Hamburger from "../images/icons8-hamburger-64.png";
 import "./Nav.scss";
-import ToolTip from '@material-ui/core/ToolTip'
-import Zoom from '@material-ui/core/Zoom'
+import ToolTip from "@material-ui/core/ToolTip";
+import Zoom from "@material-ui/core/Zoom";
 
 function Nav(props) {
   const [hamburger, setHamburger] = useState(false);
@@ -49,13 +50,16 @@ function Nav(props) {
               hamburger ? "hamburger-menu" : "hamburger-menu-open"
             }`}
           >
-            <Link to="/Dashboard">
+            <Link to="/Dashboard" component={RouterLink}>
               <h2>Dashboard</h2>
             </Link>
-            <Link to={`/Profile/${props.user.info.username}`}>
+            <Link
+              to={`/Profile/${props.user.info.username}`}
+              component={RouterLink}
+            >
               <h2>Profile</h2>
             </Link>
-            <Link to="/Episodes">
+            <Link to="/Episodes" component={RouterLink}>
               <h2>Episodes</h2>
             </Link>
             <Button
@@ -69,13 +73,16 @@ function Nav(props) {
           </div>
         </div>
         <div className="nav-middle-div">
-          <Link to="/Dashboard">
+          <Link to="/Dashboard" component={RouterLink}>
             <h1>Dashboard</h1>
           </Link>
-          <Link to={`/Profile/${props.user.info.username}`}>
+          <Link
+            to={`/Profile/${props.user.info.username}`}
+            component={RouterLink}
+          >
             <h1>Profile</h1>
           </Link>
-          <Link to="/Episodes">
+          <Link to="/Episodes" component={RouterLink}>
             <h1>Episodes</h1>
           </Link>
         </div>
