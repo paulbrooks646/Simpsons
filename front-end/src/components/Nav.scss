@@ -3,7 +3,8 @@ nav {
         display: flex;
         justify-content: space-evenly;
         height: 75px;
-        align-items: center
+        align-items: center;
+        z-index: 4;
 }
 
 .hamburger {
