@@ -1,20 +1,16 @@
 
 .dashboard-main {
     height: calc(100vh - 75px);
-    width: auto;
-    background-size: cover;
+    width: 100vw;
+    background-size: 100vw 100vh;
     background-repeat: no-repeat;
-    background-position: center;
     text-align: center;
     overflow: hidden;
+    background-position: center;
     background-attachment: fixed;
     background-clip: content-box;
 }
 
-.dashboard-title-div {
-    position: absolute;
-}
-
 .dashboard-title {
-    position: absolute;
+
 }
