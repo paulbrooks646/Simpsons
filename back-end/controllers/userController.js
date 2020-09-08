@@ -67,13 +67,9 @@ module.exports = {
     const {
       updatedUsername,
       updatedEmail,
-      updatedPassword,
       updatedPic,
     } = req.body;
 
-    const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(updatedPassword, salt);
-
-    db.update_info([user_id, updatedUsername, updatedEmail, hash, updatedPic])
+    db.update_info([user_id, updatedUsername, updatedEmail, updatedPic])
   },
 };
