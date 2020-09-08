@@ -28,7 +28,9 @@ function Profile(props) {
     props.user.info.username
   );
   const [updatedEmail, setUpdatedEmail] = useState(props.user.info.email);
-  const [updatedPic, setUpdatedPic] = useState(props.user.info.profile_pic);
+  const [updatedPic, setUpdatedPic] = useState(
+    props.user.info.profile_pic || ""
+  );
 
   useEffect(() => {
     getUser();
@@ -41,6 +43,7 @@ function Profile(props) {
   const handleCloseUpdatingProfile = () => setUpdatingProfile(false);
 
   const handleUpdate = () => {
+    setUpdatingProfile(false);
     axios.put(`/Update/${props.user.info.id}`, {
       updatedUsername,
       updatedEmail,
