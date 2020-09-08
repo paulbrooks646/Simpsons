@@ -3,7 +3,6 @@ import Page from "../../components/Page";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import axios from "axios";
-import "./Profile.scss";
 import Fab from "@material-ui/core/Fab";
 import EditIcon from "@material-ui/icons/Edit";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -17,8 +16,10 @@ import LockIcon from "@material-ui/icons/Lock";
 import EmailIcon from "@material-ui/icons/Email";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import PersonIcon from "@material-ui/icons/Person";
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Typography from "@material-ui/core/Typography";
+import "./Profile.scss";
 
 function Profile(props) {
   const [pic, setPic] = useState(
@@ -37,7 +38,7 @@ function Profile(props) {
     if (props.user.info.profile_pic) {
       setPic(props.user.info.profile_pic);
     }
-  });
+  }, [props.user.info.profile_pic]);
 
   const toggleUpdateProfile = () => setUpdateProfile(!updateProfile);
 
@@ -47,20 +48,11 @@ function Profile(props) {
 
   return (
     <Page>
-      <div
-        style={{
-          width: "200px",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          position: "relative",
-          top: "10px",
-        }}
-      >
+      <div className="profile-content">
         <img
           className="profile-image"
           src={pic}
-          style={{ width: "150px", height: "150px" }}
+          alt={props.user.info.username}
         />
         <h1>{props.user.info.username}</h1>
         <Tooltip
@@ -82,12 +74,12 @@ function Profile(props) {
             }`}
           >
             <FormControl>
-              <InputLabel htmlFor="newUsername">Username</InputLabel>
+              <InputLabel htmlFor="newUsername">Change Username</InputLabel>
               <Input
                 required
                 value={updatedUsername}
                 id="newUsername"
-                placeholder="Enter username"
+                placeholder="Enter new username"
                 startAdornment={
                   <InputAdornment position="start">
                     <PersonIcon />
@@ -97,13 +89,13 @@ function Profile(props) {
               />
             </FormControl>
             <FormControl>
-              <InputLabel htmlFor="email">Email</InputLabel>
+              <InputLabel htmlFor="email">Change Email</InputLabel>
               <Input
                 type="email"
                 required
                 value={updatedEmail}
                 id="email"
-                placeholder="Enter email"
+                placeholder="Enter new email"
                 startAdornment={
                   <InputAdornment position="start">
                     <EmailIcon />
@@ -113,13 +105,13 @@ function Profile(props) {
               />
             </FormControl>
             <FormControl error={!passwordsMatch}>
-              <InputLabel htmlFor="newPassword">Password</InputLabel>
+              <InputLabel htmlFor="newPassword">Change Password</InputLabel>
               <Input
                 required
                 value={updatedPassword}
                 aria-describedby="new-password-helper-text"
                 id="newPassword"
-                placeholder="Enter password"
+                placeholder="Enter new password"
                 error={!passwordsMatch}
                 startAdornment={
                   <InputAdornment position="start">
@@ -137,14 +129,14 @@ function Profile(props) {
             </FormControl>
             <FormControl error={!passwordsMatch}>
               <InputLabel htmlFor="confirmPassword">
-                Confirm Password
+                Confirm New Password
               </InputLabel>
               <Input
                 required
                 value={confirmUpdatedPassword}
                 aria-describedby="confirm-password-helper-text"
                 id="confirm"
-                placeholder="Confirm password"
+                placeholder="Confirm new password"
                 error={!passwordsMatch}
                 startAdornment={
                   <InputAdornment position="start">
@@ -161,15 +153,17 @@ function Profile(props) {
               )}
             </FormControl>
             <FormControl>
-              <InputLabel htmlFor="profilePic">Profile Pic</InputLabel>
+              <InputLabel htmlFor="newProfilePic">
+                Change Profile Pic
+              </InputLabel>
               <Input
                 required
                 value={updatedPic}
-                id="newUsername"
+                id="newProfilePic"
                 placeholder="Profile Pic Url"
                 startAdornment={
                   <InputAdornment position="start">
-                    <PersonIcon />
+                    <AccountBoxIcon />
                   </InputAdornment>
                 }
                 onChange={(e) => setUpdatedPic(e.target.value)}

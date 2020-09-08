@@ -53,6 +53,14 @@ nav {
   display: none;
 }
 
+.profile-link-heading {
+  display: flex;
+  align-items: center;
+  &-avatar {
+    margin-left: 5px;
+  }
+}
+
 @media (min-width: 601px) {
   .hamburger-div {
     display: none;

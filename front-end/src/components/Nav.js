@@ -5,6 +5,7 @@ import { logoutUser, getUser } from "../redux/userReducer";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
+import Avatar from "@material-ui/core/Avatar";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Hamburger from "../images/icons8-hamburger-64.png";
 import "./Nav.scss";
@@ -48,7 +49,15 @@ function Nav(props) {
               to={`/Profile/${props.user.info.username}`}
               component={RouterLink}
             >
-              <h2>Profile</h2>
+              <h2 className="profile-link-heading">
+                Profile{" "}
+                <Avatar
+                  className="profile-link-heading-avatar"
+                  style={{ width: "25px", height: "25px" }}
+                  alt={props.user.info.username}
+                  src={props.user.info.profile_pic}
+                />
+              </h2>
             </Link>
             <Link to="/Episodes" component={RouterLink}>
               <h2>Episodes</h2>
@@ -71,7 +80,15 @@ function Nav(props) {
             to={`/Profile/${props.user.info.username}`}
             component={RouterLink}
           >
-            <h1>Profile</h1>
+            <h1 className="profile-link-heading">
+              Profile{" "}
+              <Avatar
+                className="profile-link-heading-avatar"
+                style={{ width: "25px", height: "25px" }}
+                alt={props.user.info.username}
+                src={props.user.info.profile_pic}
+              />
+            </h1>
           </Link>
           <Link to="/Episodes" component={RouterLink}>
             <h1>Episodes</h1>
