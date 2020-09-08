@@ -20,6 +20,7 @@ app.post('/register', userController.register)
 app.post('/login', userController.login)
 app.get('/user', userController.getUser)
 app.delete('/logout', userController.logout)
+app.put('/update/:user_id', userController.update)
 
 const port = 5000
 

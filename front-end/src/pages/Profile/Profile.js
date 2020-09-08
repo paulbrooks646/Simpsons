@@ -42,7 +42,7 @@ function Profile(props) {
   const toggleUpdateProfile = () => setUpdateProfile(!updateProfile);
 
   const handleUpdate = () => {
-    console.log("update");
+    axios.put(`/Update/${props.user.info.id}`, {updatedUsername, updatedEmail, updatedPassword, updatedPic})
   };
 
   return (

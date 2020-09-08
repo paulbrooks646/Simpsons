@@ -60,4 +60,20 @@ module.exports = {
     req.session.destroy();
     res.sendStatus(200);
   },
+
+  update: (req, res) => {
+    const db = req.app.get("db");
+    console.log(req.body);
+    console.log(req.params)
+
+    const { user_id } = req.params;
+    const {
+      updatedUsername,
+      updatedEmail,
+      updatedPassword,
+      updatedPic,
+    } = req.body;
+
+    db.update_info([user_id, updatedUsername, updatedEmail, updatedPassword, updatedPic])
+  },
 };
