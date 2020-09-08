@@ -3,6 +3,7 @@ import Page from "../../components/Page";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import axios from "axios";
+import "./Profile.scss";
 import Fab from "@material-ui/core/Fab";
 import EditIcon from "@material-ui/icons/Edit";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -24,25 +25,25 @@ function Profile(props) {
     "https://www.clipartkey.com/mpngs/m/29-297748_round-profile-image-placeholder.png"
   );
   const [updateProfile, setUpdateProfile] = useState(false);
-  const [updatedUsername, setUpdatedUsername] = useState("")
-  const [updatedEmail, setUpdatedEmail] = useState("")
-  const [updatedPassword, setUpdatedPasword] = useState("")
-  const [confirmUpdatedPassword, setConfirmUpdatedPassword] = useState("")
-  const [updatedPic, setUpdatedPic] = useState("")
-  const [passwordsMatch, setPasswordsMatch] = useState(true)
+  const [updatedUsername, setUpdatedUsername] = useState("");
+  const [updatedEmail, setUpdatedEmail] = useState("");
+  const [updatedPassword, setUpdatedPasword] = useState("");
+  const [confirmUpdatedPassword, setConfirmUpdatedPassword] = useState("");
+  const [updatedPic, setUpdatedPic] = useState("");
+  const [passwordsMatch, setPasswordsMatch] = useState(true);
 
   useEffect(() => {
     getUser();
     if (props.user.info.profile_pic) {
       setPic(props.user.info.profile_pic);
     }
-  }, []);
+  });
 
   const toggleUpdateProfile = () => setUpdateProfile(!updateProfile);
 
   const handleUpdate = () => {
-    console.log("update")
-  }
+    console.log("update");
+  };
 
   return (
     <Page>
@@ -73,9 +74,13 @@ function Profile(props) {
             <EditIcon />
           </Fab>
         </Tooltip>
-        <div className={`${updateProfile ? "login-card" : "login-card-closed"}`}>
-          {/* <Typography variant="h4">Register</Typography> */}
-          <form onSubmit={handleUpdate} className="register-form">
+
+        <form onSubmit={handleUpdate} className="update-form">
+          <div
+            className={`${
+              updateProfile ? "update-info" : "update-info-closed"
+            }`}
+          >
             <FormControl>
               <InputLabel htmlFor="newUsername">Username</InputLabel>
               <Input
@@ -173,8 +178,8 @@ function Profile(props) {
             <Button variant="contained" color="primary" type="submit">
               Submit
             </Button>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </Page>
   );
