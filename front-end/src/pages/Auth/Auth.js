@@ -30,6 +30,7 @@ function Auth(props) {
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const [account, setAccount] = useState(true);
 
+
   function toggleAccount(event) {
     event.preventDefault();
     setAccount(!account);
