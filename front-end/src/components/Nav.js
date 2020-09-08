@@ -8,8 +8,6 @@ import Link from "@material-ui/core/Link";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Hamburger from "../images/icons8-hamburger-64.png";
 import "./Nav.scss";
-import ToolTip from "@material-ui/core/ToolTip";
-import Zoom from "@material-ui/core/Zoom";
 
 function Nav(props) {
   const [hamburger, setHamburger] = useState(false);
@@ -32,19 +30,12 @@ function Nav(props) {
     <>
       <nav>
         <div className="hamburger-div">
-          <ToolTip
-            title="Toggle Menu"
-            placement="right"
-            TransitionComponent={Zoom}
-            arrow
-          >
-            <img
-              src={Hamburger}
-              alt="hamburger"
-              className="hamburger"
-              onClick={toggleHamburger}
-            />
-          </ToolTip>
+          <img
+            src={Hamburger}
+            alt="hamburger"
+            className="hamburger"
+            onClick={toggleHamburger}
+          />
           <div
             className={`${
               hamburger ? "hamburger-menu" : "hamburger-menu-open"
