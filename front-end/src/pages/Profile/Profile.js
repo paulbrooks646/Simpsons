@@ -25,11 +25,11 @@ function Profile(props) {
     "https://www.clipartkey.com/mpngs/m/29-297748_round-profile-image-placeholder.png"
   );
   const [updateProfile, setUpdateProfile] = useState(false);
-  const [updatedUsername, setUpdatedUsername] = useState("");
-  const [updatedEmail, setUpdatedEmail] = useState("");
-  const [updatedPassword, setUpdatedPasword] = useState("");
-  const [confirmUpdatedPassword, setConfirmUpdatedPassword] = useState("");
-  const [updatedPic, setUpdatedPic] = useState("");
+  const [updatedUsername, setUpdatedUsername] = useState(
+    props.user.info.username
+  );
+  const [updatedEmail, setUpdatedEmail] = useState(props.user.info.email);
+  const [updatedPic, setUpdatedPic] = useState(props.user.info.profile_pic);
   const [passwordsMatch, setPasswordsMatch] = useState(true);
 
   useEffect(() => {
@@ -42,7 +42,11 @@ function Profile(props) {
   const toggleUpdateProfile = () => setUpdateProfile(!updateProfile);
 
   const handleUpdate = () => {
-    axios.put(`/Update/${props.user.info.id}`, {updatedUsername, updatedEmail, updatedPassword, updatedPic})
+    axios.put(`/Update/${props.user.info.id}`, {
+      updatedUsername,
+      updatedEmail,
+      updatedPic,
+    });
   };
 
   return (
@@ -102,54 +106,6 @@ function Profile(props) {
                 }
                 onChange={(e) => setUpdatedEmail(e.target.value)}
               />
-            </FormControl>
-            <FormControl error={!passwordsMatch}>
-              <InputLabel htmlFor="newPassword">Change Password</InputLabel>
-              <Input
-                required
-                value={updatedPassword}
-                aria-describedby="new-password-helper-text"
-                id="newPassword"
-                placeholder="Enter new password"
-                error={!passwordsMatch}
-                startAdornment={
-                  <InputAdornment position="start">
-                    <LockIcon />
-                  </InputAdornment>
-                }
-                onChange={(e) => setUpdatedPasword(e.target.value)}
-                type="password"
-              />
-              {!passwordsMatch && (
-                <FormHelperText id="new-password-helper-text">
-                  Passwords Do Not Match
-                </FormHelperText>
-              )}
-            </FormControl>
-            <FormControl error={!passwordsMatch}>
-              <InputLabel htmlFor="confirmPassword">
-                Confirm New Password
-              </InputLabel>
-              <Input
-                required
-                value={confirmUpdatedPassword}
-                aria-describedby="confirm-password-helper-text"
-                id="confirm"
-                placeholder="Confirm new password"
-                error={!passwordsMatch}
-                startAdornment={
-                  <InputAdornment position="start">
-                    <VpnKeyIcon />
-                  </InputAdornment>
-                }
-                onChange={(e) => setConfirmUpdatedPassword(e.target.value)}
-                type="password"
-              />
-              {!passwordsMatch && (
-                <FormHelperText id="confirm-password-helper-text">
-                  Passwords Do Not Match
-                </FormHelperText>
-              )}
             </FormControl>
             <FormControl>
               <InputLabel htmlFor="newProfilePic">
