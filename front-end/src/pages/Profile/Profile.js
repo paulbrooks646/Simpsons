@@ -28,9 +28,9 @@ function Profile(props) {
   );
   const [updatingProfile, setUpdatingProfile] = useState(false);
   const [updatedUsername, setUpdatedUsername] = useState(
-    props.user.info.username
+    props.user.info.username || ""
   );
-  const [updatedEmail, setUpdatedEmail] = useState(props.user.info.email);
+  const [updatedEmail, setUpdatedEmail] = useState(props.user.info.email || "");
   const [updatedPic, setUpdatedPic] = useState(
     props.user.info.profile_pic || ""
   );
