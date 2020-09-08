@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import "./Auth.scss";
 import axios from "axios";
 import { connect } from "react-redux";
-import { loginUser, registerUser } from "../../redux/userReducer";
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
 import FormControl from "@material-ui/core/FormControl";
@@ -17,6 +15,10 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import Link from "@material-ui/core/Link";
+
+import { loginUser, registerUser } from "../../redux/userReducer";
+import Clouds from "../../images/clouds.jpg";
+import "./Auth.scss";
 
 function Auth(props) {
   const [username, setUsername] = useState("");
@@ -64,7 +66,7 @@ function Auth(props) {
     }
   }
   return (
-    <div className="auth-main">
+    <div className="auth-main" style={{ backgroundImage: `url(${Clouds})` }}>
       <Typography variant="h2" align="center" className="auth-title">
         The Android<span style={{ fontFamily: "sans-serif" }}>'</span>s Dungeon
       </Typography>

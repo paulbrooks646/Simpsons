@@ -1,81 +1,78 @@
+@import "../Sass/colors.scss";
+
 nav {
-        background-color: blue;
-        display: flex;
-        justify-content: space-evenly;
-        height: 75px;
-        align-items: center;
-        z-index: 4;
+  background-color: #ae8386;
+  display: flex;
+  justify-content: space-evenly;
+  height: 75px;
+  align-items: center;
+  z-index: 4;
 }
 
 .hamburger {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .hamburger-div {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    z-index: 2;
-    left: 50px;
-    top: 0px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  z-index: 2;
+  left: 50px;
+  top: 0px;
 }
 
 .nav-middle-div {
-          display: flex;
-          justify-content: space-evenly;
-          width: 50%
+  display: flex;
+  justify-content: space-evenly;
+  width: 50%;
 }
 
 #nav-button-wide {
-    position: relative;
+  position: relative;
 }
 
 .hamburger-menu {
-    border: solid;
-    height: 250px;
-    width: 150px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
-    top: 10px;
-    background-color: white;
-    transition-duration: 2;
-    transition-property: all;
-    transition-timing-function: linear;
+  border: solid;
+  height: 250px;
+  width: 150px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  top: 10px;
+  background-color: white;
+  transition-duration: 2;
+  transition-property: all;
+  transition-timing-function: linear;
 }
 
 .hamburger-menu-open {
-    display: none;
+  display: none;
 }
 
 @media (min-width: 601px) {
-
-    .hamburger-div {
+  .hamburger-div {
     display: none;
-}
+  }
 
-.hamburger-menu {
+  .hamburger-menu {
     display: none;
-}
+  }
 }
 
 @media (max-width: 600px) {
+  nav {
+    display: default;
+  }
 
-    nav {
-        display: default;
+  .nav-middle-div {
+    display: none;
+  }
 
-    }
-
-    .nav-middle-div {
-
-        display: none;
-    }
-
-    #nav-button-wide {
-        display: none;
-    }
-
+  #nav-button-wide {
+    display: none;
+  }
 }
