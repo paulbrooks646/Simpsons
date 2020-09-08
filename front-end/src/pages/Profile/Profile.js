@@ -18,7 +18,6 @@ import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import PersonIcon from "@material-ui/icons/Person";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import Typography from "@material-ui/core/Typography";
 import "./Profile.scss";
 
 function Profile(props) {

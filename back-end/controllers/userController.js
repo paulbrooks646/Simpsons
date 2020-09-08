@@ -63,9 +63,6 @@ module.exports = {
 
   update: (req, res) => {
     const db = req.app.get("db");
-    console.log(req.body);
-    console.log(req.params)
-
     const { user_id } = req.params;
     const {
       updatedUsername,
