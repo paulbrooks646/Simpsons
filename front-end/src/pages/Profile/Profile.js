@@ -48,12 +48,16 @@ function Profile(props) {
   const handleCloseSnackbar = () => setSnackbarIsOpen(false);
 
   const handleUpdate = () => {
-    setUpdatingProfile(false);
-    axios.put(`/Update/${props.user.info.id}`, {
-      updatedUsername,
-      updatedEmail,
-      updatedPic,
-    });
+    axios
+      .put(`/Update/${props.user.info.id}`, {
+        updatedUsername,
+        updatedEmail,
+        updatedPic,
+      })
+      .then(() => {
+        setUpdatingProfile(false);
+        setSnackbarIsOpen(true);
+      });
   };
 
   return (
