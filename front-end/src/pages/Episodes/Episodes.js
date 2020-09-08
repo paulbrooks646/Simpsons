@@ -8,7 +8,7 @@ import {connect} from 'react-redux'
 function Episodes(props) {
 
   useEffect(() => {
-    axios.get("/episodes").then(() => {
+    axios.get("/episodes").then(res => {
       props.getEpisodes(res.data)
     })
   }, [props.getEpisodes])
@@ -22,4 +22,4 @@ function Episodes(props) {
 }
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps, { getAttractions })(Episodes);
+export default connect(mapStateToProps, { getEpisodes })(Episodes);

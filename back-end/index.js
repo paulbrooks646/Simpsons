@@ -4,6 +4,7 @@ const massive = require("massive")
 const {CONNECTION_STRING, SESSION_SECRET} = process.env
 const session = require('express-session')
 const userController = require('./controllers/userController')
+const episodesController = require("./controllers/episodesController")
 
 const app = express()
 
@@ -21,6 +22,8 @@ app.post('/login', userController.login)
 app.get('/user', userController.getUser)
 app.delete('/logout', userController.logout)
 app.put('/update/:user_id', userController.update)
+
+app.get('/episodes', episodesController.getEpisodes)
 
 const port = 5000
 
