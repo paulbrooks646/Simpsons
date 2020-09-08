@@ -24,7 +24,7 @@ import "./Profile.scss";
 
 function Profile(props) {
   const [pic, setPic] = useState(
-    "https://www.clipartkey.com/mpngs/m/29-297748_round-profile-image-placeholder.png"
+    "https://realsic.com/wp-content/uploads/2016/11/donut-enamel-pin-simpsons-donut-pin-by-real-sic-pink-4-1.jpg"
   );
   const [updatingProfile, setUpdatingProfile] = useState(false);
   const [updatedUsername, setUpdatedUsername] = useState(

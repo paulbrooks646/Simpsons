@@ -11,10 +11,17 @@ import Hamburger from "../images/icons8-hamburger-64.png";
 import "./Nav.scss";
 
 function Nav(props) {
-  const [hamburger, setHamburger] = useState(false);
+  const [hamburger, setHamburger] = useState(false)
+    const [avatar, setAvatar] = useState(
+      "https://realsic.com/wp-content/uploads/2016/11/donut-enamel-pin-simpsons-donut-pin-by-real-sic-pink-4-1.jpg"
+    );
+    ;
 
   useEffect(() => {
     getUser();
+    if (props.user.info.profile_pic) {
+      setAvatar(props.user.info.profile_pic)
+    }
   }, []);
 
   const toggleHamburger = () => {
@@ -55,7 +62,7 @@ function Nav(props) {
                   className="profile-link-heading-avatar"
                   style={{ width: "25px", height: "25px" }}
                   alt={props.user.info.username}
-                  src={props.user.info.profile_pic}
+                  src={avatar}
                 />
               </h2>
             </Link>
@@ -86,7 +93,7 @@ function Nav(props) {
                 className="profile-link-heading-avatar"
                 style={{ width: "25px", height: "25px" }}
                 alt={props.user.info.username}
-                src={props.user.info.profile_pic}
+                src={avatar}
               />
             </h1>
           </Link>
