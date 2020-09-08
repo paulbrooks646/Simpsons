@@ -24,9 +24,11 @@ function Profile(props) {
     "https://www.clipartkey.com/mpngs/m/29-297748_round-profile-image-placeholder.png"
   );
   const [updatingProfile, setUpdatingProfile] = useState(false);
-  const [updatedUsername, setUpdatedUsername] = useState("");
-  const [updatedEmail, setUpdatedEmail] = useState("");
-  const [updatedPic, setUpdatedPic] = useState("");
+  const [updatedUsername, setUpdatedUsername] = useState(
+    props.user.info.username
+  );
+  const [updatedEmail, setUpdatedEmail] = useState(props.user.info.email);
+  const [updatedPic, setUpdatedPic] = useState(props.user.info.profile_pic);
 
   useEffect(() => {
     getUser();
