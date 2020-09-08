@@ -14,9 +14,19 @@ function Episodes(props) {
   }, [props.getEpisodes])
 
 
+  const episodes = props.episodes.episodes.map((e, index) => {
+    return (
+      <div key={index} className="episodes-episode">
+        <h1>{e.episode_name}</h1>
+        <img src={e.episode_image} alt="simpsons"/>
+        <h6>{e.episode_synopsis}</h6>
+      </div>
+    )
+  })
+
   return (
     <Page>
-      <div>Episodes</div>
+      <div className="episode-main">{episodes}</div>
     </Page>
   );
 }
