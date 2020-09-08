@@ -71,5 +71,6 @@ module.exports = {
     } = req.body;
 
     db.update_info([user_id, updatedUsername, updatedEmail, updatedPic])
+    res.sendStatus(200)
   },
 };
