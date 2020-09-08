@@ -11,23 +11,3 @@
   width: 150px;
   height: 150px;
 }
-
-.update-form {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.update-info {
-  height: 400px;
-  width: 90%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-
-.update-info-closed {
-  display: none;
-}

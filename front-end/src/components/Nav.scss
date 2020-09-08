@@ -58,6 +58,9 @@ nav {
   align-items: center;
   &-avatar {
     margin-left: 5px;
+    img {
+      width: auto;
+    }
   }
 }
 

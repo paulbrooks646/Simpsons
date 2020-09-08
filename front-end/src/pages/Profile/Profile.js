@@ -8,30 +8,25 @@ import EditIcon from "@material-ui/icons/Edit";
 import Tooltip from "@material-ui/core/Tooltip";
 import Fade from "@material-ui/core/Fade";
 import Button from "@material-ui/core/Button";
-import Input from "@material-ui/core/Input";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import LockIcon from "@material-ui/icons/Lock";
 import EmailIcon from "@material-ui/icons/Email";
-import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import PersonIcon from "@material-ui/icons/Person";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import Typography from "@material-ui/core/Typography";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import TextField from "@material-ui/core/TextField";
 import "./Profile.scss";
 
 function Profile(props) {
   const [pic, setPic] = useState(
     "https://www.clipartkey.com/mpngs/m/29-297748_round-profile-image-placeholder.png"
   );
-  const [updateProfile, setUpdateProfile] = useState(false);
+  const [updatingProfile, setUpdatingProfile] = useState(false);
   const [updatedUsername, setUpdatedUsername] = useState("");
   const [updatedEmail, setUpdatedEmail] = useState("");
-  const [updatedPassword, setUpdatedPasword] = useState("");
-  const [confirmUpdatedPassword, setConfirmUpdatedPassword] = useState("");
   const [updatedPic, setUpdatedPic] = useState("");
-  const [passwordsMatch, setPasswordsMatch] = useState(true);
 
   useEffect(() => {
     getUser();
@@ -40,10 +35,15 @@ function Profile(props) {
     }
   }, [props.user.info.profile_pic]);
 
-  const toggleUpdateProfile = () => setUpdateProfile(!updateProfile);
+  const handleOpenUpdatingProfile = () => setUpdatingProfile(true);
+  const handleCloseUpdatingProfile = () => setUpdatingProfile(false);
 
   const handleUpdate = () => {
-    axios.put(`/Update/${props.user.info.id}`, {updatedUsername, updatedEmail, updatedPassword, updatedPic})
+    axios.put(`/Update/${props.user.info.id}`, {
+      updatedUsername,
+      updatedEmail,
+      updatedPic,
+    });
   };
 
   return (
@@ -62,118 +62,74 @@ function Profile(props) {
           TransitionComponent={Fade}
           TransitionProps={{ timeout: 600 }}
         >
-          <Fab color="primary" onClick={toggleUpdateProfile}>
+          <Fab color="primary" onClick={handleOpenUpdatingProfile}>
             <EditIcon />
           </Fab>
         </Tooltip>
-
-        <form onSubmit={handleUpdate} className="update-form">
-          <div
-            className={`${
-              updateProfile ? "update-info" : "update-info-closed"
-            }`}
-          >
-            <FormControl>
-              <InputLabel htmlFor="newUsername">Change Username</InputLabel>
-              <Input
-                required
-                value={updatedUsername}
-                id="newUsername"
-                placeholder="Enter new username"
-                startAdornment={
+        <Dialog
+          open={updatingProfile}
+          onClose={handleCloseUpdatingProfile}
+          aria-labelledby="update-profile-dialog-title"
+        >
+          <DialogTitle id="update-profile-dialog-title">
+            Update Profile
+          </DialogTitle>
+          <DialogContent>
+            <TextField
+              fullWidth
+              margin="dense"
+              label="Change Username"
+              value={updatedUsername}
+              type="text"
+              onChange={(event) => setUpdatedUsername(event.target.value)}
+              InputProps={{
+                startAdornment: (
                   <InputAdornment position="start">
                     <PersonIcon />
                   </InputAdornment>
-                }
-                onChange={(e) => setUpdatedUsername(e.target.value)}
-              />
-            </FormControl>
-            <FormControl>
-              <InputLabel htmlFor="email">Change Email</InputLabel>
-              <Input
-                type="email"
-                required
-                value={updatedEmail}
-                id="email"
-                placeholder="Enter new email"
-                startAdornment={
+                ),
+              }}
+            />
+            <TextField
+              fullWidth
+              margin="dense"
+              label="Change Email"
+              type="email"
+              value={updatedEmail}
+              onChange={(event) => setUpdatedEmail(event.target.value)}
+              InputProps={{
+                startAdornment: (
                   <InputAdornment position="start">
                     <EmailIcon />
                   </InputAdornment>
-                }
-                onChange={(e) => setUpdatedEmail(e.target.value)}
-              />
-            </FormControl>
-            <FormControl error={!passwordsMatch}>
-              <InputLabel htmlFor="newPassword">Change Password</InputLabel>
-              <Input
-                required
-                value={updatedPassword}
-                aria-describedby="new-password-helper-text"
-                id="newPassword"
-                placeholder="Enter new password"
-                error={!passwordsMatch}
-                startAdornment={
-                  <InputAdornment position="start">
-                    <LockIcon />
-                  </InputAdornment>
-                }
-                onChange={(e) => setUpdatedPasword(e.target.value)}
-                type="password"
-              />
-              {!passwordsMatch && (
-                <FormHelperText id="new-password-helper-text">
-                  Passwords Do Not Match
-                </FormHelperText>
-              )}
-            </FormControl>
-            <FormControl error={!passwordsMatch}>
-              <InputLabel htmlFor="confirmPassword">
-                Confirm New Password
-              </InputLabel>
-              <Input
-                required
-                value={confirmUpdatedPassword}
-                aria-describedby="confirm-password-helper-text"
-                id="confirm"
-                placeholder="Confirm new password"
-                error={!passwordsMatch}
-                startAdornment={
-                  <InputAdornment position="start">
-                    <VpnKeyIcon />
-                  </InputAdornment>
-                }
-                onChange={(e) => setConfirmUpdatedPassword(e.target.value)}
-                type="password"
-              />
-              {!passwordsMatch && (
-                <FormHelperText id="confirm-password-helper-text">
-                  Passwords Do Not Match
-                </FormHelperText>
-              )}
-            </FormControl>
-            <FormControl>
-              <InputLabel htmlFor="newProfilePic">
-                Change Profile Pic
-              </InputLabel>
-              <Input
-                required
-                value={updatedPic}
-                id="newProfilePic"
-                placeholder="Profile Pic Url"
-                startAdornment={
+                ),
+              }}
+            />
+            <TextField
+              fullWidth
+              margin="dense"
+              label="Change Profile Picture"
+              value={updatedPic}
+              type="text"
+              onChange={(event) => setUpdatedPic(event.target.value)}
+              InputProps={{
+                startAdornment: (
                   <InputAdornment position="start">
                     <AccountBoxIcon />
                   </InputAdornment>
-                }
-                onChange={(e) => setUpdatedPic(e.target.value)}
-              />
-            </FormControl>
-            <Button variant="contained" color="primary" type="submit">
+                ),
+              }}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button color="secondary" onClick={handleCloseUpdatingProfile}>
+              Cancel
+            </Button>
+            <Button color="primary" onClick={handleUpdate}>
               Submit
             </Button>
-          </div>
-        </form>
+          </DialogActions>
+        </Dialog>
       </div>
     </Page>
   );
