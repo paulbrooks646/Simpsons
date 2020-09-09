@@ -27,10 +27,6 @@ app.get('/episodes', episodesController.getEpisodes)
 
 const port = 5000
 
-// app.get('/', (req, res) => {
-//     res.send('Hola Phil!')
-// })
-
 massive({
     connectionString: CONNECTION_STRING,
     ssl: {rejectUnauthorized: false}

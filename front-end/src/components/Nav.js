@@ -47,11 +47,11 @@ function Nav(props) {
               hamburger ? "hamburger-menu" : "hamburger-menu-open"
             }`}
           >
-            <Link to="/Dashboard" component={RouterLink}>
+            <Link to="/dashboard" component={RouterLink}>
               <h2>Dashboard</h2>
             </Link>
             <Link
-              to={`/Profile/${props.user.info.username}`}
+              to={`/profile/${props.user.info.username}`}
               component={RouterLink}
             >
               <h2 className="profile-link-heading">
@@ -64,7 +64,7 @@ function Nav(props) {
                 />
               </h2>
             </Link>
-            <Link to="/Episodes" component={RouterLink}>
+            <Link to="/episodes" component={RouterLink}>
               <h2>Episodes</h2>
             </Link>
             <Button
@@ -78,11 +78,11 @@ function Nav(props) {
           </div>
         </div>
         <div className="nav-middle-div">
-          <Link to="/Dashboard" component={RouterLink}>
+          <Link to="/dashboard" component={RouterLink}>
             <h1>Dashboard</h1>
           </Link>
           <Link
-            to={`/Profile/${props.user.info.username}`}
+            to={`/profile/${props.user.info.username}`}
             component={RouterLink}
           >
             <h1 className="profile-link-heading">
@@ -95,7 +95,7 @@ function Nav(props) {
               />
             </h1>
           </Link>
-          <Link to="/Episodes" component={RouterLink}>
+          <Link to="/episodes" component={RouterLink}>
             <h1>Episodes</h1>
           </Link>
         </div>
