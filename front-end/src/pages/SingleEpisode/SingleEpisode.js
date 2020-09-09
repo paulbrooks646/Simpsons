@@ -27,7 +27,7 @@ export default function SingleEpisode(props) {
       <div style={{border: 'solid'}}>
       <h1>{info.episode_name}</h1>
       <img src={info.episode_image} alt="simpsons family at christmas"/>
-      <h2>{info.episode_name}</h2>
+      <h2>{info.episode_synopsis}</h2>
       </div>
   )
 
