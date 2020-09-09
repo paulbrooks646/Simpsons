@@ -9,6 +9,10 @@ nav {
   z-index: 4;
 }
 
+.drawer-content {
+  width: 250px;
+}
+
 .hamburger {
   cursor: pointer;
 }
@@ -33,26 +37,6 @@ nav {
   position: relative;
 }
 
-.hamburger-menu {
-  border: solid;
-  height: 250px;
-  width: 150px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-  position: relative;
-  top: 10px;
-  background-color: white;
-  transition-duration: 2;
-  transition-property: all;
-  transition-timing-function: linear;
-}
-
-.hamburger-menu-open {
-  display: none;
-}
-
 .profile-link-heading {
   display: flex;
   align-items: center;
@@ -66,10 +50,6 @@ nav {
 
 @media (min-width: 601px) {
   .hamburger-div {
-    display: none;
-  }
-
-  .hamburger-menu {
     display: none;
   }
 }
