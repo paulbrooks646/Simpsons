@@ -24,12 +24,12 @@ export default function SingleEpisode(props) {
   // })
 
   return (
-      <div style={{border: 'solid'}}>
+      <div style={{border: 'solid', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-evenly', textAlign: 'center', width: '500px'}}>
       <h1>{info.episode_name}</h1>
       <img src={info.episode_image} alt="simpsons family at christmas"/>
-      <h2>{info.episode_synopsis}</h2>
+      <p>{info.episode_synopsis}</p>
       <h2>Air Date: {info.air_date}</h2>
-      <h2>{info.episode_quote}</h2>
+      <p>{info.episode_quote}</p>
       <h2>Season: {info.season}</h2>
       </div>
   )
