@@ -30,6 +30,7 @@ export default function SingleEpisode(props) {
       <h2>{info.episode_synopsis}</h2>
       <h2>Air Date: {info.air_date}</h2>
       <h2>{info.episode_quote}</h2>
+      <h2>Season: {info.season}</h2>
       </div>
   )
 
