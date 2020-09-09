@@ -3,7 +3,8 @@ import Page from "../../components/Page";
 import './Episodes.scss'
 import axios from "axios";
 import { getEpisodes } from '../../redux/episodesReducer'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
+import {Link} from 'react-router-dom'
 
 function Episodes(props) {
 
@@ -16,12 +17,14 @@ function Episodes(props) {
 
   const episodes = props.episodes.episodes.map((e, index) => {
     return (
-      <div key={index} className="episodes-episode">
-        <h1>{e.episode_name}</h1>
-        <img src={e.episode_image} alt="simpsons"/>
-        <h6>{e.episode_synopsis}</h6>
-      </div>
-    )
+      <Link to={`/Episodes/${e.episode_name}`}>
+        <div key={index} className="episodes-episode">
+          <h1>{e.episode_name}</h1>
+          <img src={e.episode_image} alt="simpsons" />
+          <h6>{e.episode_synopsis}</h6>
+        </div>
+      </Link>
+    );
   })
 
   return (
