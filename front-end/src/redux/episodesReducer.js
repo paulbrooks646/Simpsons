@@ -1,5 +1,5 @@
 const initialState = {
-  episodes: [],
+  info: [],
 };
 
 const GET_EPISODES = "GET_EPISODES";
@@ -14,7 +14,7 @@ export function getEpisodes(data) {
 export default function (state = initialState, action) {
   switch (action.type) {
     case GET_EPISODES:
-      return { ...state, episodes: action.payload };
+      return { ...state, info: action.payload };
     default:
       return state;
   }

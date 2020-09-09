@@ -11,18 +11,16 @@ import Hamburger from "../images/icons8-hamburger-64.png";
 import "./Nav.scss";
 
 function Nav(props) {
-  const [hamburger, setHamburger] = useState(false)
-    const [avatar, setAvatar] = useState(
-      "https://realsic.com/wp-content/uploads/2016/11/donut-enamel-pin-simpsons-donut-pin-by-real-sic-pink-4-1.jpg"
-    );
-    ;
-
+  const [hamburger, setHamburger] = useState(false);
+  const [avatar, setAvatar] = useState(
+    "https://realsic.com/wp-content/uploads/2016/11/donut-enamel-pin-simpsons-donut-pin-by-real-sic-pink-4-1.jpg"
+  );
   useEffect(() => {
     getUser();
     if (props.user.info.profile_pic) {
-      setAvatar(props.user.info.profile_pic)
+      setAvatar(props.user.info.profile_pic);
     }
-  }, []);
+  }, [props.user.info.profile_pic]);
 
   const toggleHamburger = () => {
     setHamburger(!hamburger);
