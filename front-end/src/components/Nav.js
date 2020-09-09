@@ -11,18 +11,16 @@ import Hamburger from "../images/icons8-hamburger-64.png";
 import "./Nav.scss";
 
 function Nav(props) {
-  const [hamburger, setHamburger] = useState(false)
-    const [avatar, setAvatar] = useState(
-      "https://realsic.com/wp-content/uploads/2016/11/donut-enamel-pin-simpsons-donut-pin-by-real-sic-pink-4-1.jpg"
-    );
-    ;
-
+  const [hamburger, setHamburger] = useState(false);
+  const [avatar, setAvatar] = useState(
+    "https://realsic.com/wp-content/uploads/2016/11/donut-enamel-pin-simpsons-donut-pin-by-real-sic-pink-4-1.jpg"
+  );
   useEffect(() => {
     getUser();
     if (props.user.info.profile_pic) {
-      setAvatar(props.user.info.profile_pic)
+      setAvatar(props.user.info.profile_pic);
     }
-  }, []);
+  }, [props.user.info.profile_pic]);
 
   const toggleHamburger = () => {
     setHamburger(!hamburger);
@@ -49,11 +47,11 @@ function Nav(props) {
               hamburger ? "hamburger-menu" : "hamburger-menu-open"
             }`}
           >
-            <Link to="/Dashboard" component={RouterLink}>
+            <Link to="/dashboard" component={RouterLink}>
               <h2>Dashboard</h2>
             </Link>
             <Link
-              to={`/Profile/${props.user.info.username}`}
+              to={`/profile/${props.user.info.username}`}
               component={RouterLink}
             >
               <h2 className="profile-link-heading">
@@ -66,7 +64,7 @@ function Nav(props) {
                 />
               </h2>
             </Link>
-            <Link to="/Episodes" component={RouterLink}>
+            <Link to="/episodes" component={RouterLink}>
               <h2>Episodes</h2>
             </Link>
             <Button
@@ -80,11 +78,11 @@ function Nav(props) {
           </div>
         </div>
         <div className="nav-middle-div">
-          <Link to="/Dashboard" component={RouterLink}>
+          <Link to="/dashboard" component={RouterLink}>
             <h1>Dashboard</h1>
           </Link>
           <Link
-            to={`/Profile/${props.user.info.username}`}
+            to={`/profile/${props.user.info.username}`}
             component={RouterLink}
           >
             <h1 className="profile-link-heading">
@@ -97,7 +95,7 @@ function Nav(props) {
               />
             </h1>
           </Link>
-          <Link to="/Episodes" component={RouterLink}>
+          <Link to="/episodes" component={RouterLink}>
             <h1>Episodes</h1>
           </Link>
         </div>
