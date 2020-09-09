@@ -5,25 +5,29 @@ import axios from "axios";
 
 export default function SingleEpisode(props) {
 
-  const [info, setInfo] = useState()
+  const [info, setInfo] = useState([])
 
   useEffect(() => {
     const episode = props.match.params.episode.replace(/_/g, " ")
     axios.get(`/episode/${episode}`)
       .then(res => {
-      setInfo(res.data)
+        setInfo(res.data[0])
     })
     
-}, [props.match.params.episode])
-
-
-
+  }, [props.match.params.episode])
+  
+  
+  // const episodeInformation = info.info[0].map((e, index) => {
+  //   return (
+  //     <h1>Please work!</h1>
+  //   )
+  // })
 
   return (
-    <Page>
-      <div>
-
+      <div style={{border: 'solid'}}>
+      <h1>{info.episode_synopsis}</h1>
+      <h2>{info.episode_name}</h2>
       </div>
-    </Page>
-  );
+  )
+
 }

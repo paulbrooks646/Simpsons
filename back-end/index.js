@@ -24,6 +24,7 @@ app.delete('/logout', userController.logout)
 app.put('/update/:user_id', userController.update)
 
 app.get('/episodes', episodesController.getEpisodes)
+app.get('/episode/:episode', episodesController.getEpisode)
 
 const port = 5000
 
