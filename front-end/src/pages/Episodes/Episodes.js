@@ -17,8 +17,8 @@ function Episodes(props) {
 
   const episodes = props.episodes.episodes.map((e, index) => {
     return (
-      <Link to={`/Episodes/${e.episode_name}`}>
-        <div key={index} className="episodes-episode">
+      <Link key={index} to={`/episodes/${e.episode_name.replace(/ /g, "_")}`}>
+        <div className="episodes-episode">
           <h1>{e.episode_name}</h1>
           <img src={e.episode_image} alt="simpsons" />
           <h6>{e.episode_synopsis}</h6>

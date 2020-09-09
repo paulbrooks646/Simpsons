@@ -5,7 +5,9 @@ import "./SingleEpisode.scss";
 export default function SingleEpisode() {
   return (
     <Page>
-      <div>SingleEpisode</div>
+      <div>
+        
+      </div>
     </Page>
   );
 }
