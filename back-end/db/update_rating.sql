@@ -1,0 +1,3 @@
+UPDATE RATINGS 
+SET RATING = $1
+WHERE episode_name = $2

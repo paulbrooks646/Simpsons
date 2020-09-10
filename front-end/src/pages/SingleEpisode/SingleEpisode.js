@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { getUser } from "../../redux/userReducer";
 import Page from "../../components/Page";
 import "./SingleEpisode.scss";
 import axios from "axios";
@@ -9,19 +11,17 @@ import Rating from "@material-ui/lab/Rating";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import TextField from "@material-ui/core/TextField";
 
-
-export default function SingleEpisode(props) {
+function SingleEpisode(props) {
   const [info, setInfo] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isRating, setIsRating] = useState(false);
-  const [rating, setRating] = useState()
-  const [review, setReview] = useState("")
+  const [rating, setRating] = useState();
+  const [review, setReview] = useState("");
 
   useEffect(() => {
     const episode = props.match.params.episode.replace(/_/g, " ");
@@ -37,9 +37,12 @@ export default function SingleEpisode(props) {
 
   const handleCloseDialog = () => setIsRating(false);
 
-  const submitReview = () => {
-    
-  }
+  const submitRatingAndReview = () => {
+    const data = { rating, review, episode_name: info.episode_name };
+    axios.put(`/review/${props.user.info.id}`, data).then(() => {
+      alert("review posted");
+    });
+  };
 
   return (
     <Page>
@@ -83,25 +86,37 @@ export default function SingleEpisode(props) {
                 emptyIcon={<StarBorderIcon fontSize="inherit" />}
                 precision={0.5}
                 defaultValue={0}
-                  size="large"
-                  style={{ marginBottom: '20px' }}
-                  onChange={e => setRating(e.target.value)}
-                  value={rating}
-                />
-                <TextField
-                  label="Write review here"
-                  multiline
-                  rows={5}
-                  variant="outlined"
-                  fullWidth
-                  style={{ marginBottom: '20px' }}
-                  onChange={e => setReview(e.target.value)}
-                />
-                <Button variant="contained" color="secondary" onClick={submitReview}>Submit</Button>
+                size="large"
+                style={{ marginBottom: "20px" }}
+                onChange={(e) => setRating(e.target.value)}
+                value={rating}
+              />
+              <TextField
+                label="Write review here"
+                multiline
+                rows={5}
+                variant="outlined"
+                fullWidth
+                style={{ marginBottom: "20px" }}
+                value={review}
+                onChange={(e) => setReview(e.target.value)}
+              />
             </DialogContent>
+            <DialogActions>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={submitRatingAndReview}
+              >
+                Submit
+              </Button>
+            </DialogActions>
           </Dialog>
         </div>
       )}
     </Page>
   );
 }
+
+const mapStateToProps = (reduxState) => reduxState;
+export default connect(mapStateToProps, { getUser })(SingleEpisode);
