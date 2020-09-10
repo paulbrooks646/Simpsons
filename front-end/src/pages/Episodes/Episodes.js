@@ -33,9 +33,9 @@ function Episodes(props) {
         >
           <Card variant="outlined" className="episodes-card">
             <div className="episodes-episode">
-              <h1>{e.episode_name}</h1>
-              <img src={e.episode_image} alt="simpsons" />
-              <h6>{e.episode_synopsis}</h6>
+              <h5>{e.episode_name}</h5>
+              <img src={e.episode_image} alt="simpsons" className="episodes-image"/>
+              <h6 className="episodes-synopsis">{e.episode_synopsis}</h6>
             </div>
           </Card>
         </Link>
@@ -45,7 +45,7 @@ function Episodes(props) {
 
   return (
     <Page>
-      <div className="episode-main">{episodes}</div>
+      <div className="episodes-main">{episodes}</div>
       <Typography style={{ textAlign: "center" }}>Season: {page}</Typography>
       <Pagination
         count={10}
