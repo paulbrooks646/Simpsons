@@ -1,3 +1,9 @@
+.episode-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .episode-card {
   width: 600px;
   height: 600px;
@@ -6,7 +12,7 @@
   align-items: center;
   justify-content: space-evenly;
   position: relative;
-  top: 100px;
+  top: 75px;
 }
 
 .episode-div {
