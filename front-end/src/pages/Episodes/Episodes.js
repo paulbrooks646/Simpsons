@@ -21,7 +21,7 @@ function Episodes(props) {
       <Link key={index} to={`/episodes/${e.episode_name.replace(/ /g, "_")}`}>
         <Card variant="outlined" className="episodes-card">
           <div className="episodes-episode">
-            <h1>{e.episode_name}</h1>
+            <h4>{e.episode_name}</h4>
             <img src={e.episode_image} alt="simpsons" />
             <h6>{e.episode_synopsis}</h6>
           </div>
