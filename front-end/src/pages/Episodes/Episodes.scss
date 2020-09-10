@@ -6,7 +6,7 @@
 }
 
 .episodes-card {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .episodes-episode {
@@ -21,4 +21,9 @@
 .episodes-image {
     width: 100px;
     height: 100px;
+}
+
+.seasons-pagination {
+  display: flex;
+  justify-content: center;
 }
