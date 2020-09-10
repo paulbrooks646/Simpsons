@@ -8,14 +8,17 @@ import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Pagination from "@material-ui/lab/Pagination";
 import Card from "@material-ui/core/Card";
+import LoadingSpinner from "../../shared/LoadingSpinner";
 
 function Episodes(props) {
   const { getEpisodes } = props;
   const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios.get("/episodes").then((res) => {
       getEpisodes(res.data);
+      setLoading(false);
     });
   }, [getEpisodes]);
 
@@ -24,8 +27,8 @@ function Episodes(props) {
   };
 
   const episodes = props.episodes.info.map((e, index) => {
-    if (e.season === page) {
-      return (
+    return (
+      e.season === page && (
         <Link
           key={index}
           to={`/episodes/${e.episode_name.replace(/ /g, "_")}`}
@@ -39,22 +42,30 @@ function Episodes(props) {
             </div>
           </Card>
         </Link>
-      );
-    }
+      )
+    );
   });
 
   return (
     <Page>
-      <div className="episode-main">{episodes}</div>
-      <Typography style={{ textAlign: "center" }}>Season: {page}</Typography>
-      <Pagination
-        count={10}
-        color="primary"
-        page={page}
-        onChange={handleChange}
-        showFirstButton
-        showLastButton
-      />
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <div className="episode-main">{episodes}</div>
+          <Typography style={{ textAlign: "center" }}>
+            Season: {page}
+          </Typography>
+          <Pagination
+            count={10}
+            color="primary"
+            page={page}
+            onChange={handleChange}
+            showFirstButton
+            showLastButton
+          />
+        </>
+      )}
     </Page>
   );
 }
