@@ -5,6 +5,7 @@ import axios from "axios";
 import { getEpisodes } from "../../redux/episodesReducer";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import Card from '@material-ui/core/Card'
 
 function Episodes(props) {
   const { getEpisodes } = props;
@@ -18,11 +19,13 @@ function Episodes(props) {
   const episodes = props.episodes.info.map((e, index) => {
     return (
       <Link key={index} to={`/episodes/${e.episode_name.replace(/ /g, "_")}`}>
-        <div className="episodes-episode">
-          <h1>{e.episode_name}</h1>
-          <img src={e.episode_image} alt="simpsons" />
-          <h6>{e.episode_synopsis}</h6>
-        </div>
+        <Card variant="outlined" className="episodes-card">
+          <div className="episodes-episode">
+            <h1>{e.episode_name}</h1>
+            <img src={e.episode_image} alt="simpsons" />
+            <h6>{e.episode_synopsis}</h6>
+          </div>
+        </Card>
       </Link>
     );
   });

@@ -3,6 +3,7 @@ import Page from "../../components/Page";
 import "./SingleEpisode.scss";
 import axios from "axios";
 import formatDate from "../../util/formatDate";
+import Card from "@material-ui/core/Card";
 
 export default function SingleEpisode(props) {
   const [info, setInfo] = useState([]);
@@ -16,23 +17,17 @@ export default function SingleEpisode(props) {
 
   return (
     <Page>
-      <div
-        style={{
-          border: "solid",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "space-evenly",
-          textAlign: "center",
-          width: "500px",
-        }}
-      >
-        <h1>{info.episode_name}</h1>
-        <img src={info.episode_image} alt={info.episode_name} />
-        <p>{info.episode_synopsis}</p>
-        <h2>Air Date: {formatDate(info.air_date)}</h2>
-        <p>{info.episode_quote}</p>
-        <h2>Season: {info.season}</h2>
+      <div className="episode-main">
+        <Card variant="outlined" className="episode-card">
+          <div className="episode-div">
+            <h2>{info.episode_name}</h2>
+            <img src={info.episode_image} alt={info.episode_name} />
+            <p>{info.episode_synopsis}</p>
+            <h2>Air Date: {formatDate(info.air_date)}</h2>
+            <p>{info.episode_quote}</p>
+            <h2>Season: {info.season}</h2>
+          </div>
+        </Card>
       </div>
     </Page>
   );
