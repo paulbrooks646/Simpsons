@@ -10,6 +10,7 @@ import Pagination from "@material-ui/lab/Pagination";
 import Card from "@material-ui/core/Card";
 import LoadingSpinner from "../../shared/LoadingSpinner";
 
+
 function Episodes(props) {
   const { getEpisodes } = props;
   const [page, setPage] = useState(1);
