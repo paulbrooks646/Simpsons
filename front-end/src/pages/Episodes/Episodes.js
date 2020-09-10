@@ -42,7 +42,6 @@ function Episodes(props) {
                 alt="simpsons"
                 className="episodes-image"
               />
-              <h6 className="episodes-synopsis">{e.episode_synopsis}</h6>
             </div>
           </Card>
         </Link>
@@ -56,7 +55,7 @@ function Episodes(props) {
         <LoadingSpinner />
       ) : (
         <>
-          <div className="episode-main">{episodes}</div>
+          <div className="episodes-main">{episodes}</div>
           <Typography style={{ textAlign: "center" }}>
             Season: {page}
           </Typography>
