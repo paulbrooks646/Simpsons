@@ -34,7 +34,7 @@ function Nav(props) {
 
   return (
     <>
-      <nav>
+      <nav className="navbar">
         <div className="hamburger-div">
           <img
             src={Hamburger}

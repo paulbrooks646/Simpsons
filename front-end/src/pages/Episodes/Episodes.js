@@ -61,6 +61,7 @@ function Episodes(props) {
             Season: {page}
           </Typography>
           <Pagination
+            className="seasons-pagination"
             count={10}
             color="primary"
             page={page}
