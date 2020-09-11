@@ -69,20 +69,17 @@ function SingleEpisode(props) {
           </Card>
           <Dialog
             open={isRating}
+            fullWidth
+            disableBackdropClick
             onClose={handleCloseDialog}
             aria-labelledby="dialog-rating-title"
           >
-            <DialogTitle id="dialog-rating-title">
+            <DialogTitle id="dialog-rating-title" style={{ paddingBottom: 0 }}>
               Rate this episode ({info.episode_name})
             </DialogTitle>
-            <DialogContent
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
+            <DialogContent>
               <Rating
+                name="episode-star-rating-input"
                 emptyIcon={<StarBorderIcon fontSize="inherit" />}
                 precision={0.5}
                 defaultValue={0}
@@ -94,10 +91,9 @@ function SingleEpisode(props) {
               <TextField
                 label="Write review here"
                 multiline
-                rows={5}
+                rows={8}
                 variant="outlined"
                 fullWidth
-                style={{ marginBottom: "20px" }}
                 value={review}
                 onChange={(e) => setReview(e.target.value)}
               />
@@ -106,6 +102,13 @@ function SingleEpisode(props) {
               <Button
                 variant="contained"
                 color="secondary"
+                onClick={handleCloseDialog}
+              >
+                Close
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
                 onClick={submitRatingAndReview}
               >
                 Submit
