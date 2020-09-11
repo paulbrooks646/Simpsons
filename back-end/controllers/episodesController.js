@@ -33,21 +33,30 @@ module.exports = {
   getEpisodes: (req, res) => {
     const db = req.app.get("db");
 
-    db.get_ratings().then((ratings) => {
-      console.log(ratings);
+    db.get_episodes().then((ratings) => {
       let newArr = [];
 
-      for (let i = 1; i < ratings.length; i++) {
+      for (let i = 0; i < ratings.length; i++) {
         let total = 0;
         let avg = 0;
         let combined = {
           episode_name: ratings[i].episode_name,
+          episode_id: ratings[i].episode_id,
+          episode_synopsis: ratings[i].episode_synopsis,
+          episode_image: ratings[i].episode_image,
+          season: ratings[i].season,
+          air_date: ratings[i].air_date,
+          episode_quote: ratings[i].episode_quote,
+          ratings_reviews_id: ratings[i].ratings_reviews_id,
+          user_id: ratings[i].user_id,
+          reviews: []
         };
 
         ratings.forEach((element) => {
           if (ratings[i].episode_name === element.episode_name) {
             avg += 1;
             total += +element.rating;
+            combined.reviews.push(element.review)
           }
         });
         combined.rating = (total / avg).toFixed(1);
