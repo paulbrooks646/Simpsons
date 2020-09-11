@@ -1,9 +1,4 @@
 module.exports = {
-  getEpisodes: (req, res) => {
-    const db = req.app.get("db");
-
-    db.get_episodes().then((episodes) => res.status(200).send(episodes));
-  },
 
   getEpisode: (req, res) => {
     const db = req.app.get("db");
@@ -35,7 +30,7 @@ module.exports = {
       ]).then(() => res.sendStatus(200));
   },
 
-  getRatings: (req, res) => {
+  getEpisodes: (req, res) => {
     const db = req.app.get("db");
 
     db.get_ratings().then((ratings) => {
