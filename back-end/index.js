@@ -29,7 +29,7 @@ app.get("/episodes", episodesController.getEpisodes);
 app.get("/episode/:episode", episodesController.getEpisode);
 
 app.put("/review/:user_id", episodesController.updateRatingAndReview);
-app.get("/rating", episodesController.getRating)
+app.get("/ratings", episodesController.getRatings)
 
 const port = 5000;
 
