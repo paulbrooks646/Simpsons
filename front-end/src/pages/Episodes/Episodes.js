@@ -15,10 +15,14 @@ function Episodes(props) {
   const { getEpisodes } = props;
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [ratings, setRatings] = useState()
 
   useEffect(() => {
     axios.get("/episodes").then((res) => {
       getEpisodes(res.data);
+      axios.get("/ratings").then(res => {
+      setRatings(res.data)
+    })
       setLoading(false);
     });
   }, [getEpisodes]);
