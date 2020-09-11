@@ -15,6 +15,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import TextField from "@material-ui/core/TextField";
+import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "@material-ui/lab/Alert";
 
 function SingleEpisode(props) {
   const [info, setInfo] = useState([]);
@@ -22,6 +24,7 @@ function SingleEpisode(props) {
   const [isRating, setIsRating] = useState(false);
   const [rating, setRating] = useState();
   const [review, setReview] = useState("");
+  const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
 
   useEffect(() => {
     const episode = props.match.params.episode.replace(/_/g, " ");
@@ -34,13 +37,14 @@ function SingleEpisode(props) {
   // const toggleRating = () => setIsRating(!isRating);
 
   const handleOpenDialog = () => setIsRating(true);
-
   const handleCloseDialog = () => setIsRating(false);
+  const handleSnackbarClose = () => setSnackbarIsOpen(false);
 
   const submitRatingAndReview = () => {
     const data = { rating, review, episode_name: info.episode_name };
     axios.put(`/review/${props.user.info.id}`, data).then(() => {
-      alert("review posted");
+      handleCloseDialog();
+      setSnackbarIsOpen(true);
     });
   };
 
@@ -115,6 +119,20 @@ function SingleEpisode(props) {
               </Button>
             </DialogActions>
           </Dialog>
+          <Snackbar
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            open={snackbarIsOpen}
+            autoHideDuration={4000}
+            onClose={handleSnackbarClose}
+          >
+            <Alert
+              onClose={handleSnackbarClose}
+              variant="filled"
+              severity="success"
+            >
+              RATING AND REVIEW SUBMITTED!
+            </Alert>
+          </Snackbar>
         </div>
       )}
     </Page>
