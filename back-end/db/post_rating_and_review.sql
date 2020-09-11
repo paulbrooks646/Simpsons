@@ -1,5 +1,2 @@
-INSERT INTO RATINGS (user_id, episode_name, rating)
-VALUES ($1, $2, $3);
-
-INSERT INTO REVIEWS (user_id, episode_name, review)
-VALUES ($1, $2, $4);
+INSERT INTO ratings_reviews (user_id, episode_name, rating, review)
+VALUES ($1, $2, $3, $4);

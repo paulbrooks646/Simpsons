@@ -39,7 +39,7 @@ function SingleEpisode(props) {
 
   const submitRatingAndReview = () => {
     const data = { rating, review, episode_name: info.episode_name };
-    axios.put(`/review/${props.user.info.id}`, data).then(() => {
+    axios.put(`/rating-review/${props.user.info.id}`, data).then(() => {
       alert("review posted");
     });
   };
