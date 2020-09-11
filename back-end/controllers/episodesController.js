@@ -26,12 +26,10 @@ module.exports = {
     ]);
     if (ratingExists[0])
       db.update_rating([user_id, episode_name, +rating]).then(() =>
-        res.sendStatus(200).catch((err) => res.status(404).send(err))
-      );
+        res.sendStatus(200));
     if (reviewExists[0])
       db.update_review([user_id, episode_name, review]).then(() =>
-        res.sendStatus(200).catch((err) => res.status(404).send(err))
-      );
+        res.sendStatus(200));
     if (!ratingExists[0] || !reviewExists[0])
       db.post_rating_and_review([
         user_id,
@@ -39,7 +37,6 @@ module.exports = {
         +rating,
         review,
       ]).then(() =>
-        res.sendStatus(200).catch((err) => res.status(404).send(err))
-      );
+        res.sendStatus(200));
   },
 };
