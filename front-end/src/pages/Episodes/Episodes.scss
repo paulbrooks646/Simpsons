@@ -1,8 +1,8 @@
 .episodes-main {
-    display: flex;
-    justify-content: space-evenly;
-    width: 100vw;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100vw;
+  flex-wrap: wrap;
 }
 
 .episodes-card {
@@ -10,17 +10,17 @@
 }
 
 .episodes-episode {
-    box-sizing: border-box;
-    width: 225px;
-    height: 225px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  box-sizing: border-box;
+  width: 225px;
+  // height: 225px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .episodes-image {
-    width: 100px;
-    height: 100px;
+  width: 100px;
+  height: 100px;
 }
 
 .seasons-pagination {
