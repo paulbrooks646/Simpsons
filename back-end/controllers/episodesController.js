@@ -1,9 +1,4 @@
 module.exports = {
-  getEpisodes: (req, res) => {
-    const db = req.app.get("db");
-
-    db.get_episodes().then((episodes) => res.status(200).send(episodes));
-  },
 
   getEpisode: (req, res) => {
     const db = req.app.get("db");
@@ -16,37 +11,32 @@ module.exports = {
     const db = req.app.get("db");
     const { user_id } = req.params;
     const { rating, review, episode_name } = req.body;
-    const ratingExists = await db.check_existing_rating([
+    const ratingReviewExists = await db.check_existing_rating_review([
       user_id,
       episode_name,
     ]);
-    const reviewExists = await db.check_existing_review([
-      user_id,
-      episode_name,
-    ]);
-    if (ratingExists[0])
-      db.update_rating([user_id, episode_name, +rating]).then(() =>
-        res.sendStatus(200));
-    if (reviewExists[0])
-      db.update_review([user_id, episode_name, review]).then(() =>
-        res.sendStatus(200));
-    if (!ratingExists[0] || !reviewExists[0])
+
+    if (ratingReviewExists[0])
+      db.update_rating_review([user_id, episode_name, +rating, review]).then(() =>
+        res.sendStatus(200)
+      );
+  
+    else
       db.post_rating_and_review([
         user_id,
         episode_name,
         +rating,
         review,
-      ]).then(() =>
-        res.sendStatus(200));
+      ]).then(() => res.sendStatus(200));
   },
 
-  getRatings: (req, res) => {
-    const db = req.app.get("db")
+  getEpisodes: (req, res) => {
+    const db = req.app.get("db");
 
-    db.get_ratings().then(ratings => {
-      console.log(ratings)
-      let newArr = []
-      
+    db.get_ratings().then((ratings) => {
+      console.log(ratings);
+      let newArr = [];
+
       for (let i = 1; i < ratings.length; i++) {
         let total = 0;
         let avg = 0;
@@ -61,18 +51,20 @@ module.exports = {
           }
         });
         combined.rating = (total / avg).toFixed(1);
-        newArr.push(combined)
+        newArr.push(combined);
       }
 
       for (let i = 0; i < newArr.length; i++) {
         for (let j = newArr.length - 1; j > i; j--) {
           if (newArr[i].episode_name === newArr[j].episode_name) {
-            newArr.splice(j , 1)
+            newArr.splice(j, 1);
           }
         }
       }
-      newArr.sort((a, b) => a.rating.length > b.rating.length ? -1 : a.rating < b.rating ? 1 : -1);
-      res.status(200).send(newArr)
-    })
-  }
+      newArr.sort((a, b) =>
+        a.rating.length > b.rating.length ? -1 : a.rating < b.rating ? 1 : -1
+      );
+      res.status(200).send(newArr);
+    });
+  },
 };

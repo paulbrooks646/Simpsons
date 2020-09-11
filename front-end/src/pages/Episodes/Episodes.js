@@ -20,9 +20,6 @@ function Episodes(props) {
   useEffect(() => {
     axios.get("/episodes").then((res) => {
       getEpisodes(res.data);
-      axios.get("/ratings").then(res => {
-      setRatings(res.data)
-    })
       setLoading(false);
     });
   }, [getEpisodes]);
