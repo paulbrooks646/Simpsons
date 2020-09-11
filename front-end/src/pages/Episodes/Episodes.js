@@ -44,6 +44,7 @@ function Episodes(props) {
                 alt="simpsons"
                 className="episodes-image"
               />
+              <h6>Rating: {e.rating}</h6>
             </div>
           </Card>
         </Link>
