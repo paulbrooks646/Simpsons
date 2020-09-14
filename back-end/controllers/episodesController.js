@@ -9,13 +9,15 @@ module.exports = {
 
   updateRatingAndReview: async (req, res) => {
     const db = req.app.get("db");
+    console.log(req.body)
+    console.log(req.params)
     const { user_id } = req.params;
     const { rating, review, episode_name } = req.body;
     const ratingReviewExists = await db.check_existing_rating_review([
       user_id,
       episode_name,
     ]);
-
+    console.log(ratingReviewExists)
     if (ratingReviewExists[0])
       db.update_rating_review([user_id, episode_name, +rating, review]).then(() =>
         res.sendStatus(200)
@@ -70,9 +72,13 @@ module.exports = {
           }
         }
       }
-      newArr.sort((a, b) =>
-        a.rating.length > b.rating.length ? -1 : a.rating < b.rating ? 1 : -1
-      );
+            newArr.sort((a, b) =>
+              a.episode_id.length < b.episode_id.length
+                ? -1
+                : a.episode_id > b.episode_id
+                ? 1
+                : -1
+            );
       res.status(200).send(newArr);
     });
   },
