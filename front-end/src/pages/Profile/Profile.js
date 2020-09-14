@@ -17,29 +17,27 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
-import SnackbarComponent from "../../shared/Snackbar";
+import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "@material-ui/lab/Alert";
 import "./Profile.scss";
 
 function Profile(props) {
+  const { id, username, email, profile_pic } = props.user.info;
   const [pic, setPic] = useState(
     "https://realsic.com/wp-content/uploads/2016/11/donut-enamel-pin-simpsons-donut-pin-by-real-sic-pink-4-1.jpg"
   );
   const [updatingProfile, setUpdatingProfile] = useState(false);
-  const [updatedUsername, setUpdatedUsername] = useState(
-    props.user.info.username || ""
-  );
-  const [updatedEmail, setUpdatedEmail] = useState(props.user.info.email || "");
-  const [updatedPic, setUpdatedPic] = useState(
-    props.user.info.profile_pic || ""
-  );
+  const [updatedUsername, setUpdatedUsername] = useState(username || "");
+  const [updatedEmail, setUpdatedEmail] = useState(email || "");
+  const [updatedPic, setUpdatedPic] = useState(profile_pic || "");
   const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
 
   useEffect(() => {
     getUser();
-    if (props.user.info.profile_pic) {
-      setPic(props.user.info.profile_pic);
+    if (profile_pic) {
+      setPic(profile_pic);
     }
-  }, [props.user.info.profile_pic]);
+  }, [profile_pic]);
 
   const handleOpenUpdatingProfile = () => setUpdatingProfile(true);
   const handleCloseUpdatingProfile = () => setUpdatingProfile(false);
@@ -47,7 +45,7 @@ function Profile(props) {
 
   const handleUpdate = () => {
     axios
-      .put(`/Update/${props.user.info.id}`, {
+      .put(`/Update/${id}`, {
         updatedUsername,
         updatedEmail,
         updatedPic,
@@ -61,12 +59,8 @@ function Profile(props) {
   return (
     <Page>
       <div className="profile-content">
-        <img
-          className="profile-image"
-          src={pic}
-          alt={props.user.info.username}
-        />
-        <h1>{props.user.info.username}</h1>
+        <img className="profile-image" src={pic} alt={username} />
+        <h1>{username}</h1>
         <Tooltip
           title="Edit Profile"
           placement="right"
@@ -143,13 +137,16 @@ function Profile(props) {
           </DialogActions>
         </Dialog>
       </div>
-      <SnackbarComponent
-        vertical="bottom"
-        horizontal="center"
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         open={snackbarIsOpen}
         onClose={handleCloseSnackbar}
-        message="Profile Updated!"
-      />
+        autoHideDuration={5000}
+      >
+        <Alert onClose={handleCloseSnackbar} variant="filled" severity="info">
+          Profile Updated
+        </Alert>
+      </Snackbar>
     </Page>
   );
 }
