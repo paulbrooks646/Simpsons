@@ -127,20 +127,30 @@ const addToWatchlist = (req, res) => {
 
   db.add_to_watchlist([+user_id, episode_name]).then(() => {
     res.sendStatus(200);
-  });  
+  });
 };
 
 const getWatchlist = (req, res) => {
-  const db = req.app.get("db")
-  const {user_id} = req.params
+  const db = req.app.get("db");
+  const { user_id } = req.params;
 
-  db.get_watchlist(user_id).then(watchlist => {
-    return res.status(200).send(watchlist)
-  })
-}
+  db.get_watchlist(user_id).then((watchlist) => {
+    return res.status(200).send(watchlist);
+  });
+};
+
+const deleteFromWatchlist = (req, res) => {
+  const db = req.app.get("db");
+  console.log(req.session.user)
+  const { id } = req.session.user;
+  const { episode_name } = req.params;
+
+  db.delete_from_watchlist([id, episode_name]).then(() => res.sendStatus(200));
+};
 
 exports.getEpisode = getEpisode;
 exports.updateRatingAndReview = updateRatingAndReview;
 exports.getEpisodes = getEpisodes;
 exports.addToWatchlist = addToWatchlist;
 exports.getWatchlist = getWatchlist;
+exports.deleteFromWatchlist = deleteFromWatchlist;
