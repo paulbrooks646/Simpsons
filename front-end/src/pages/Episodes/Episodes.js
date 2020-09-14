@@ -8,14 +8,13 @@ import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Pagination from "@material-ui/lab/Pagination";
 import Card from "@material-ui/core/Card";
+import Rating from "@material-ui/lab/Rating";
 import LoadingSpinner from "../../shared/LoadingSpinner";
-
 
 function Episodes(props) {
   const { getEpisodes } = props;
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
-  const [ratings, setRatings] = useState()
 
   useEffect(() => {
     axios.get("/episodes").then((res) => {
@@ -45,6 +44,12 @@ function Episodes(props) {
                 className="episodes-image"
               />
               <h6>Rating: {e.rating}</h6>
+              <Rating
+                name="average-rating"
+                value={+e.rating}
+                precision={0.1}
+                readOnly
+              />
             </div>
           </Card>
         </Link>
