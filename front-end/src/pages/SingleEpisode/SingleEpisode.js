@@ -30,6 +30,7 @@ function SingleEpisode(props) {
   const [review, setReview] = useState("");
   const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
   const [userWatchlist, setUserWatchlist] = useState([]);
+  const episode_name = info.episode_name
 
   useEffect(() => {
     const episode = props.match.params.episode.replace(/_/g, " ");
@@ -62,6 +63,12 @@ function SingleEpisode(props) {
     axios.post(`/watchlist/${props.user.info.id}`, { episode_name });
   };
 
+  const removeFromWatchlist = () => {
+    const episode_name = info.episode_name;
+    console.log(episode_name)
+    axios.delete(`/watchlist/${episode_name}`)
+  }
+
   return (
     <Page>
       {loading ? (
@@ -85,7 +92,7 @@ function SingleEpisode(props) {
                   <Tooltip title="Remove From Watchlist">
                     <IconButton
                       color="secondary"
-                      onClick={() => console.log("removing from watchlist...")}
+                      onClick={removeFromWatchlist}
                     >
                       <RemoveFromQueueIcon />
                     </IconButton>
