@@ -56,7 +56,8 @@ function SingleEpisode(props) {
         <div className="episode-main">
           <Card variant="outlined" className="episode-card">
             <div className="episode-div">
-              <h2>{info.episode_name}</h2>
+                <h2>{info.episode_name}</h2>
+                <h3>Rating: {info.rating}</h3>
               <img src={info.episode_image} alt={info.episode_name} />
               <p>{info.episode_synopsis}</p>
               <h2>Air Date: {formatDate(info.air_date)}</h2>
