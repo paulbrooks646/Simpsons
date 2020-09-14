@@ -1,5 +1,4 @@
 module.exports = {
-
   getEpisode: (req, res) => {
     const db = req.app.get("db");
     const { episode } = req.params;
@@ -47,20 +46,21 @@ module.exports = {
 
   updateRatingAndReview: async (req, res) => {
     const db = req.app.get("db");
-    console.log(req.body)
-    console.log(req.params)
+
     const { user_id } = req.params;
     const { rating, review, episode_name } = req.body;
     const ratingReviewExists = await db.check_existing_rating_review([
       user_id,
       episode_name,
     ]);
-    console.log(ratingReviewExists)
+
     if (ratingReviewExists[0])
-      db.update_rating_review([user_id, episode_name, +rating, review]).then(() =>
-        res.sendStatus(200)
-      );
-  
+      db.update_rating_review([
+        user_id,
+        episode_name,
+        +rating,
+        review,
+      ]).then(() => res.sendStatus(200));
     else
       db.post_rating_and_review([
         user_id,
@@ -89,14 +89,14 @@ module.exports = {
           episode_quote: episodes[i].episode_quote,
           ratings_reviews_id: episodes[i].ratings_reviews_id,
           user_id: episodes[i].user_id,
-          reviews: []
+          reviews: [],
         };
 
         episodes.forEach((element) => {
           if (episodes[i].episode_name === element.episode_name) {
             avg += 1;
             total += +element.rating;
-            combined.reviews.push(element.review)
+            combined.reviews.push(element.review);
           }
         });
         combined.rating = (total / avg).toFixed(1);
@@ -110,26 +110,42 @@ module.exports = {
           }
         }
       }
-            newArr.sort((a, b) =>
-              a.episode_id.length < b.episode_id.length
-                ? -1
-                : a.episode_id > b.episode_id
-                ? 1
-                : -1
-            );
+      newArr.sort((a, b) =>
+        a.episode_id.length < b.episode_id.length
+          ? -1
+          : a.episode_id > b.episode_id
+          ? 1
+          : -1
+      );
       res.status(200).send(newArr);
     });
   },
 
-  addToWatchlist: (req, res) => {
-    const db = req.app.get("db")
-    console.log(req.body)
+  addToWatchlist: async (req, res) => {
+    const db = req.app.get("db");
 
-    const { user_id } = req.params
-    const { episode_name } = req.body
-    
-    db.add_to_watchlist([+user_id, episode_name]).then(() => {
-      res.sendStatus(200)
-    })
-  }
+    const { user_id } = req.params;
+    const { episode_name } = req.body;
+
+    const alreadyOnWatchlist = await db.already_on_watchlist([
+      +user_id,
+      episode_name,
+    ]);
+
+    if (!alreadyOnWatchlist[0])
+      db.add_to_watchlist([+user_id, episode_name]).then(() => {
+        res.sendStatus(200);
+      });
+  },
+
+  getWatchlist: (req, res) => {
+    const db = req.app.get("db");
+  console.log(req.params)
+
+    const { user_id } = req.params;
+
+    db.get_watchlist(user_id).then((watchlist) => {
+      return res.status(200).send(watchlist);
+    });
+  },
 };

@@ -31,11 +31,13 @@ function Profile(props) {
   const [updatedEmail, setUpdatedEmail] = useState(email || "");
   const [updatedPic, setUpdatedPic] = useState(profile_pic || "");
   const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
+  const [watchlist, setWatchlist] = useState()
 
   useEffect(() => {
     getUser();
     if (profile_pic) {
       setPic(profile_pic);
+      getWatchlist();
     }
   }, [profile_pic]);
 
@@ -55,6 +57,14 @@ function Profile(props) {
         setSnackbarIsOpen(true);
       });
   };
+
+  const getWatchlist = () => {
+    axios.get(`/watchlist/${props.user.info.id}`).then(res => {
+      console.log(res.data)
+      setWatchlist(res.data)
+    })
+  }
+
 
   return (
     <Page>
