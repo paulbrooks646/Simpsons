@@ -3,8 +3,8 @@ const express = require("express");
 const massive = require("massive");
 const { CONNECTION_STRING, SESSION_SECRET } = process.env;
 const session = require("express-session");
-const userController = require("./controllers/userController");
-const episodesController = require("./controllers/episodesController");
+const userRoutes = require("./routes/userRoutes");
+const episodesRoutes = require("./routes/episodesRoutes");
 
 const app = express();
 
@@ -19,18 +19,8 @@ app.use(
   })
 );
 
-app.post("/register", userController.register);
-app.post("/login", userController.login);
-app.get("/user", userController.getUser);
-app.delete("/logout", userController.logout);
-app.put("/update/:user_id", userController.update);
-
-app.get("/episodes", episodesController.getEpisodes);
-app.get("/episode/:episode", episodesController.getEpisode);
-app.post("/watchlist/:user_id", episodesController.addToWatchlist)
-
-app.put("/rating-review/:user_id", episodesController.updateRatingAndReview);
-
+app.use(userRoutes);
+app.use(episodesRoutes);
 
 const port = 5000;
 
