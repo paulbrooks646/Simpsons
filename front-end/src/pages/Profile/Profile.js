@@ -17,7 +17,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
-import SnackbarComponent from "../../shared/Snackbar";
+import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "@material-ui/lab/Alert";
 import "./Profile.scss";
 
 function Profile(props) {
@@ -143,13 +144,16 @@ function Profile(props) {
           </DialogActions>
         </Dialog>
       </div>
-      <SnackbarComponent
-        vertical="bottom"
-        horizontal="center"
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         open={snackbarIsOpen}
         onClose={handleCloseSnackbar}
-        message="Profile Updated!"
-      />
+        autoHideDuration={5000}
+      >
+        <Alert onClose={handleCloseSnackbar} variant="filled" severity="info">
+          Profile Updated
+        </Alert>
+      </Snackbar>
     </Page>
   );
 }
