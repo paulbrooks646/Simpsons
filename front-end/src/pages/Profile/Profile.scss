@@ -1,8 +1,7 @@
 .profile-content {
-  width: 225px;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
   top: 10px;
 }
@@ -10,4 +9,17 @@
 .profile-image {
   width: 150px;
   height: 150px;
+}
+
+.profile-main {
+  width: 90%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+.profile-information {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

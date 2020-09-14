@@ -59,19 +59,24 @@ function Profile(props) {
   return (
     <Page>
       <div className="profile-content">
-        <img className="profile-image" src={pic} alt={username} />
-        <h1>{username}</h1>
-        <Tooltip
-          title="Edit Profile"
-          placement="right"
-          arrow
-          TransitionComponent={Fade}
-          TransitionProps={{ timeout: 600 }}
-        >
-          <Fab color="primary" onClick={handleOpenUpdatingProfile}>
-            <EditIcon />
-          </Fab>
-        </Tooltip>
+        <div className="profile-information">
+          <img className="profile-image" src={pic} alt={username} />
+          <h1>{username}</h1>
+          <Tooltip
+            title="Edit Profile"
+            placement="right"
+            arrow
+            TransitionComponent={Fade}
+            TransitionProps={{ timeout: 600 }}
+          >
+            <Fab color="primary" onClick={handleOpenUpdatingProfile}>
+              <EditIcon />
+            </Fab>
+          </Tooltip>
+        </div>
+        <div className="profile-main">
+          <h1>Your Watchlist</h1>
+        </div>
         <Dialog
           open={updatingProfile}
           onClose={handleCloseUpdatingProfile}
