@@ -75,7 +75,12 @@ function Profile(props) {
           </Tooltip>
         </div>
         <div className="profile-main">
-          <h1>Your Watchlist</h1>
+          <div>
+            <h1>Your Watchlist</h1>
+          </div>
+          <div>
+            <h1>Favorites</h1>
+          </div>
         </div>
         <Dialog
           open={updatingProfile}

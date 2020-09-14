@@ -8,3 +8,15 @@ profile_pic text
 
 insert into episodes (episode_name, episode_image, episode_synopsis, season, air_date, episode_quote)
 values ('', '', '', 1, '1989-12-17', '' )
+
+create table watchlist (
+watchlist_id serial,
+user_id integer,
+episode_name text
+)
+
+create table favorites (
+favorites_id serial,
+user_id integer,
+episode_name text
+)

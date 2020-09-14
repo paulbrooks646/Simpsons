@@ -17,6 +17,7 @@ import StarBorderIcon from "@material-ui/icons/StarBorder";
 import TextField from "@material-ui/core/TextField";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
+import AddToQueueIcon from "@material-ui/icons/AddToQueue";
 
 function SingleEpisode(props) {
   const [info, setInfo] = useState([]);
@@ -46,6 +47,11 @@ function SingleEpisode(props) {
     });
   };
 
+  const addToWatchlist = () => {
+    const episode_name = info.episode_name
+    axios.post(`/watchlist/${props.user.info.id}`, { episode_name });
+  };
+
   return (
     <Page>
       {loading ? (
@@ -54,7 +60,17 @@ function SingleEpisode(props) {
         <div className="episode-main">
           <Card variant="outlined" className="episode-card">
             <div className="episode-div">
-              <h2>{info.episode_name}</h2>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-evenly",
+                  width: "100%",
+                }}
+              >
+                <h2>{info.episode_name}</h2>
+                <AddToQueueIcon onClick={addToWatchlist} />
+              </div>
               <h3>Rating: {info.rating}</h3>
               <img src={info.episode_image} alt={info.episode_name} />
               <p>{info.episode_synopsis}</p>

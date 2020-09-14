@@ -120,4 +120,16 @@ module.exports = {
       res.status(200).send(newArr);
     });
   },
+
+  addToWatchlist: (req, res) => {
+    const db = req.app.get("db")
+    console.log(req.body)
+
+    const { user_id } = req.params
+    const { episode_name } = req.body
+    
+    db.add_to_watchlist([+user_id, episode_name]).then(() => {
+      res.sendStatus(200)
+    })
+  }
 };

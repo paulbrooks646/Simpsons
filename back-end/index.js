@@ -27,6 +27,7 @@ app.put("/update/:user_id", userController.update);
 
 app.get("/episodes", episodesController.getEpisodes);
 app.get("/episode/:episode", episodesController.getEpisode);
+app.post("/watchlist/:user_id", episodesController.addToWatchlist)
 
 app.put("/rating-review/:user_id", episodesController.updateRatingAndReview);
 
