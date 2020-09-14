@@ -6,7 +6,7 @@ import "./SingleEpisode.scss";
 import axios from "axios";
 import formatDate from "../../util/formatDate";
 import Card from "@material-ui/core/Card";
-import LoadingSpinner from "../../shared/LoadingSpinner";
+import LoadingSpinner from "../../components/LoadingSpinner";
 import Rating from "@material-ui/lab/Rating";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
