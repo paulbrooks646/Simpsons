@@ -18,6 +18,7 @@ import TextField from "@material-ui/core/TextField";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 import AddToQueueIcon from "@material-ui/icons/AddToQueue";
+import RemoveFromQueueIcon from "@material-ui/icons/RemoveFromQueue";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 
@@ -28,16 +29,21 @@ function SingleEpisode(props) {
   const [rating, setRating] = useState();
   const [review, setReview] = useState("");
   const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
-  const [watchlist, setWatchlist] = useState()
+  const [userWatchlist, setUserWatchlist] = useState([]);
 
   useEffect(() => {
     const episode = props.match.params.episode.replace(/_/g, " ");
-    axios.get(`/episode/${episode}`).then((res) => {
-      setInfo(res.data[0]);
+    const fetchData = async () => {
+      const getEpisode = await axios.get(`/episode/${episode}`);
+      const getUserWatchlist = await axios.get(
+        `/watchlist/${props.user.info.id}`
+      );
+      setInfo(getEpisode.data[0]);
+      setUserWatchlist(getUserWatchlist.data);
       setLoading(false);
-    });
-    getWatchlist();
-  }, [props.match.params.episode]);
+    };
+    fetchData();
+  }, [props.match.params.episode, props.user.info.id]);
 
   const handleOpenDialog = () => setIsRating(true);
   const handleCloseDialog = () => setIsRating(false);
@@ -54,12 +60,6 @@ function SingleEpisode(props) {
   const addToWatchlist = () => {
     const episode_name = info.episode_name;
     axios.post(`/watchlist/${props.user.info.id}`, { episode_name });
-  };
-
-  const getWatchlist = () => {
-    axios.get(`/watchlist/${props.user.info.id}`).then((res) => {
-      setWatchlist(res.data);
-    });
   };
 
   return (
@@ -79,11 +79,24 @@ function SingleEpisode(props) {
                 }}
               >
                 <h2>{info.episode_name}</h2>
-                <Tooltip title="Add To Watchlist">
-                  <IconButton color="primary" onClick={addToWatchlist}>
-                    <AddToQueueIcon />
-                  </IconButton>
-                </Tooltip>
+                {userWatchlist
+                  .map((episode) => episode.episode_name)
+                  .includes(info.episode_name) ? (
+                  <Tooltip title="Remove From Watchlist">
+                    <IconButton
+                      color="secondary"
+                      onClick={() => console.log("removing from watchlist...")}
+                    >
+                      <RemoveFromQueueIcon />
+                    </IconButton>
+                  </Tooltip>
+                ) : (
+                  <Tooltip title="Add To Watchlist">
+                    <IconButton color="primary" onClick={addToWatchlist}>
+                      <AddToQueueIcon />
+                    </IconButton>
+                  </Tooltip>
+                )}
               </div>
               <h3>Rating: {info.rating}</h3>
               <Rating
