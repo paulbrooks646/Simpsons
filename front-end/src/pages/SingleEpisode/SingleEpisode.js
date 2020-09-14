@@ -18,6 +18,8 @@ import TextField from "@material-ui/core/TextField";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 import AddToQueueIcon from "@material-ui/icons/AddToQueue";
+import IconButton from "@material-ui/core/IconButton";
+import Tooltip from "@material-ui/core/Tooltip";
 
 function SingleEpisode(props) {
   const [info, setInfo] = useState([]);
@@ -48,7 +50,7 @@ function SingleEpisode(props) {
   };
 
   const addToWatchlist = () => {
-    const episode_name = info.episode_name
+    const episode_name = info.episode_name;
     axios.post(`/watchlist/${props.user.info.id}`, { episode_name });
   };
 
@@ -69,7 +71,11 @@ function SingleEpisode(props) {
                 }}
               >
                 <h2>{info.episode_name}</h2>
-                <AddToQueueIcon onClick={addToWatchlist} />
+                <Tooltip title="Add To Watchlist">
+                  <IconButton color="primary" onClick={addToWatchlist}>
+                    <AddToQueueIcon />
+                  </IconButton>
+                </Tooltip>
               </div>
               <h3>Rating: {info.rating}</h3>
               <Rating
@@ -93,8 +99,8 @@ function SingleEpisode(props) {
               </Button>
             </div>
             <div className="reviews-div">
-              {info.reviews.map((e) => {
-                return <h3>{e}</h3>;
+              {info.reviews.map((e, index) => {
+                return <h3 key={index}>{e}</h3>;
               })}
             </div>
           </Card>
