@@ -72,6 +72,13 @@ function SingleEpisode(props) {
                 <AddToQueueIcon onClick={addToWatchlist} />
               </div>
               <h3>Rating: {info.rating}</h3>
+              <Rating
+                name="average-rating"
+                value={info.rating}
+                precision={0.1}
+                size="large"
+                readOnly
+              />
               <img src={info.episode_image} alt={info.episode_name} />
               <p>{info.episode_synopsis}</p>
               <h2>Air Date: {formatDate(info.air_date)}</h2>
