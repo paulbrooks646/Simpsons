@@ -60,7 +60,6 @@ function Profile(props) {
 
   const getWatchlist = () => {
     axios.get(`/watchlist/${props.user.info.id}`).then(res => {
-      console.log(res.data)
       setWatchlist(res.data)
     })
   }

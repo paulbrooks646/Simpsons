@@ -28,6 +28,7 @@ function SingleEpisode(props) {
   const [rating, setRating] = useState();
   const [review, setReview] = useState("");
   const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
+  const [watchlist, setWatchlist] = useState()
 
   useEffect(() => {
     const episode = props.match.params.episode.replace(/_/g, " ");
@@ -35,6 +36,7 @@ function SingleEpisode(props) {
       setInfo(res.data[0]);
       setLoading(false);
     });
+    getWatchlist();
   }, [props.match.params.episode]);
 
   const handleOpenDialog = () => setIsRating(true);
@@ -52,6 +54,12 @@ function SingleEpisode(props) {
   const addToWatchlist = () => {
     const episode_name = info.episode_name;
     axios.post(`/watchlist/${props.user.info.id}`, { episode_name });
+  };
+
+  const getWatchlist = () => {
+    axios.get(`/watchlist/${props.user.info.id}`).then((res) => {
+      setWatchlist(res.data);
+    });
   };
 
   return (
