@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link as RouterLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { logoutUser, getUser } from "../redux/userReducer";
+import { logoutUser, getUser } from "../../redux/userReducer";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
 import Avatar from "@material-ui/core/Avatar";
 import Drawer from "@material-ui/core/Drawer";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import Hamburger from "../images/icons8-hamburger-64.png";
+import Hamburger from "../../images/icons8-hamburger-64.png";
 import "./Nav.scss";
 
 function Nav(props) {

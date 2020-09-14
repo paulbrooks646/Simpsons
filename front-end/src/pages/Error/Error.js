@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import comicBookGuy from "../../images/comic-book-guy.png";
 import "./Error.scss";
-import comicBookGuy from "../images/comic-book-guy.png";
 
 export default function Error() {
   return (

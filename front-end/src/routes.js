@@ -5,7 +5,7 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Episodes from "./pages/Episodes/Episodes";
 import Profile from "./pages/Profile/Profile";
 import SingleEpisode from "./pages/SingleEpisode/SingleEpisode";
-import Error from "./pages/Error";
+import Error from "./pages/Error/Error";
 
 export default (
   <Switch>
