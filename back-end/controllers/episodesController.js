@@ -4,7 +4,45 @@ module.exports = {
     const db = req.app.get("db");
     const { episode } = req.params;
 
-    db.get_episode(episode).then((episode) => res.status(200).send(episode));
+    db.get_episode(episode).then((episodes) => {
+      let newArr = [];
+
+      for (let i = 0; i < episodes.length; i++) {
+        let total = 0;
+        let avg = 0;
+        let combined = {
+          episode_name: episodes[i].episode_name,
+          episode_id: episodes[i].episode_id,
+          episode_synopsis: episodes[i].episode_synopsis,
+          episode_image: episodes[i].episode_image,
+          season: episodes[i].season,
+          air_date: episodes[i].air_date,
+          episode_quote: episodes[i].episode_quote,
+          ratings_reviews_id: episodes[i].ratings_reviews_id,
+          user_id: episodes[i].user_id,
+          reviews: [],
+        };
+
+        episodes.forEach((element) => {
+          if (episodes[i].episode_name === element.episode_name) {
+            avg += 1;
+            total += +element.rating;
+            combined.reviews.push(element.review);
+          }
+        });
+        combined.rating = (total / avg).toFixed(1);
+        newArr.push(combined);
+      }
+
+      for (let i = 0; i < newArr.length; i++) {
+        for (let j = newArr.length - 1; j > i; j--) {
+          if (newArr[i].episode_name === newArr[j].episode_name) {
+            newArr.splice(j, 1);
+          }
+        }
+      }
+      res.status(200).send(newArr);
+    });
   },
 
   updateRatingAndReview: async (req, res) => {
@@ -35,27 +73,27 @@ module.exports = {
   getEpisodes: (req, res) => {
     const db = req.app.get("db");
 
-    db.get_episodes().then((ratings) => {
+    db.get_episodes().then((episodes) => {
       let newArr = [];
 
-      for (let i = 0; i < ratings.length; i++) {
+      for (let i = 0; i < episodes.length; i++) {
         let total = 0;
         let avg = 0;
         let combined = {
-          episode_name: ratings[i].episode_name,
-          episode_id: ratings[i].episode_id,
-          episode_synopsis: ratings[i].episode_synopsis,
-          episode_image: ratings[i].episode_image,
-          season: ratings[i].season,
-          air_date: ratings[i].air_date,
-          episode_quote: ratings[i].episode_quote,
-          ratings_reviews_id: ratings[i].ratings_reviews_id,
-          user_id: ratings[i].user_id,
+          episode_name: episodes[i].episode_name,
+          episode_id: episodes[i].episode_id,
+          episode_synopsis: episodes[i].episode_synopsis,
+          episode_image: episodes[i].episode_image,
+          season: episodes[i].season,
+          air_date: episodes[i].air_date,
+          episode_quote: episodes[i].episode_quote,
+          ratings_reviews_id: episodes[i].ratings_reviews_id,
+          user_id: episodes[i].user_id,
           reviews: []
         };
 
-        ratings.forEach((element) => {
-          if (ratings[i].episode_name === element.episode_name) {
+        episodes.forEach((element) => {
+          if (episodes[i].episode_name === element.episode_name) {
             avg += 1;
             total += +element.rating;
             combined.reviews.push(element.review)
