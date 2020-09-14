@@ -34,8 +34,6 @@ function SingleEpisode(props) {
     });
   }, [props.match.params.episode]);
 
-  // const toggleRating = () => setIsRating(!isRating);
-
   const handleOpenDialog = () => setIsRating(true);
   const handleCloseDialog = () => setIsRating(false);
   const handleSnackbarClose = () => setSnackbarIsOpen(false);
@@ -70,6 +68,11 @@ function SingleEpisode(props) {
               >
                 Rate this episode!
               </Button>
+            </div>
+            <div className="reviews-div">
+              {info.reviews.map((e) => {
+                return <h3>{e}</h3>;
+              })}
             </div>
           </Card>
           <Dialog
