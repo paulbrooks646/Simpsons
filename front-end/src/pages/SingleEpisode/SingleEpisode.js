@@ -34,8 +34,6 @@ function SingleEpisode(props) {
     });
   }, [props.match.params.episode]);
 
-  // const toggleRating = () => setIsRating(!isRating);
-
   const handleOpenDialog = () => setIsRating(true);
   const handleCloseDialog = () => setIsRating(false);
   const handleSnackbarClose = () => setSnackbarIsOpen(false);
@@ -56,8 +54,8 @@ function SingleEpisode(props) {
         <div className="episode-main">
           <Card variant="outlined" className="episode-card">
             <div className="episode-div">
-                <h2>{info.episode_name}</h2>
-                <h3>Rating: {info.rating}</h3>
+              <h2>{info.episode_name}</h2>
+              <h3>Rating: {info.rating}</h3>
               <img src={info.episode_image} alt={info.episode_name} />
               <p>{info.episode_synopsis}</p>
               <h2>Air Date: {formatDate(info.air_date)}</h2>
@@ -70,6 +68,11 @@ function SingleEpisode(props) {
               >
                 Rate this episode!
               </Button>
+            </div>
+            <div className="reviews-div">
+              {info.reviews.map((e) => {
+                return <h3>{e}</h3>;
+              })}
             </div>
           </Card>
           <Dialog
