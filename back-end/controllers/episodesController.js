@@ -127,10 +127,20 @@ const addToWatchlist = (req, res) => {
 
   db.add_to_watchlist([+user_id, episode_name]).then(() => {
     res.sendStatus(200);
-  });
+  });  
 };
+
+const getWatchlist = (req, res) => {
+  const db = req.app.get("db")
+  const {user_id} = req.params
+
+  db.get_watchlist(user_id).then(watchlist => {
+    return res.status(200).send(watchlist)
+  })
+}
 
 exports.getEpisode = getEpisode;
 exports.updateRatingAndReview = updateRatingAndReview;
 exports.getEpisodes = getEpisodes;
 exports.addToWatchlist = addToWatchlist;
+exports.getWatchlist = getWatchlist;
