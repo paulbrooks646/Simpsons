@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Page from "../../components/Page";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
@@ -19,6 +20,9 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 import "./Profile.scss";
 
 function Profile(props) {
@@ -31,15 +35,17 @@ function Profile(props) {
   const [updatedEmail, setUpdatedEmail] = useState(email || "");
   const [updatedPic, setUpdatedPic] = useState(profile_pic || "");
   const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
-  const [watchlist, setWatchlist] = useState()
+  const [watchlist, setWatchlist] = useState([]);
 
   useEffect(() => {
     getUser();
     if (profile_pic) {
       setPic(profile_pic);
-      getWatchlist();
+      axios.get(`/watchlist/${props.user.info.id}`).then((res) => {
+        setWatchlist(res.data);
+      });
     }
-  }, [profile_pic]);
+  }, [profile_pic, props.user.info.id]);
 
   const handleOpenUpdatingProfile = () => setUpdatingProfile(true);
   const handleCloseUpdatingProfile = () => setUpdatingProfile(false);
@@ -57,13 +63,6 @@ function Profile(props) {
         setSnackbarIsOpen(true);
       });
   };
-
-  const getWatchlist = () => {
-    axios.get(`/watchlist/${props.user.info.id}`).then(res => {
-      setWatchlist(res.data)
-    })
-  }
-
 
   return (
     <Page>
@@ -86,6 +85,18 @@ function Profile(props) {
         <div className="profile-main">
           <div>
             <h1>Your Watchlist</h1>
+            <List>
+              {watchlist.map((episode) => (
+                <ListItem
+                  button
+                  key={episode.watchlist_id}
+                  component={Link}
+                  to={`/episodes/${episode.episode_name.replace(/ /g, "_")}`}
+                >
+                  <ListItemText primary={episode.episode_name} />
+                </ListItem>
+              ))}
+            </List>
           </div>
           <div>
             <h1>Favorites</h1>
