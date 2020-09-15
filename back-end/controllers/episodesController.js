@@ -26,6 +26,7 @@ const getEpisode = (req, res) => {
           avg += 1;
           total += +element.rating;
           combined.reviews.push([
+            element.rating,
             element.review,
             element.username,
             element.profile_pic,

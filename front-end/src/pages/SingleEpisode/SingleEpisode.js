@@ -23,6 +23,11 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
+import ListItemText from "@material-ui/core/ListItemText";
 
 function SingleEpisode(props) {
   const [info, setInfo] = useState([]);
@@ -151,11 +156,32 @@ function SingleEpisode(props) {
                 Rate this episode!
               </Button>
             </div>
-            <div className="reviews-div">
-              {info.reviews.map((e, index) => {
-                return <h3 key={index}>{e}</h3>;
+            <List style={{ width: "100%" }}>
+              {info.reviews.map((item, index) => {
+                const [starRating, reviewText, reviewer, reviewerImage] = item;
+                return (
+                  <ListItem alignItems="flex-start" key={index}>
+                    <ListItemAvatar>
+                      <Avatar src={reviewerImage} alt={reviewer} />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={
+                        <>
+                          {reviewer} rated it{" "}
+                          <Rating
+                            value={starRating}
+                            readOnly
+                            size="small"
+                            precision={0.5}
+                          />
+                        </>
+                      }
+                      secondary={reviewText}
+                    />
+                  </ListItem>
+                );
               })}
-            </div>
+            </List>
           </Card>
           <Dialog
             open={isRating}
