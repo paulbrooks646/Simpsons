@@ -11,5 +11,6 @@ router.put("/rating-review/:user_id", episodesController.updateRatingAndReview);
 router.get("/watchlist/:user_id", episodesController.getWatchlist);
 router.delete("/watchlist/:episode_name", episodesController.deleteFromWatchlist)
 router.post("/favorites/:user_id", episodesController.addToFavorites)
+router.delete("/favorites/:episode_name", episodesController.removeFromFavorites)
 
 module.exports = router;

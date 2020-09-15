@@ -170,6 +170,14 @@ const addToFavorites = async (req, res) => {
     });
 };
 
+const removeFromFavorites = (req, res) => {
+  const db = req.app.get("db");
+  const { id } = req.session.user;
+  const { episode_name } = req.params;
+
+  db.remove_from_favorites([id, episode_name]).then(() => res.sendStatus(200));
+};
+
 exports.getEpisode = getEpisode;
 exports.updateRatingAndReview = updateRatingAndReview;
 exports.getEpisodes = getEpisodes;
@@ -177,3 +185,4 @@ exports.addToWatchlist = addToWatchlist;
 exports.getWatchlist = getWatchlist;
 exports.deleteFromWatchlist = deleteFromWatchlist;
 exports.addToFavorites = addToFavorites;
+exports.removeFromFavorites = removeFromFavorites;

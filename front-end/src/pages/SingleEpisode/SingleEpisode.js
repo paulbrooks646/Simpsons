@@ -74,6 +74,7 @@ function SingleEpisode(props) {
   };
 
   const removeFromFavorites = () => {
+    console.log("bleh bleh bleh")
     const episode_name = info.episode_name;
     axios.delete(`/favorites/${episode_name}`);
   };
@@ -111,6 +112,7 @@ function SingleEpisode(props) {
                   </Tooltip>
                     )}
                   <button onClick={addToFavorites}>Add to Favorites</button>
+                  <button onClick={removeFromFavorites}>Remove From Favorites</button>
               </div>
               <h3>Rating: {info.rating}</h3>
               <Rating
