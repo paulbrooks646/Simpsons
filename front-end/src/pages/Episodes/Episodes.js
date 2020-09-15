@@ -43,13 +43,16 @@ function Episodes(props) {
                 alt="simpsons"
                 className="episodes-image"
               />
-              <h6>Rating: {e.rating}</h6>
               <Rating
                 name="average-rating"
                 value={+e.rating}
                 precision={0.1}
                 readOnly
               />
+              <p>
+                ({e.reviews.length}{" "}
+                {e.reviews.length === 1 ? "rating" : "ratings"})
+              </p>
             </div>
           </Card>
         </Link>
