@@ -65,7 +65,7 @@ function SingleEpisode(props) {
 
   const removeFromWatchlist = () => {
     const episode_name = info.episode_name;
-    console.log(episode_name)
+
     axios.delete(`/watchlist/${episode_name}`)
   }
 
