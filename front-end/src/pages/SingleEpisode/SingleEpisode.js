@@ -60,7 +60,13 @@ function SingleEpisode(props) {
   const handleSnackbarClose = () => setSnackbarIsOpen(false);
 
   const submitRatingAndReview = () => {
-    const data = { rating, review, episode_name: info.episode_name, username: props.user.info.username, profile_pic: props.user.info.profile_pic };
+    const data = {
+      rating,
+      review,
+      episode_name: info.episode_name,
+      username: props.user.info.username,
+      profile_pic: props.user.info.profile_pic,
+    };
     axios.put(`/rating-review/${props.user.info.id}`, data).then(() => {
       handleCloseDialog();
       setSnackbarIsOpen(true);
@@ -135,7 +141,6 @@ function SingleEpisode(props) {
                   </Tooltip>
                 )}
               </div>
-              <h3>Rating: {info.rating}</h3>
               <Rating
                 name="average-rating"
                 value={+info.rating}
@@ -143,6 +148,10 @@ function SingleEpisode(props) {
                 size="large"
                 readOnly
               />
+              <p>
+                ({info.reviews.length}{" "}
+                {info.reviews.length === 1 ? "rating" : "ratings"})
+              </p>
               <img src={info.episode_image} alt={info.episode_name} />
               <p>{info.episode_synopsis}</p>
               <h2>Air Date: {formatDate(info.air_date)}</h2>
@@ -166,15 +175,16 @@ function SingleEpisode(props) {
                     </ListItemAvatar>
                     <ListItemText
                       primary={
-                        <>
+                        <span style={{ display: "flex", alignItems: "center" }}>
                           {reviewer} rated it{" "}
                           <Rating
-                            value={starRating}
+                            style={{ marginLeft: "5px" }}
+                            value={+starRating}
                             readOnly
                             size="small"
                             precision={0.5}
                           />
-                        </>
+                        </span>
                       }
                       secondary={reviewText}
                     />
