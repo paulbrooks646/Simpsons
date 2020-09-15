@@ -106,7 +106,6 @@ function Profile(props) {
             <h1>Your Watchlist</h1>
             <List>
               {watchlist.map((episode) => (
-<<<<<<< HEAD
                 <ListItem
                   button
                   key={episode.watchlist_id}
@@ -128,26 +127,6 @@ function Profile(props) {
                     </Tooltip>
                   </ListItemSecondaryAction>
                 </ListItem>
-=======
-                <div style={{ display: "flex" }}>
-                  <ListItem
-                    button
-                    key={episode.watchlist_id}
-                    component={Link}
-                    to={`/episodes/${episode.episode_name.replace(/ /g, "_")}`}
-                  >
-                    <ListItemText primary={episode.episode_name} />
-                  </ListItem>
-                  <Tooltip title="Remove From Watchlist">
-                    <IconButton
-                      color="secondary"
-                      onClick={() => removeFromWatchlist(episode.episode_name)}
-                    >
-                      <RemoveFromQueueIcon />
-                    </IconButton>
-                  </Tooltip>
-                </div>
->>>>>>> 161963411591b2c865c0b6c8e5f6f3f6169c4171
               ))}
             </List>
           </div>
