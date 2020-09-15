@@ -1,3 +1,10 @@
+@import "../../Sass/colors.scss";
+
+.favorite-icon,
+.favorite-border-icon {
+  color: $primary-red;
+}
+
 .episode-main {
   display: flex;
   justify-content: center;
