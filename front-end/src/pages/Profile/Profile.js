@@ -36,6 +36,7 @@ function Profile(props) {
   const [updatedPic, setUpdatedPic] = useState(profile_pic || "");
   const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
   const [watchlist, setWatchlist] = useState([]);
+  const [favorites, setFavorites] = useState([])
 
   useEffect(() => {
     getUser();
@@ -44,6 +45,9 @@ function Profile(props) {
       axios.get(`/watchlist/${props.user.info.id}`).then((res) => {
         setWatchlist(res.data);
       });
+       axios.get(`/favorites/${props.user.info.id}`).then((res) => {
+         setFavorites(res.data);
+       });
     }
   }, [profile_pic, props.user.info.id]);
 
