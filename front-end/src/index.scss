@@ -1,3 +1,5 @@
+@import './Sass/colors.scss';
+
 body {
   margin: 0px;
   padding: 0px;
@@ -7,4 +9,9 @@ body {
 @font-face {
   font-family: "SimpsonsFont";
   src: local("SimpsonsFont"), url(./fonts/SimpsonsFont.otf) format("opentype");
+}
+
+.favorite-icon,
+.favorite-border-icon {
+  color: $primary-red;
 }
