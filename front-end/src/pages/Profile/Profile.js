@@ -27,6 +27,8 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import "./Profile.scss";
 import RemoveFromQueueIcon from "@material-ui/icons/RemoveFromQueue";
 import IconButton from "@material-ui/core/IconButton";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import { ListItemSecondaryAction } from "@material-ui/core";
 
 function Profile(props) {
   const { id, username, email, profile_pic } = props.user.info;
@@ -76,6 +78,11 @@ function Profile(props) {
     axios.delete(`/watchlist/${episode_name}`);
   };
 
+  const removeFromFavorites = (episode) => {
+    const episode_name = episode;
+    axios.delete(`/favorites/${episode_name}`);
+  };
+
   return (
     <Page>
       <div className="profile-content">
@@ -95,10 +102,11 @@ function Profile(props) {
           </Tooltip>
         </div>
         <div className="profile-main">
-          <div>
+          <div className="profile-list-heading">
             <h1>Your Watchlist</h1>
             <List>
               {watchlist.map((episode) => (
+<<<<<<< HEAD
                 <ListItem
                   button
                   key={episode.watchlist_id}
@@ -120,10 +128,30 @@ function Profile(props) {
                     </Tooltip>
                   </ListItemSecondaryAction>
                 </ListItem>
+=======
+                <div style={{ display: "flex" }}>
+                  <ListItem
+                    button
+                    key={episode.watchlist_id}
+                    component={Link}
+                    to={`/episodes/${episode.episode_name.replace(/ /g, "_")}`}
+                  >
+                    <ListItemText primary={episode.episode_name} />
+                  </ListItem>
+                  <Tooltip title="Remove From Watchlist">
+                    <IconButton
+                      color="secondary"
+                      onClick={() => removeFromWatchlist(episode.episode_name)}
+                    >
+                      <RemoveFromQueueIcon />
+                    </IconButton>
+                  </Tooltip>
+                </div>
+>>>>>>> 161963411591b2c865c0b6c8e5f6f3f6169c4171
               ))}
             </List>
           </div>
-          <div>
+          <div className="profile-list-heading">
             <h1>Favorites</h1>
             <List>
               {favorites.map((episode) => (
@@ -134,6 +162,18 @@ function Profile(props) {
                   to={`/episodes/${episode.episode_name.replace(/ /g, "_")}`}
                 >
                   <ListItemText primary={episode.episode_name} />
+                  <ListItemSecondaryAction>
+                    <Tooltip title="Remove From Favorites">
+                      <IconButton
+                        edge="end"
+                        onClick={() =>
+                          removeFromFavorites(episode.episode_name)
+                        }
+                      >
+                        <FavoriteIcon className="favorite-icon" />
+                      </IconButton>
+                    </Tooltip>
+                  </ListItemSecondaryAction>
                 </ListItem>
               ))}
             </List>
