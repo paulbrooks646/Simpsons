@@ -21,6 +21,8 @@ import AddToQueueIcon from "@material-ui/icons/AddToQueue";
 import RemoveFromQueueIcon from "@material-ui/icons/RemoveFromQueue";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
 function SingleEpisode(props) {
   const [info, setInfo] = useState([]);
@@ -30,6 +32,7 @@ function SingleEpisode(props) {
   const [review, setReview] = useState("");
   const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
   const [userWatchlist, setUserWatchlist] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     const episode = props.match.params.episode.replace(/_/g, " ");
@@ -38,8 +41,10 @@ function SingleEpisode(props) {
       const getUserWatchlist = await axios.get(
         `/watchlist/${props.user.info.id}`
       );
+      const getFavorites = await axios.get(`/favorites/${props.user.info.id}`);
       setInfo(getEpisode.data[0]);
       setUserWatchlist(getUserWatchlist.data);
+      setFavorites(getFavorites.data);
       setLoading(false);
     };
     fetchData();
@@ -64,7 +69,6 @@ function SingleEpisode(props) {
 
   const removeFromWatchlist = () => {
     const episode_name = info.episode_name;
-
     axios.delete(`/watchlist/${episode_name}`);
   };
 
@@ -74,7 +78,6 @@ function SingleEpisode(props) {
   };
 
   const removeFromFavorites = () => {
-    console.log("bleh bleh bleh")
     const episode_name = info.episode_name;
     axios.delete(`/favorites/${episode_name}`);
   };
@@ -110,9 +113,22 @@ function SingleEpisode(props) {
                       <AddToQueueIcon />
                     </IconButton>
                   </Tooltip>
-                    )}
-                  <button onClick={addToFavorites}>Add to Favorites</button>
-                  <button onClick={removeFromFavorites}>Remove From Favorites</button>
+                )}
+                {favorites
+                  .map((episode) => episode.episode_name)
+                  .includes(info.episode_name) ? (
+                  <Tooltip title="Remove From Favorites">
+                    <IconButton onClick={removeFromFavorites}>
+                      <FavoriteIcon className="favorite-icon" />
+                    </IconButton>
+                  </Tooltip>
+                ) : (
+                  <Tooltip title="Add To Favorites">
+                    <IconButton onClick={addToFavorites}>
+                      <FavoriteBorderIcon className="favorite-border-icon" />
+                    </IconButton>
+                  </Tooltip>
+                )}
               </div>
               <h3>Rating: {info.rating}</h3>
               <Rating
