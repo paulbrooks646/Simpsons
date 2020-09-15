@@ -124,15 +124,16 @@ const addToWatchlist = async (req, res) => {
   const { user_id } = req.params;
   const { episode_name } = req.body;
 
-  const alreadyOnWatchlist = await db.already_on_watchlist([user_id, episode_name])
+  const alreadyOnWatchlist = await db.already_on_watchlist([
+    user_id,
+    episode_name,
+  ]);
 
   if (!alreadyOnWatchlist.length) {
-
     db.add_to_watchlist([+user_id, episode_name]).then(() => {
       res.sendStatus(200);
-    })
-  };
-
+    });
+  }
 };
 
 const getWatchlist = (req, res) => {
@@ -152,9 +153,27 @@ const deleteFromWatchlist = (req, res) => {
   db.delete_from_watchlist([id, episode_name]).then(() => res.sendStatus(200));
 };
 
+const addToFavorites = async (req, res) => {
+  const db = req.app.get("db");
+
+  const { user_id } = req.params;
+  const { episode_name } = req.body;
+
+  const alreadyOnFavorites = await db.already_on_favorites([
+    user_id,
+    episode_name,
+  ]);
+
+  if (!alreadyOnFavorites.length)
+    db.add_to_favorites([+user_id, episode_name]).then(() => {
+      res.sendStatus(200);
+    });
+};
+
 exports.getEpisode = getEpisode;
 exports.updateRatingAndReview = updateRatingAndReview;
 exports.getEpisodes = getEpisodes;
 exports.addToWatchlist = addToWatchlist;
 exports.getWatchlist = getWatchlist;
 exports.deleteFromWatchlist = deleteFromWatchlist;
+exports.addToFavorites = addToFavorites;

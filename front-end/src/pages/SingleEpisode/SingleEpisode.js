@@ -65,8 +65,18 @@ function SingleEpisode(props) {
   const removeFromWatchlist = () => {
     const episode_name = info.episode_name;
 
-    axios.delete(`/watchlist/${episode_name}`)
-  }
+    axios.delete(`/watchlist/${episode_name}`);
+  };
+
+  const addToFavorites = () => {
+    const episode_name = info.episode_name;
+    axios.post(`/favorites/${props.user.info.id}`, { episode_name });
+  };
+
+  const removeFromFavorites = () => {
+    const episode_name = info.episode_name;
+    axios.delete(`/favorites/${episode_name}`);
+  };
 
   return (
     <Page>
@@ -99,7 +109,8 @@ function SingleEpisode(props) {
                       <AddToQueueIcon />
                     </IconButton>
                   </Tooltip>
-                )}
+                    )}
+                  <button onClick={addToFavorites}>Add to Favorites</button>
               </div>
               <h3>Rating: {info.rating}</h3>
               <Rating
