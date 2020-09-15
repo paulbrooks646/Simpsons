@@ -45,15 +45,15 @@ const getEpisode = (req, res) => {
 
 const updateRatingAndReview = async (req, res) => {
   const db = req.app.get("db");
-  console.log(req.body);
-  console.log(req.params);
+
   const { user_id } = req.params;
   const { rating, review, episode_name } = req.body;
+
   const ratingReviewExists = await db.check_existing_rating_review([
     user_id,
     episode_name,
   ]);
-  console.log(ratingReviewExists);
+
   if (ratingReviewExists[0])
     db.update_rating_review([user_id, episode_name, +rating, review]).then(() =>
       res.sendStatus(200)
@@ -118,16 +118,22 @@ const getEpisodes = (req, res) => {
   });
 };
 
-const addToWatchlist = (req, res) => {
+const addToWatchlist = async (req, res) => {
   const db = req.app.get("db");
-  console.log(req.body);
 
   const { user_id } = req.params;
   const { episode_name } = req.body;
 
-  db.add_to_watchlist([+user_id, episode_name]).then(() => {
-    res.sendStatus(200);
-  });
+  const alreadyOnWatchlist = await db.already_on_watchlist([
+    user_id,
+    episode_name,
+  ]);
+
+  if (!alreadyOnWatchlist.length) {
+    db.add_to_watchlist([+user_id, episode_name]).then(() => {
+      res.sendStatus(200);
+    });
+  }
 };
 
 const getWatchlist = (req, res) => {
@@ -141,11 +147,44 @@ const getWatchlist = (req, res) => {
 
 const deleteFromWatchlist = (req, res) => {
   const db = req.app.get("db");
-  console.log(req.session.user)
   const { id } = req.session.user;
   const { episode_name } = req.params;
 
   db.delete_from_watchlist([id, episode_name]).then(() => res.sendStatus(200));
+};
+
+const addToFavorites = async (req, res) => {
+  const db = req.app.get("db");
+
+  const { user_id } = req.params;
+  const { episode_name } = req.body;
+
+  const alreadyOnFavorites = await db.already_on_favorites([
+    user_id,
+    episode_name,
+  ]);
+
+  if (!alreadyOnFavorites.length)
+    db.add_to_favorites([+user_id, episode_name]).then(() => {
+      res.sendStatus(200);
+    });
+};
+
+const removeFromFavorites = (req, res) => {
+  const db = req.app.get("db");
+  const { id } = req.session.user;
+  const { episode_name } = req.params;
+
+  db.remove_from_favorites([id, episode_name]).then(() => res.sendStatus(200));
+};
+
+const getFavorites = (req, res) => {
+  const db = req.app.get("db");
+  const { user_id } = req.params;
+
+  db.get_favorites(user_id).then((watchlist) => {
+    return res.status(200).send(watchlist);
+  });
 };
 
 exports.getEpisode = getEpisode;
@@ -154,3 +193,6 @@ exports.getEpisodes = getEpisodes;
 exports.addToWatchlist = addToWatchlist;
 exports.getWatchlist = getWatchlist;
 exports.deleteFromWatchlist = deleteFromWatchlist;
+exports.addToFavorites = addToFavorites;
+exports.removeFromFavorites = removeFromFavorites;
+exports.getFavorites = getFavorites;
