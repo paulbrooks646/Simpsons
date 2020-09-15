@@ -104,6 +104,18 @@ function Profile(props) {
           </div>
           <div>
             <h1>Favorites</h1>
+            <List>
+              {favorites.map((episode) => (
+                <ListItem
+                  button
+                  key={episode.favorites_id}
+                  component={Link}
+                  to={`/episodes/${episode.episode_name.replace(/ /g, "_")}`}
+                >
+                  <ListItemText primary={episode.episode_name} />
+                </ListItem>
+              ))}
+            </List>
           </div>
         </div>
         <Dialog
