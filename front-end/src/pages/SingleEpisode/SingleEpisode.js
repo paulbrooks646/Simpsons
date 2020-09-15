@@ -171,7 +171,11 @@ function SingleEpisode(props) {
                 return (
                   <ListItem alignItems="flex-start" key={index}>
                     <ListItemAvatar>
-                      <Avatar src={reviewerImage} alt={reviewer} />
+                      <Avatar
+                        src={reviewerImage}
+                        alt={reviewer}
+                        className="user-review-avatar"
+                      />
                     </ListItemAvatar>
                     <ListItemText
                       primary={
