@@ -24,6 +24,8 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import "./Profile.scss";
+import RemoveFromQueueIcon from "@material-ui/icons/RemoveFromQueue";
+import IconButton from "@material-ui/core/IconButton";
 
 function Profile(props) {
   const { id, username, email, profile_pic } = props.user.info;
@@ -68,6 +70,12 @@ function Profile(props) {
       });
   };
 
+  const removeFromWatchlist = episode => {
+    const episode_name = episode;
+
+    axios.delete(`/watchlist/${episode_name}`);
+  };
+
   return (
     <Page>
       <div className="profile-content">
@@ -91,14 +99,24 @@ function Profile(props) {
             <h1>Your Watchlist</h1>
             <List>
               {watchlist.map((episode) => (
-                <ListItem
-                  button
-                  key={episode.watchlist_id}
-                  component={Link}
-                  to={`/episodes/${episode.episode_name.replace(/ /g, "_")}`}
-                >
-                  <ListItemText primary={episode.episode_name} />
-                </ListItem>
+                <div style={{display: 'flex'}}>
+                  <ListItem
+                    button
+                    key={episode.watchlist_id}
+                    component={Link}
+                    to={`/episodes/${episode.episode_name.replace(/ /g, "_")}`}
+                  >
+                    <ListItemText primary={episode.episode_name} />
+                  </ListItem>
+                  <Tooltip title="Remove From Watchlist">
+                    <IconButton
+                      color="secondary"
+                      onClick={() => removeFromWatchlist(episode.episode_name)}
+                    >
+                      <RemoveFromQueueIcon />
+                    </IconButton>
+                  </Tooltip>
+                </div>
               ))}
             </List>
           </div>
