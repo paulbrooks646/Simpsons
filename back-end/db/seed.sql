@@ -20,3 +20,6 @@ favorites_id serial,
 user_id integer,
 episode_name text
 )
+
+insert into ratings_reviews (user_id, episode_name, rating, review, username, profile_pic)
+values (,,,,,)

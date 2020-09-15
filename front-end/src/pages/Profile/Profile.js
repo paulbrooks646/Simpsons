@@ -28,7 +28,6 @@ import "./Profile.scss";
 import RemoveFromQueueIcon from "@material-ui/icons/RemoveFromQueue";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import { ListItemSecondaryAction } from "@material-ui/core";
 
 function Profile(props) {
   const { id, username, email, profile_pic } = props.user.info;

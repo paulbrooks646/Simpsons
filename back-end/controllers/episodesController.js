@@ -25,7 +25,7 @@ const getEpisode = (req, res) => {
         if (episodes[i].episode_name === element.episode_name) {
           avg += 1;
           total += +element.rating;
-          combined.reviews.push(element.review);
+          combined.reviews.push([element.review, element.username, element.profile_pic]);
         }
       });
       combined.rating = (total / avg).toFixed(1);
@@ -93,7 +93,7 @@ const getEpisodes = (req, res) => {
         if (episodes[i].episode_name === element.episode_name) {
           avg += 1;
           total += +element.rating;
-          combined.reviews.push(element.review);
+          combined.reviews.push([element.review, element.username, element.profile_pic]);
         }
       });
       combined.rating = (total / avg).toFixed(1);
