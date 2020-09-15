@@ -25,7 +25,11 @@ const getEpisode = (req, res) => {
         if (episodes[i].episode_name === element.episode_name) {
           avg += 1;
           total += +element.rating;
-          combined.reviews.push([element.review, element.username, element.profile_pic]);
+          combined.reviews.push([
+            element.review,
+            element.username,
+            element.profile_pic,
+          ]);
         }
       });
       combined.rating = (total / avg).toFixed(1);
@@ -47,7 +51,7 @@ const updateRatingAndReview = async (req, res) => {
   const db = req.app.get("db");
 
   const { user_id } = req.params;
-  const { rating, review, episode_name } = req.body;
+  const { rating, review, episode_name, username, profile_pic } = req.body;
 
   const ratingReviewExists = await db.check_existing_rating_review([
     user_id,
@@ -64,6 +68,8 @@ const updateRatingAndReview = async (req, res) => {
       episode_name,
       +rating,
       review,
+      username,
+      profile_pic,
     ]).then(() => res.sendStatus(200));
 };
 
@@ -93,7 +99,11 @@ const getEpisodes = (req, res) => {
         if (episodes[i].episode_name === element.episode_name) {
           avg += 1;
           total += +element.rating;
-          combined.reviews.push([element.review, element.username, element.profile_pic]);
+          combined.reviews.push([
+            element.review,
+            element.username,
+            element.profile_pic,
+          ]);
         }
       });
       combined.rating = (total / avg).toFixed(1);

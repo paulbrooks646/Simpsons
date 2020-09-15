@@ -55,7 +55,7 @@ function SingleEpisode(props) {
   const handleSnackbarClose = () => setSnackbarIsOpen(false);
 
   const submitRatingAndReview = () => {
-    const data = { rating, review, episode_name: info.episode_name };
+    const data = { rating, review, episode_name: info.episode_name, username: props.user.info.username, profile_pic: props.user.info.profile_pic };
     axios.put(`/rating-review/${props.user.info.id}`, data).then(() => {
       handleCloseDialog();
       setSnackbarIsOpen(true);
