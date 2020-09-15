@@ -30,7 +30,6 @@ function SingleEpisode(props) {
   const [review, setReview] = useState("");
   const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
   const [userWatchlist, setUserWatchlist] = useState([]);
-  const episode_name = info.episode_name
 
   useEffect(() => {
     const episode = props.match.params.episode.replace(/_/g, " ");
@@ -90,10 +89,7 @@ function SingleEpisode(props) {
                   .map((episode) => episode.episode_name)
                   .includes(info.episode_name) ? (
                   <Tooltip title="Remove From Watchlist">
-                    <IconButton
-                      color="secondary"
-                      onClick={removeFromWatchlist}
-                    >
+                    <IconButton color="secondary" onClick={removeFromWatchlist}>
                       <RemoveFromQueueIcon />
                     </IconButton>
                   </Tooltip>
@@ -108,7 +104,7 @@ function SingleEpisode(props) {
               <h3>Rating: {info.rating}</h3>
               <Rating
                 name="average-rating"
-                value={info.rating}
+                value={+info.rating}
                 precision={0.1}
                 size="large"
                 readOnly
