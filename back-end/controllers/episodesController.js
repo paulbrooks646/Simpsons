@@ -49,9 +49,11 @@ const getEpisode = (req, res) => {
 
 const updateRatingAndReview = async (req, res) => {
   const db = req.app.get("db");
+  console.log(req.body);
 
   const { user_id } = req.params;
   const { rating, review, episode_name, username, profile_pic } = req.body;
+  console.log(username, profile_pic);
 
   const ratingReviewExists = await db.check_existing_rating_review([
     user_id,
@@ -59,7 +61,7 @@ const updateRatingAndReview = async (req, res) => {
   ]);
 
   if (ratingReviewExists[0])
-    db.update_rating_review([user_id, episode_name, +rating, review]).then(() =>
+    db.update_rating_review([user_id, episode_name, +rating, review, username, profile_pic]).then(() =>
       res.sendStatus(200)
     );
   else
