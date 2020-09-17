@@ -200,6 +200,14 @@ const getFavorites = (req, res) => {
   });
 };
 
+const getCharacters = (req, res) => {
+  const db = req.app.get("db")
+  
+  db.get_characters().then(characters => {
+    return res.status(200).send(characters)
+  })
+}
+
 exports.getEpisode = getEpisode;
 exports.updateRatingAndReview = updateRatingAndReview;
 exports.getEpisodes = getEpisodes;
@@ -209,3 +217,4 @@ exports.deleteFromWatchlist = deleteFromWatchlist;
 exports.addToFavorites = addToFavorites;
 exports.removeFromFavorites = removeFromFavorites;
 exports.getFavorites = getFavorites;
+exports.getCharacters = getCharacters

@@ -13,5 +13,6 @@ router.delete("/watchlist/:episode_name", episodesController.deleteFromWatchlist
 router.post("/favorites/:user_id", episodesController.addToFavorites)
 router.delete("/favorites/:episode_name", episodesController.removeFromFavorites)
 router.get("/favorites/:user_id", episodesController.getFavorites)
+router.get("/characters", episodesController.getCharacters)
 
 module.exports = router;
