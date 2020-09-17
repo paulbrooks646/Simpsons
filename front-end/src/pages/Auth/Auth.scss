@@ -39,6 +39,9 @@
         flex-direction: column;
         justify-content: space-evenly;
         height: 60%;
+        .forgot-password-btn {
+          text-transform: capitalize;
+        }
       }
     }
   }
