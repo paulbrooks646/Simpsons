@@ -7,6 +7,7 @@ import Profile from "./pages/Profile/Profile";
 import SingleEpisode from "./pages/SingleEpisode/SingleEpisode";
 import Error from "./pages/Error/Error";
 import Characters from "./pages/Characters/Characters";
+import SingleCharacter from "./pages/SingleCharacter/SingleCharacter"
 
 export default (
   <Switch>
@@ -15,7 +16,8 @@ export default (
     <Route path="/profile/:user_id" component={Profile} />
     <Route exact path="/episodes" component={Episodes} />
     <Route path="/episodes/:episode" component={SingleEpisode} />
-    <Route path="/characters" component={Characters}/>
+    <Route exact path="/characters" component={Characters} />
+    <Route path="/characters/:character" component={SingleCharacter}/>
     <Route path="*" component={Error} />
   </Switch>
 );
