@@ -14,5 +14,6 @@ router.post("/favorites/:user_id", episodesController.addToFavorites)
 router.delete("/favorites/:episode_name", episodesController.removeFromFavorites)
 router.get("/favorites/:user_id", episodesController.getFavorites)
 router.get("/characters", episodesController.getCharacters)
+router.get("/characters/:character", episodesController.getCharacter)
 
 module.exports = router;
