@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
-import "./Characters.scss"
+import React, { useState } from "react";
+import "./Characters.scss";
+import Page from "../../components/Page";
 
 export default function Characters(props) {
-
-    return (
-        <div>Characters</div>
-    )
+  return (
+    <Page>
+      <div>Characters</div>
+    </Page>
+  );
 }

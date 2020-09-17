@@ -64,6 +64,9 @@ function Nav(props) {
               <Link to="/episodes" component={RouterLink}>
                 <h2>Episodes</h2>
               </Link>
+              <Link to="/characters" component={RouterLink}>
+                <h2>Characters</h2>
+              </Link>
               <Button
                 variant="contained"
                 color="secondary"
@@ -95,6 +98,9 @@ function Nav(props) {
           </Link>
           <Link to="/episodes" component={RouterLink}>
             <h1>Episodes</h1>
+          </Link>
+          <Link to="/characters" component={RouterLink}>
+            <h1>Characters</h1>
           </Link>
         </div>
         <Button
