@@ -24,23 +24,25 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import "./Profile.scss";
 import RemoveFromQueueIcon from "@material-ui/icons/RemoveFromQueue";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import placeholderProfilePic from "../../images/placeholder-profile-pic.jpg";
+import "./Profile.scss";
 
 function Profile(props) {
   const { id, username, email, profile_pic } = props.user.info;
-  const [pic, setPic] = useState(
-    "https://realsic.com/wp-content/uploads/2016/11/donut-enamel-pin-simpsons-donut-pin-by-real-sic-pink-4-1.jpg"
-  );
+  const [pic, setPic] = useState(placeholderProfilePic);
   const [updatingProfile, setUpdatingProfile] = useState(false);
   const [updatedUsername, setUpdatedUsername] = useState(username || "");
   const [updatedEmail, setUpdatedEmail] = useState(email || "");
   const [updatedPic, setUpdatedPic] = useState(profile_pic || "");
   const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
   const [watchlist, setWatchlist] = useState([]);
+  const [watchlistLoading, setWatchlistLoading] = useState(true);
   const [favorites, setFavorites] = useState([]);
+  const [favoritesLoading, setFavoritesLoading] = useState(true);
 
   useEffect(() => {
     getUser();
@@ -48,9 +50,11 @@ function Profile(props) {
       setPic(profile_pic);
       axios.get(`/watchlist/${props.user.info.id}`).then((res) => {
         setWatchlist(res.data);
+        setWatchlistLoading(false);
       });
       axios.get(`/favorites/${props.user.info.id}`).then((res) => {
         setFavorites(res.data);
+        setFavoritesLoading(false);
       });
     }
   }, [profile_pic, props.user.info.id]);
@@ -103,58 +107,66 @@ function Profile(props) {
         <div className="profile-main">
           <div className="profile-list-heading">
             <h1>Your Watchlist</h1>
-            <List>
-              {watchlist.map((episode) => (
-                <ListItem
-                  button
-                  key={episode.watchlist_id}
-                  component={Link}
-                  to={`/episodes/${episode.episode_name.replace(/ /g, "_")}`}
-                >
-                  <ListItemText primary={episode.episode_name} />
-                  <ListItemSecondaryAction>
-                    <Tooltip title="Remove From Watchlist">
-                      <IconButton
-                        color="secondary"
-                        edge="end"
-                        onClick={() =>
-                          removeFromWatchlist(episode.episode_name)
-                        }
-                      >
-                        <RemoveFromQueueIcon />
-                      </IconButton>
-                    </Tooltip>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              ))}
-            </List>
+            {watchlistLoading ? (
+              <CircularProgress thickness={4} />
+            ) : (
+              <List>
+                {watchlist.map((episode) => (
+                  <ListItem
+                    button
+                    key={episode.watchlist_id}
+                    component={Link}
+                    to={`/episodes/${episode.episode_name.replace(/ /g, "_")}`}
+                  >
+                    <ListItemText primary={episode.episode_name} />
+                    <ListItemSecondaryAction>
+                      <Tooltip title="Remove From Watchlist">
+                        <IconButton
+                          color="secondary"
+                          edge="end"
+                          onClick={() =>
+                            removeFromWatchlist(episode.episode_name)
+                          }
+                        >
+                          <RemoveFromQueueIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                ))}
+              </List>
+            )}
           </div>
           <div className="profile-list-heading">
             <h1>Favorites</h1>
-            <List>
-              {favorites.map((episode) => (
-                <ListItem
-                  button
-                  key={episode.favorites_id}
-                  component={Link}
-                  to={`/episodes/${episode.episode_name.replace(/ /g, "_")}`}
-                >
-                  <ListItemText primary={episode.episode_name} />
-                  <ListItemSecondaryAction>
-                    <Tooltip title="Remove From Favorites">
-                      <IconButton
-                        edge="end"
-                        onClick={() =>
-                          removeFromFavorites(episode.episode_name)
-                        }
-                      >
-                        <FavoriteIcon className="favorite-icon" />
-                      </IconButton>
-                    </Tooltip>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              ))}
-            </List>
+            {favoritesLoading ? (
+              <CircularProgress thickness={4} />
+            ) : (
+              <List>
+                {favorites.map((episode) => (
+                  <ListItem
+                    button
+                    key={episode.favorites_id}
+                    component={Link}
+                    to={`/episodes/${episode.episode_name.replace(/ /g, "_")}`}
+                  >
+                    <ListItemText primary={episode.episode_name} />
+                    <ListItemSecondaryAction>
+                      <Tooltip title="Remove From Favorites">
+                        <IconButton
+                          edge="end"
+                          onClick={() =>
+                            removeFromFavorites(episode.episode_name)
+                          }
+                        >
+                          <FavoriteIcon className="favorite-icon" />
+                        </IconButton>
+                      </Tooltip>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                ))}
+              </List>
+            )}
           </div>
         </div>
         <Dialog
