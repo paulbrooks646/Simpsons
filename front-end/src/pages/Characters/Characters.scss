@@ -10,6 +10,18 @@
     position: relative;
 }
 
+.character-card-closed {
+    display: none;
+}
+
 .character-detail-card {
-    
+ width: 650px;
+ height: 650px;
+ display: flex;
+ align-items: center;
+ flex-direction: column;
+}
+
+.character-detail-card-closed {
+    display: none;
 }
