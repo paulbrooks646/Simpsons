@@ -23,3 +23,6 @@ episode_name text
 
 insert into ratings_reviews (user_id, episode_name, rating, review, username, profile_pic)
 values (,,,,,)
+
+insert into characters (name, picture, description, quote, voice_actor, first_appearance)
+values (,,,,,)
