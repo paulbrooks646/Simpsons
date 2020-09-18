@@ -21,48 +21,15 @@ export default function SingleCharacter(props) {
 
   const characterInfo = character.map((e, index) => {
     return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          position: "relative",
-          top: "25px",
-        }}
-      >
+      <div className="single-character-main">
         <Card className="character-detail-card">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-evenly",
-              alignItems: "center",
-              width: "100%",
-            }}
-          >
+          <div className="single-character-card-div">
             <h1>{e.name}</h1>
-            <img src={e.picture} style={{ height: "100px" }} alt={e.name} />
+            <img src={e.picture} alt={e.name} />
           </div>
-          <h6
-            style={{
-              width: "90%",
-              border: "solid 1px red",
-              textAlign: "center",
-              padding: "10px",
-            }}
-          >
-            {e.description}
-          </h6>
+          <h6 className="character-description">{e.description}</h6>
           <h3>Voice actor: {e.voice_actor}</h3>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              border: "solid 1px blue",
-              padding: "10px",
-              width: "90%",
-            }}
-          >
+          <div className="quote-div">
             <h4>{e.quote}</h4>
             <h6>{e.name}</h6>
           </div>
@@ -78,6 +45,12 @@ export default function SingleCharacter(props) {
   });
 
   return (
-    <Page>{loading ? <LoadingSpinner /> : <div>{characterInfo}</div>}</Page>
+    <Page>
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <div className="single-character-body">{characterInfo}</div>
+      )}
+    </Page>
   );
 }

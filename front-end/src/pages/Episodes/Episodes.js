@@ -65,7 +65,7 @@ function Episodes(props) {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <>
+        <div className="episodes-body">
           <div className="episodes-main">{episodes}</div>
           <Typography className="episodes-typography">
             Season: {page}
@@ -79,7 +79,7 @@ function Episodes(props) {
             showFirstButton
             showLastButton
           />
-        </>
+        </div>
       )}
     </Page>
   );
