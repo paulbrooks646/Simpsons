@@ -16,7 +16,15 @@ export default function SingleCharacter(props) {
 
   const characterInfo = character.map((e, index) => {
     return (
-      <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative', top: '25px'}}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          position: "relative",
+                top: "25px"
+        }}
+      >
         <Card className="character-detail-card">
           <div
             style={{
@@ -24,7 +32,6 @@ export default function SingleCharacter(props) {
               justifyContent: "space-evenly",
               alignItems: "center",
               width: "100%",
-              marginTop: "10px",
             }}
           >
             <h1>{e.name}</h1>
@@ -48,6 +55,7 @@ export default function SingleCharacter(props) {
               alignItems: "center",
               border: "solid 1px blue",
               padding: "10px",
+              width: "90%",
             }}
           >
             <h4>{e.quote}</h4>
@@ -66,7 +74,7 @@ export default function SingleCharacter(props) {
 
   return (
     <Page>
-          <div>{characterInfo}</div>
+      <div>{characterInfo}</div>
     </Page>
   );
 }

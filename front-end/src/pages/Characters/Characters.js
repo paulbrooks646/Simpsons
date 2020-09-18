@@ -7,15 +7,12 @@ import { Link } from "react-router-dom";
 
 export default function Characters(props) {
   const [characters, setCharacters] = useState([]);
-  const [detailView, setDetailView] = useState(false);
 
   useEffect(() => {
     axios.get("/characters").then((res) => {
       setCharacters(res.data);
     });
   }, []);
-
-  const toggleDetailView = () => setDetailView(!detailView);
 
   const characterList = characters.map((e, index) => {
     return (
@@ -29,13 +26,7 @@ export default function Characters(props) {
         }}
       >
         <Link to={`/characters/${e.name}`}>
-          <Card
-            variant="outlined"
-            className={`${
-              detailView ? "character-card-closed" : "character-card"
-            }`}
-            onClick={toggleDetailView}
-          >
+          <Card variant="outlined" className="character-card">
             <img
               src={e.picture}
               style={{ height: "100px", marginTop: "10px" }}
