@@ -1,5 +1,40 @@
-.character-detail-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+@import "../../Sass/mixins.scss";
+
+.single-character-body {
+  @include flex(center);
+  height: calc(100vh - 75px);
+  background-color: #f8f8ff;
+  box-sizing: border-box;
+
+  .single-character-main {
+    @include flex(center);
+    text-align: center;
+    height: calc(100vh-75px);
+
+    .character-detail-card {
+      @include flex(space-evenly);
+
+      .single-character-card-div {
+        @include flex(space-evenly);
+        flex-direction: row;
+        width: 100%;
+
+        img {
+          height: 100px;
+        }
+      }
+      .character-description {
+        width: 90%;
+        border: solid 1px red;
+        padding: 10px;
+      }
+
+      .quote-div {
+        @include flex(center);
+        border: solid 1px blue;
+        padding: 10px;
+        width: 90%;
+      }
+    }
+  }
 }

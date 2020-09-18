@@ -31,6 +31,12 @@ export default function Characters(props) {
   });
 
   return (
-    <Page>{loading ? <LoadingSpinner /> : <div>{characterList}</div>}</Page>
+    <Page>
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <div className="characters-body">{characterList}</div>
+      )}
+    </Page>
   );
 }
