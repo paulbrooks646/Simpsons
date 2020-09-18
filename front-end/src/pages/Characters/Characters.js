@@ -28,7 +28,7 @@ export default function Characters(props) {
           flexDirection: "column",
         }}
       >
-        <Link to={`/characters/${e.name}`}>
+        <Link to={`/characters/${e.name.replace(/ /g, "_")}`}>
           <Card
             variant="outlined"
             className={`${

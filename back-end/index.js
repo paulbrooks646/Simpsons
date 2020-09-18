@@ -5,6 +5,7 @@ const { CONNECTION_STRING, SESSION_SECRET } = process.env;
 const session = require("express-session");
 const userRoutes = require("./routes/userRoutes");
 const episodesRoutes = require("./routes/episodesRoutes");
+const charactersRouters = require("./routes/charactersRoutes");
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(
 
 app.use(userRoutes);
 app.use(episodesRoutes);
+app.use(charactersRouters);
 
 const port = 5000;
 
