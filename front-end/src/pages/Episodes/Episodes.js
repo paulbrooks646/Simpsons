@@ -33,7 +33,7 @@ function Episodes(props) {
         <Link
           key={index}
           to={`/episodes/${e.episode_name.replace(/ /g, "_")}`}
-          style={{ textDecoration: "none" }}
+          className="episodes-link"
         >
           <Card variant="outlined" className="episodes-card">
             <div className="episodes-episode">
@@ -67,7 +67,7 @@ function Episodes(props) {
       ) : (
         <>
           <div className="episodes-main">{episodes}</div>
-          <Typography style={{ textAlign: "center" }}>
+          <Typography className="episodes-typography">
             Season: {page}
           </Typography>
           <Pagination

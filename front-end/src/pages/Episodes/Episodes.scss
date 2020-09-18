@@ -1,26 +1,32 @@
+@import "../../Sass/mixins.scss";
+
 .episodes-main {
   display: flex;
   justify-content: space-evenly;
   width: 100vw;
   flex-wrap: wrap;
+
+  .episodes-link {
+    text-decoration: none;
+    .episodes-card {
+      margin-top: 20px;
+
+      .episodes-episode {
+        @include flex(initial);
+        box-sizing: border-box;
+        width: 225px;
+
+        .episodes-image {
+          width: 100px;
+          height: 100px;
+        }
+      }
+    }
+  }
 }
 
-.episodes-card {
-  margin-top: 20px;
-}
-
-.episodes-episode {
-  box-sizing: border-box;
-  width: 225px;
-  // height: 225px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.episodes-image {
-  width: 100px;
-  height: 100px;
+.episodes-typography {
+  text-align: center;
 }
 
 .seasons-pagination {
