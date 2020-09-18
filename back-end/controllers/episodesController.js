@@ -62,9 +62,14 @@ const updateRatingAndReview = async (req, res) => {
   ]);
 
   if (ratingReviewExists[0])
-    db.update_rating_review([user_id, episode_name, +rating, review, username, profile_pic]).then(() =>
-      res.sendStatus(200)
-    );
+    db.update_rating_review([
+      user_id,
+      episode_name,
+      +rating,
+      review,
+      username,
+      profile_pic,
+    ]).then(() => res.sendStatus(200));
   else
     db.post_rating_and_review([
       user_id,
@@ -200,23 +205,6 @@ const getFavorites = (req, res) => {
   });
 };
 
-const getCharacters = (req, res) => {
-  const db = req.app.get("db")
-  
-  db.get_characters().then(characters => {
-    return res.status(200).send(characters)
-  })
-}
-
-const getCharacter = (req, res) => {
-  const db = req.app.get("db")
-  const { character } = req.params
-
-  db.get_character(character).then(info => {
-    res.status(200).send(info)
-  })
-}
-
 exports.getEpisode = getEpisode;
 exports.updateRatingAndReview = updateRatingAndReview;
 exports.getEpisodes = getEpisodes;
@@ -226,5 +214,3 @@ exports.deleteFromWatchlist = deleteFromWatchlist;
 exports.addToFavorites = addToFavorites;
 exports.removeFromFavorites = removeFromFavorites;
 exports.getFavorites = getFavorites;
-exports.getCharacters = getCharacters
-exports.getCharacter = getCharacter

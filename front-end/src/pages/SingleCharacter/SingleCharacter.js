@@ -9,9 +9,11 @@ export default function SingleCharacter(props) {
   const [character, setCharacter] = useState([]);
 
   useEffect(() => {
-    axios.get(`/characters/${props.match.params.character}`).then((res) => {
-      setCharacter(res.data);
-    });
+    axios
+      .get(`/characters/${props.match.params.character.replace(/_/g, " ")}`)
+      .then((res) => {
+        setCharacter(res.data);
+      });
   }, []);
 
   const characterInfo = character.map((e, index) => {
@@ -22,7 +24,7 @@ export default function SingleCharacter(props) {
           justifyContent: "center",
           alignItems: "center",
           position: "relative",
-                top: "25px"
+          top: "25px",
         }}
       >
         <Card className="character-detail-card">

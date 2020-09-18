@@ -17,7 +17,7 @@ export default function Characters(props) {
   const characterList = characters.map((e, index) => {
     return (
       <div className="character-list" key={index}>
-        <Link to={`/characters/${e.name}`}>
+        <Link to={`/characters/${e.name.replace(/ /g, "_")}`}>
           <Card variant="outlined" className="character-card">
             <img src={e.picture} className="character-image" alt={e.name} />
             <h6 className="character-name">{e.name}</h6>
