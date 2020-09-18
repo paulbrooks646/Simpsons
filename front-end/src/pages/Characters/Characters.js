@@ -16,25 +16,11 @@ export default function Characters(props) {
 
   const characterList = characters.map((e, index) => {
     return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "50px",
-          flexDirection: "column",
-        }}
-      >
+      <div className="character-list" key={index}>
         <Link to={`/characters/${e.name}`}>
           <Card variant="outlined" className="character-card">
-            <img
-              src={e.picture}
-              style={{ height: "100px", marginTop: "10px" }}
-              alt={e.name}
-            />
-            <h6 style={{ zIndex: "1", position: "absolute", top: "100px" }}>
-              {e.name}
-            </h6>
+            <img src={e.picture} className="character-image" alt={e.name} />
+            <h6 className="character-name">{e.name}</h6>
           </Card>
         </Link>
       </div>

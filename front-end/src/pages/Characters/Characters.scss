@@ -1,19 +1,28 @@
-.character-card {
-  width: 150px;
-  height: 150px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  position: relative;
-}
+@import "../../Sass/mixins.scss";
 
-.character-detail-card {
-  width: 650px;
-  height: 650px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+.character-list {
+  @include flex(center);
+  margin-top: 50px;
+
+  .character-card {
+    width: 150px;
+    height: 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    @include flex(center);
+    flex-direction: row;
+    align-items: flex-start;
+
+    .character-image {
+      height: 100px;
+      margin-top: 10px;
+    }
+
+    .character-name {
+      z-index: 1;
+      position: absolute;
+      top: 100px;
+    }
+  }
 }

@@ -52,9 +52,9 @@ function Auth(props) {
     setInfoSnackbarIsOpen(false);
   }
 
-  function handleErrorSnackbarOpen() {
-    setErrorSnackbarIsOpen(true);
-  }
+  // function handleErrorSnackbarOpen() {
+  //   setErrorSnackbarIsOpen(true);
+  // }
 
   function handleErrorSnackbarClose() {
     setErrorSnackbarIsOpen(false);
@@ -113,8 +113,7 @@ function Auth(props) {
     <>
       <div className="auth-main" style={{ backgroundImage: `url(${Clouds})` }}>
         <Typography variant="h2" align="center" className="auth-title">
-          The Android<span style={{ fontFamily: "sans-serif" }}>'</span>s
-          Dungeon
+          The Android<span className="sans-serif">'</span>s Dungeon
         </Typography>
         <Typography variant="h4" align="center" className="auth-subtitle">
           A Simpsons Fan Page
