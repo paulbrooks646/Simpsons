@@ -4,13 +4,16 @@ import Page from "../../components/Page";
 import axios from "axios";
 import Card from "@material-ui/core/Card";
 import { Link } from "react-router-dom";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 export default function Characters(props) {
   const [characters, setCharacters] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios.get("/characters").then((res) => {
       setCharacters(res.data);
+      setLoading(false);
     });
   }, []);
 
@@ -28,8 +31,6 @@ export default function Characters(props) {
   });
 
   return (
-    <Page>
-      <div>{characterList}</div>
-    </Page>
+    <Page>{loading ? <LoadingSpinner /> : <div>{characterList}</div>}</Page>
   );
 }
