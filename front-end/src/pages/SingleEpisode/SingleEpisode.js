@@ -222,18 +222,10 @@ function SingleEpisode(props) {
               />
             </DialogContent>
             <DialogActions>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={handleCloseDialog}
-              >
+              <Button color="secondary" onClick={handleCloseDialog}>
                 Close
               </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={submitRatingAndReview}
-              >
+              <Button color="primary" onClick={submitRatingAndReview}>
                 Submit
               </Button>
             </DialogActions>
