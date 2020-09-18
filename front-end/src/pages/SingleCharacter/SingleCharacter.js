@@ -17,7 +17,7 @@ export default function SingleCharacter(props) {
         setCharacter(res.data);
         setLoading(false);
       });
-  }, []);
+  }, [props.match.params.character]);
 
   const characterInfo = character.map((e, index) => {
     return (
