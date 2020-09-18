@@ -4,15 +4,18 @@ import Page from "../../components/Page";
 import axios from "axios";
 import Card from "@material-ui/core/Card";
 import { Link } from "react-router-dom";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 export default function SingleCharacter(props) {
   const [character, setCharacter] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
       .get(`/characters/${props.match.params.character.replace(/_/g, " ")}`)
       .then((res) => {
         setCharacter(res.data);
+        setLoading(false);
       });
   }, []);
 
@@ -65,7 +68,7 @@ export default function SingleCharacter(props) {
           </div>
           <h5>
             First Appearance:{" "}
-            <Link to={`/episodes/${e.first_appearance}`}>
+            <Link to={`/episodes/${e.first_appearance.replace(/ /g, "_")}`}>
               {e.first_appearance}
             </Link>
           </h5>
@@ -75,8 +78,6 @@ export default function SingleCharacter(props) {
   });
 
   return (
-    <Page>
-      <div>{characterInfo}</div>
-    </Page>
+    <Page>{loading ? <LoadingSpinner /> : <div>{characterInfo}</div>}</Page>
   );
 }
