@@ -1,27 +1,19 @@
 .character-card {
-    width: 150px;
-    height: 150px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    position: relative;
-}
-
-.character-card-closed {
-    display: none;
+  width: 150px;
+  height: 150px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
 }
 
 .character-detail-card {
- width: 650px;
- height: 650px;
- display: flex;
- align-items: center;
- flex-direction: column;
-}
-
-.character-detail-card-closed {
-    display: none;
+  width: 650px;
+  height: 650px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }

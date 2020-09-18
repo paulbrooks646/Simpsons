@@ -34,7 +34,6 @@ export default function SingleCharacter(props) {
               justifyContent: "space-evenly",
               alignItems: "center",
               width: "100%",
-              marginTop: "10px",
             }}
           >
             <h1>{e.name}</h1>
@@ -58,6 +57,7 @@ export default function SingleCharacter(props) {
               alignItems: "center",
               border: "solid 1px blue",
               padding: "10px",
+              width: "90%",
             }}
           >
             <h4>{e.quote}</h4>
