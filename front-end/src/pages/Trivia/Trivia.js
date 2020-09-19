@@ -18,11 +18,12 @@ export default function Trivia(props) {
           height: "calc(100vh - 75px)",
           width: "100vw",
           display: "flex",
-          justifyContent: "center",
+          justifyContent: "space-evenly",
           alignItems: "center",
           textAlign: "center",
           flexDirection: "column",
           color: "red",
+          backgroundColor: "#f8f8ff",
         }}
       >
         <h1>Trivia</h1>
