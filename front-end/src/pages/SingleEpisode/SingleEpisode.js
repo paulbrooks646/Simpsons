@@ -148,14 +148,18 @@ function SingleEpisode(props) {
               <img src={info.episode_image} alt={info.episode_name} />
               <p>{info.episode_synopsis}</p>
               <h2>Air Date: {formatDate(info.air_date)}</h2>
-              <p>{info.episode_quote}</p>
+              <p className="episode-quote">{info.episode_quote}</p>
               <h2>Season: {info.season}</h2>
               <Button
                 variant="contained"
                 color="secondary"
                 onClick={handleOpenDialog}
               >
-                Rate this episode!
+                {info.reviews
+                  .map((review) => review[2])
+                  .includes(props.user.info.username)
+                  ? "Update Your Rating"
+                  : "Rate this episode!"}
               </Button>
             </div>
             <List className="single-episode-list">
