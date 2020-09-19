@@ -21,9 +21,12 @@ export default function Trivia(props) {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            textAlign: "center",
+                    textAlign: "center",
+                    flexDirection: 'column',
+            color: 'red'
           }}
-        >
+            >
+                <h1>Trivia</h1>
           <Card
             style={{
               width: "500px",
@@ -42,7 +45,7 @@ export default function Trivia(props) {
                 alignItems: "center",
               }}
             >
-              <h2>
+              <h2 style={{color: 'blue'}}>
                 If you've committed a crime and want to confess, click 'Yes'.
                 Otherwise, click 'No'
               </h2>
