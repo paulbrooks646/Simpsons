@@ -101,14 +101,7 @@ function SingleEpisode(props) {
         <div className="episode-main">
           <Card variant="outlined" className="episode-card">
             <div className="episode-div">
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-evenly",
-                  width: "100%",
-                }}
-              >
+              <div className="title-div">
                 <h2>{info.episode_name}</h2>
                 {userWatchlist
                   .map((episode) => episode.episode_name)
@@ -165,7 +158,7 @@ function SingleEpisode(props) {
                 Rate this episode!
               </Button>
             </div>
-            <List style={{ width: "100%" }}>
+            <List className="single-episode-list">
               {info.reviews.map((item, index) => {
                 const [starRating, reviewText, reviewer, reviewerImage] = item;
                 return (
@@ -204,7 +197,7 @@ function SingleEpisode(props) {
             onClose={handleCloseDialog}
             aria-labelledby="dialog-rating-title"
           >
-            <DialogTitle id="dialog-rating-title" style={{ paddingBottom: 0 }}>
+            <DialogTitle id="dialog-rating-title">
               Rate this episode ({info.episode_name})
             </DialogTitle>
             <DialogContent>

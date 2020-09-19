@@ -13,6 +13,8 @@
 
     .character-detail-card {
       @include flex(space-evenly);
+      width: 500px;
+      height: 600px;
 
       .single-character-card-div {
         @include flex(space-evenly);
