@@ -7,7 +7,8 @@ import Profile from "./pages/Profile/Profile";
 import SingleEpisode from "./pages/SingleEpisode/SingleEpisode";
 import Error from "./pages/Error/Error";
 import Characters from "./pages/Characters/Characters";
-import SingleCharacter from "./pages/SingleCharacter/SingleCharacter"
+import SingleCharacter from "./pages/SingleCharacter/SingleCharacter";
+import Trivia from "./pages/Trivia/Trivia";
 
 export default (
   <Switch>
@@ -17,8 +18,9 @@ export default (
     <Route exact path="/episodes" component={Episodes} />
     <Route path="/episodes/:episode" component={SingleEpisode} />
     <Route exact path="/characters" component={Characters} />
-    <Route path="/characters/:character" component={SingleCharacter}/>
-    <Route path='/error' component={Error} />
+    <Route path="/characters/:character" component={SingleCharacter} />
+    <Route path="/error" component={Error} />
+    <Route exact path="/trivia" component={Trivia} />
     <Route path="*" component={Error} />
   </Switch>
 );
