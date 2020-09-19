@@ -16,32 +16,10 @@ export default function SingleCharacter(props) {
       .then((res) => {
         setCharacter(res.data);
         setLoading(false);
+      })
+      .catch((err) => {
+        props.history.push("/error");
       });
-  }, []);
-
-  const characterInfo = character.map((e, index) => {
-    return (
-      <div className="single-character-main">
-        <Card className="character-detail-card">
-          <div className="single-character-card-div">
-            <h1>{e.name}</h1>
-            <img src={e.picture} alt={e.name} />
-          </div>
-          <h6 className="character-description">{e.description}</h6>
-          <h3>Voice actor: {e.voice_actor}</h3>
-          <div className="quote-div">
-            <h4>{e.quote}</h4>
-            <h6>{e.name}</h6>
-          </div>
-          <h5>
-            First Appearance:{" "}
-            <Link to={`/episodes/${e.first_appearance.replace(/ /g, "_")}`}>
-              {e.first_appearance}
-            </Link>
-          </h5>
-        </Card>
-      </div>
-    );
   });
 
   return (
@@ -49,7 +27,35 @@ export default function SingleCharacter(props) {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div className="single-character-body">{characterInfo}</div>
+        <div className="single-character-body">
+          <div className="single-character-main">
+            <Card className="character-detail-card">
+              <div className="single-character-card-div">
+                <h1>{character[0].name}</h1>
+                <img src={character[0].picture} alt={character[0].name} />
+              </div>
+              <h6 className="character-description">
+                {character[0].description}
+              </h6>
+              <h3>Voice actor: {character[0].voice_actor}</h3>
+              <div className="quote-div">
+                <h4>{character[0].quote}</h4>
+                <h6>{character[0].name}</h6>
+              </div>
+              <h5>
+                First Appearance:{" "}
+                <Link
+                  to={`/episodes/${character[0].first_appearance.replace(
+                    / /g,
+                    "_"
+                  )}`}
+                >
+                  {character[0].first_appearance}
+                </Link>
+              </h5>
+            </Card>
+          </div>
+        </div>
       )}
     </Page>
   );

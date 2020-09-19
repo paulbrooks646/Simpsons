@@ -18,6 +18,7 @@ export default (
     <Route path="/episodes/:episode" component={SingleEpisode} />
     <Route exact path="/characters" component={Characters} />
     <Route path="/characters/:character" component={SingleCharacter}/>
+    <Route path='/error' component={Error} />
     <Route path="*" component={Error} />
   </Switch>
 );
