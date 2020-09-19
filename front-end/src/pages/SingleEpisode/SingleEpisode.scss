@@ -20,6 +20,12 @@
         flex-direction: row;
         width: 100%;
       }
+
+      .episode-quote {
+        white-space: pre-wrap;
+        text-align: left;
+        width: 90%;
+      }
     }
   }
 }
