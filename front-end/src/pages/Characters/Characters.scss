@@ -3,6 +3,9 @@
 .characters-body {
   background-color: #f8f8ff;
   height: calc(100vh - 75px);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
 
   .character-list {
     @include flex(center);
