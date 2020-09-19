@@ -5,7 +5,12 @@ import Button from "@material-ui/core/Button"
 
 export default function Trivia(props) {
 
-const yes = () => alert("A paddy wagon is now speeding to your home.");
+    const yes = () => alert("A paddy wagon is now speeding to your home.");
+    
+    const no = () =>
+      alert(
+        "You have chosen 'No', meaning that you've committed a crime, but don't want to confess. A paddy wagon is now speeding to your home."
+      );
 
     return (
       <Page>
@@ -45,7 +50,7 @@ const yes = () => alert("A paddy wagon is now speeding to your home.");
                 <Button variant="outlined" color="secondary" onClick={yes}>
                   Yes
                 </Button>
-                <Button variant="outlined" color="secondary">
+                <Button variant="outlined" color="secondary" onClick={no}>
                   No
                 </Button>
               </div>
