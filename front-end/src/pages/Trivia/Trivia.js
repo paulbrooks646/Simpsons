@@ -71,7 +71,7 @@ export default function Trivia(props) {
               alt="Springfield Nuclear Power Plant"
               className="trivia-card-image"
             />
-            <h2 className="trivia-question"></h2>
+            <h2 className="trivia-question">Which sector does Homer work in at the nuclear power plant?</h2>
 
             <FormControl component="fieldset" className="trivia-answers">
               <RadioGroup
@@ -83,27 +83,27 @@ export default function Trivia(props) {
                 onChange={(e) => setSector(e.target.value)}
               >
                 <FormControlLabel
-                  value=""
+                  value="8A"
                   control={<Radio style={{ color: "red" }} />}
-                  label=""
+                  label="8A"
                   style={{ color: "red" }}
                 />
                 <FormControlLabel
-                  value=""
+                  value="3C"
                   control={<Radio style={{ color: "red" }} />}
-                  label=""
+                  label="3C"
                   style={{ color: "red" }}
                 />
                 <FormControlLabel
-                  value=""
+                  value="7G"
                   control={<Radio style={{ color: "red" }} />}
-                  label=""
+                  label="7G"
                   style={{ color: "red" }}
                 />
                 <FormControlLabel
-                  value=""
+                  value="6E"
                   control={<Radio style={{ color: "red" }} />}
-                  label=""
+                  label="6E"
                   style={{ color: "red" }}
                 />
               </RadioGroup>
@@ -446,6 +446,7 @@ export default function Trivia(props) {
             </FormControl>
           </div>
         </Card> */}
+              <Button variant="contained" color="secondary">Submit Answers</Button>
       </div>
     </Page>
   );
