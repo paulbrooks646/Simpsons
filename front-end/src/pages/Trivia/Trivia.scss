@@ -1,0 +1,9 @@
+@import "../../Sass/mixins.scss";
+
+.trivia-main {
+    width: 100vw;
+    @include flex(space-evenly);
+    text-align: center;
+    color: red;
+    background-color: #f8f8ff;
+}

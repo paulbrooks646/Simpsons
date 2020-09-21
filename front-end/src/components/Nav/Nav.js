@@ -67,6 +67,9 @@ function Nav(props) {
               <Link to="/characters" component={RouterLink}>
                 <h2>Characters</h2>
               </Link>
+              <Link to="/trivia" component={RouterLink}>
+                <h2>Trivia</h2>
+              </Link>
               <Button
                 variant="contained"
                 color="secondary"
@@ -101,6 +104,9 @@ function Nav(props) {
           </Link>
           <Link to="/characters" component={RouterLink}>
             <h1>Characters</h1>
+          </Link>
+          <Link to="/trivia" component={RouterLink}>
+            <h1>Trivia</h1>
           </Link>
         </div>
         <Button
