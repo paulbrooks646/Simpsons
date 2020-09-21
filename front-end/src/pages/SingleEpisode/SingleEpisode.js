@@ -37,7 +37,7 @@ function SingleEpisode(props) {
   const [loading, setLoading] = useState(true);
   const [isRating, setIsRating] = useState(false);
   const [isDeletingReview, setIsDeletingReview] = useState(false);
-  const [rating, setRating] = useState();
+  const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
   const [reviewSubmitSnackbarIsOpen, setReviewSubmitSnackbarIsOpen] = useState(
     false
@@ -244,11 +244,10 @@ function SingleEpisode(props) {
                 name="episode-star-rating-input"
                 emptyIcon={<StarBorderIcon fontSize="inherit" />}
                 precision={0.5}
-                defaultValue={0}
                 size="large"
                 style={{ marginBottom: "20px" }}
                 onChange={(e) => setRating(e.target.value)}
-                value={rating}
+                value={+rating}
               />
               <TextField
                 label="Write review here"
