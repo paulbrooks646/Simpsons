@@ -2,7 +2,7 @@ import React from "react";
 import Page from "../../components/Page";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
-import "./Trivia.scss"
+import "./Trivia.scss";
 
 export default function Trivia(props) {
   const yes = () => alert("A paddy wagon is now speeding to your home.");
@@ -14,28 +14,10 @@ export default function Trivia(props) {
 
   return (
     <Page>
-      <div className="trivia-main"
-      >
+      <div className="trivia-main">
         <h1>Trivia</h1>
-        <Card
-          style={{
-            width: "500px",
-            height: "300px",
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-            marginBottom: "20px",
-          }}
-        >
-          <div
-            style={{
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-evenly",
-              alignItems: "center",
-            }}
-          >
+        <Card className="trivia-card">
+          <div classsName="trivia-card-div">
             <img
               src="https://upload.wikimedia.org/wikipedia/en/7/7a/Chief_Wiggum.png"
               alt="chief wiggums"
@@ -61,7 +43,6 @@ export default function Trivia(props) {
             </div>
           </div>
         </Card>
-        
       </div>
     </Page>
   );

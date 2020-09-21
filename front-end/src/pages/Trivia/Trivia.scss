@@ -7,3 +7,15 @@
     color: red;
     background-color: #f8f8ff;
 }
+
+.trivia-card {
+    @include flex(center);
+    width: 500px;
+    height: 300px;
+    margin-bottom: 20px;
+}
+
+.trivia-card-div {
+    @include flex(space-evenly);
+    height: 100%;
+}
