@@ -11,6 +11,7 @@ import Rating from "@material-ui/lab/Rating";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
@@ -28,14 +29,22 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 function SingleEpisode(props) {
   const [info, setInfo] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isRating, setIsRating] = useState(false);
+  const [isDeletingReview, setIsDeletingReview] = useState(false);
   const [rating, setRating] = useState();
   const [review, setReview] = useState("");
-  const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
+  const [reviewSubmitSnackbarIsOpen, setReviewSubmitSnackbarIsOpen] = useState(
+    false
+  );
+  const [reviewDeleteSnackbarIsOpen, setReviewDeleteSnackbarIsOpen] = useState(
+    false
+  );
   const [userWatchlist, setUserWatchlist] = useState([]);
   const [favorites, setFavorites] = useState([]);
 
@@ -55,9 +64,14 @@ function SingleEpisode(props) {
     fetchData();
   }, [props.match.params.episode, props.user.info.id]);
 
-  const handleOpenDialog = () => setIsRating(true);
-  const handleCloseDialog = () => setIsRating(false);
-  const handleSnackbarClose = () => setSnackbarIsOpen(false);
+  const handleOpenReviewDialog = () => setIsRating(true);
+  const handleCloseReviewDialog = () => setIsRating(false);
+  const handleOpenReviewDeleteDialog = () => setIsDeletingReview(true);
+  const handleCloseReviewDeleteDialog = () => setIsDeletingReview(false);
+  const handleReviewSubmitSnackbarClose = () =>
+    setReviewSubmitSnackbarIsOpen(false);
+  const handleReviewDeleteSnackbarClose = () =>
+    setReviewDeleteSnackbarIsOpen(false);
 
   const submitRatingAndReview = () => {
     const data = {
@@ -68,8 +82,16 @@ function SingleEpisode(props) {
       profile_pic: props.user.info.profile_pic,
     };
     axios.put(`/rating-review/${props.user.info.id}`, data).then(() => {
-      handleCloseDialog();
-      setSnackbarIsOpen(true);
+      handleCloseReviewDialog();
+      setReviewSubmitSnackbarIsOpen(true);
+    });
+  };
+
+  const deleteReview = () => {
+    const episode_name = info.episode_name;
+    axios.delete(`/rating-review/${episode_name}`).then(() => {
+      handleCloseReviewDeleteDialog();
+      setReviewDeleteSnackbarIsOpen(true);
     });
   };
 
@@ -153,7 +175,7 @@ function SingleEpisode(props) {
               <Button
                 variant="contained"
                 color="secondary"
-                onClick={handleOpenDialog}
+                onClick={handleOpenReviewDialog}
               >
                 {info.reviews
                   .map((review) => review[2])
@@ -189,6 +211,19 @@ function SingleEpisode(props) {
                       }
                       secondary={reviewText}
                     />
+                    {props.user.info.username === reviewer && (
+                      <ListItemSecondaryAction>
+                        <Tooltip title="Delete Review" placement="left">
+                          <IconButton
+                            edge="end"
+                            color="secondary"
+                            onClick={handleOpenReviewDeleteDialog}
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                        </Tooltip>
+                      </ListItemSecondaryAction>
+                    )}
                   </ListItem>
                 );
               })}
@@ -198,7 +233,7 @@ function SingleEpisode(props) {
             open={isRating}
             fullWidth
             disableBackdropClick
-            onClose={handleCloseDialog}
+            onClose={handleCloseReviewDialog}
             aria-labelledby="dialog-rating-title"
           >
             <DialogTitle id="dialog-rating-title">
@@ -226,7 +261,7 @@ function SingleEpisode(props) {
               />
             </DialogContent>
             <DialogActions>
-              <Button color="secondary" onClick={handleCloseDialog}>
+              <Button color="secondary" onClick={handleCloseReviewDialog}>
                 Close
               </Button>
               <Button color="primary" onClick={submitRatingAndReview}>
@@ -234,18 +269,56 @@ function SingleEpisode(props) {
               </Button>
             </DialogActions>
           </Dialog>
+          <Dialog
+            disableBackdropClick
+            disableEscapeKeyDown
+            aria-labelledby="confirm-review-deletion"
+            open={isDeletingReview}
+          >
+            <DialogTitle id="confirm-review-deletion">
+              Delete Review?
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Are you sure you want to delete your review? This action cannot
+                be undone.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseReviewDeleteDialog} color="primary">
+                no, go back
+              </Button>
+              <Button onClick={deleteReview} color="secondary">
+                yes, proceed
+              </Button>
+            </DialogActions>
+          </Dialog>
           <Snackbar
             anchorOrigin={{ vertical: "top", horizontal: "center" }}
-            open={snackbarIsOpen}
+            open={reviewSubmitSnackbarIsOpen}
             autoHideDuration={4000}
-            onClose={handleSnackbarClose}
+            onClose={handleReviewSubmitSnackbarClose}
           >
             <Alert
-              onClose={handleSnackbarClose}
+              onClose={handleReviewSubmitSnackbarClose}
               variant="filled"
               severity="success"
             >
               RATING AND REVIEW SUBMITTED!
+            </Alert>
+          </Snackbar>
+          <Snackbar
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            open={reviewDeleteSnackbarIsOpen}
+            autoHideDuration={4000}
+            onClose={handleReviewDeleteSnackbarClose}
+          >
+            <Alert
+              onClose={handleReviewDeleteSnackbarClose}
+              variant="filled"
+              severity="info"
+            >
+              RATING AND REVIEW DELETED
             </Alert>
           </Snackbar>
         </div>
