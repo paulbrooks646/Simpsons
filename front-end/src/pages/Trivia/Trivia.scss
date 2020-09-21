@@ -16,20 +16,20 @@
     .trivia-card-div {
       @include flex(space-evenly);
       height: 100%;
+
+      .trivia-card-image {
+        height: 100px;
+      }
+
+      .trivia-question {
+        color: blue;
+      }
+
+      .trivia-answers {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+      }
     }
   }
-}
-
-.trivia-card-image {
-  height: 100px;
-}
-
-.trivia-question {
-  color: blue;
-}
-
-.trivia-answers {
-  display: flex;
-  justify-content: space-evenly;
-  width: 100%;
 }
