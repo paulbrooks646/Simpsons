@@ -2,6 +2,7 @@ import React from "react";
 import Page from "../../components/Page";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
+import "./Trivia.scss"
 
 export default function Trivia(props) {
   const yes = () => alert("A paddy wagon is now speeding to your home.");
@@ -13,18 +14,7 @@ export default function Trivia(props) {
 
   return (
     <Page>
-      <div
-        style={{
-          height: "calc(100vh - 75px)",
-          width: "100vw",
-          display: "flex",
-          justifyContent: "space-evenly",
-          alignItems: "center",
-          textAlign: "center",
-          flexDirection: "column",
-          color: "red",
-          backgroundColor: "#f8f8ff",
-        }}
+      <div className="trivia-main"
       >
         <h1>Trivia</h1>
         <Card
@@ -34,6 +24,7 @@ export default function Trivia(props) {
             display: "flex",
             justifyContent: "center",
             flexDirection: "column",
+            marginBottom: "20px",
           }}
         >
           <div
@@ -70,6 +61,7 @@ export default function Trivia(props) {
             </div>
           </div>
         </Card>
+        
       </div>
     </Page>
   );
