@@ -39,12 +39,9 @@ function SingleEpisode(props) {
   const [isDeletingReview, setIsDeletingReview] = useState(false);
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
-  const [reviewSubmitSnackbarIsOpen, setReviewSubmitSnackbarIsOpen] = useState(
-    false
-  );
-  const [reviewDeleteSnackbarIsOpen, setReviewDeleteSnackbarIsOpen] = useState(
-    false
-  );
+  const [snackbarAlertType, setSnackbarAlertType] = useState("info");
+  const [snackbarAlertText, setSnackbarAlertText] = useState("");
+  const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
   const [userWatchlist, setUserWatchlist] = useState([]);
   const [favorites, setFavorites] = useState([]);
 
@@ -68,10 +65,18 @@ function SingleEpisode(props) {
   const handleCloseReviewDialog = () => setIsRating(false);
   const handleOpenReviewDeleteDialog = () => setIsDeletingReview(true);
   const handleCloseReviewDeleteDialog = () => setIsDeletingReview(false);
-  const handleReviewSubmitSnackbarClose = () =>
-    setReviewSubmitSnackbarIsOpen(false);
-  const handleReviewDeleteSnackbarClose = () =>
-    setReviewDeleteSnackbarIsOpen(false);
+
+  const handleSnackbarOpen = (alertType, alertText) => {
+    setSnackbarIsOpen(true);
+    setSnackbarAlertType(alertType);
+    setSnackbarAlertText(alertText);
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbarIsOpen(false);
+    setSnackbarAlertType("info");
+    setSnackbarAlertText("");
+  };
 
   const submitRatingAndReview = () => {
     const data = {
@@ -83,7 +88,7 @@ function SingleEpisode(props) {
     };
     axios.put(`/rating-review/${props.user.info.id}`, data).then(() => {
       handleCloseReviewDialog();
-      setReviewSubmitSnackbarIsOpen(true);
+      handleSnackbarOpen("success", "RATING AND REVIEW SUBMITTED!");
     });
   };
 
@@ -91,7 +96,7 @@ function SingleEpisode(props) {
     const episode_name = info.episode_name;
     axios.delete(`/rating-review/${episode_name}`).then(() => {
       handleCloseReviewDeleteDialog();
-      setReviewDeleteSnackbarIsOpen(true);
+      handleSnackbarOpen("info", "RATING AND REVIEW DELETED");
     });
   };
 
@@ -294,30 +299,16 @@ function SingleEpisode(props) {
           </Dialog>
           <Snackbar
             anchorOrigin={{ vertical: "top", horizontal: "center" }}
-            open={reviewSubmitSnackbarIsOpen}
+            open={snackbarIsOpen}
             autoHideDuration={4000}
-            onClose={handleReviewSubmitSnackbarClose}
+            onClose={handleSnackbarClose}
           >
             <Alert
-              onClose={handleReviewSubmitSnackbarClose}
+              onClose={handleSnackbarClose}
               variant="filled"
-              severity="success"
+              severity={snackbarAlertType}
             >
-              RATING AND REVIEW SUBMITTED!
-            </Alert>
-          </Snackbar>
-          <Snackbar
-            anchorOrigin={{ vertical: "top", horizontal: "center" }}
-            open={reviewDeleteSnackbarIsOpen}
-            autoHideDuration={4000}
-            onClose={handleReviewDeleteSnackbarClose}
-          >
-            <Alert
-              onClose={handleReviewDeleteSnackbarClose}
-              variant="filled"
-              severity="info"
-            >
-              RATING AND REVIEW DELETED
+              {snackbarAlertText}
             </Alert>
           </Snackbar>
         </div>
