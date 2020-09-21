@@ -10,6 +10,7 @@ import FormControl from "@material-ui/core/FormControl";
 
 export default function Trivia(props) {
   const [maggie, setMaggie] = useState();
+  const [sector, setSector] = useState();
 
   return (
     <Page>
@@ -65,17 +66,21 @@ export default function Trivia(props) {
         </Card>
         <Card className="trivia-card">
           <div className="trivia-card-div">
-            <img src="" alt="" className="trivia-card-image" />
+            <img
+              src="https://www.energy.gov/sites/prod/files/styles/borealis_photo_gallery_large_respondmedium/public/2018/03/f49/Elektrownia_J%C4%85drowa_w_Springfield_0.png?itok=d07fctJh"
+              alt="Springfield Nuclear Power Plant"
+              className="trivia-card-image"
+            />
             <h2 className="trivia-question"></h2>
 
             <FormControl component="fieldset" className="trivia-answers">
               <RadioGroup
                 className="trivia-radio-group"
                 row
-                aria-label=""
-                name=""
-                value={}
-                onChange={(e) => set(e.target.value)}
+                aria-label="sector"
+                name="sector"
+                value={sector}
+                onChange={(e) => setSector(e.target.value)}
               >
                 <FormControlLabel
                   value=""
