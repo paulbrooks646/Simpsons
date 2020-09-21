@@ -11,6 +11,7 @@ import FormControl from "@material-ui/core/FormControl";
 export default function Trivia(props) {
   const [maggie, setMaggie] = useState();
   const [sector, setSector] = useState();
+  const [burns, setBurns] = useState();
 
   return (
     <Page>
@@ -71,7 +72,9 @@ export default function Trivia(props) {
               alt="Springfield Nuclear Power Plant"
               className="trivia-card-image"
             />
-            <h2 className="trivia-question">Which sector does Homer work in at the nuclear power plant?</h2>
+            <h2 className="trivia-question">
+              Which sector does Homer work in at the nuclear power plant?
+            </h2>
 
             <FormControl component="fieldset" className="trivia-answers">
               <RadioGroup
@@ -104,6 +107,51 @@ export default function Trivia(props) {
                   value="6E"
                   control={<Radio style={{ color: "red" }} />}
                   label="6E"
+                  style={{ color: "red" }}
+                />
+              </RadioGroup>
+            </FormControl>
+          </div>
+        </Card>
+        <Card className="trivia-card">
+          <div className="trivia-card-div">
+            <img
+              src="https://nationalpostcom.files.wordpress.com/2018/03/mrb.jpg?quality=100&strip=all&w=642"
+              alt="Mr Burns after being shot"
+              className="trivia-card-image"
+            />
+            <h2 className="trivia-question">Who shot Mr. Burns?</h2>
+            <FormControl component="fieldset" className="trivia-answers">
+              <RadioGroup
+                className="trivia-radio-group"
+                row
+                aria-label="burns"
+                name="burns"
+                value={burns}
+                onChange={(e) => setBurns(e.target.value)}
+              >
+                <FormControlLabel
+                  value="Homer Simpson"
+                  control={<Radio style={{ color: "red" }} />}
+                  label="Homer Simpson"
+                  style={{ color: "red" }}
+                />
+                <FormControlLabel
+                  value="Maggie Simpson"
+                  control={<Radio style={{ color: "red" }} />}
+                  label="Maggie Simpson"
+                  style={{ color: "red" }}
+                />
+                <FormControlLabel
+                  value="Wayland Smithers"
+                  control={<Radio style={{ color: "red" }} />}
+                  label="Wayland Smithers"
+                  style={{ color: "red" }}
+                />
+                <FormControlLabel
+                  value="Groundskeeper Willie"
+                  control={<Radio style={{ color: "red" }} />}
+                  label="Groundskeeper Willie"
                   style={{ color: "red" }}
                 />
               </RadioGroup>
@@ -403,50 +451,10 @@ export default function Trivia(props) {
               </RadioGroup>
             </FormControl>
           </div>
-        </Card>{" "}
-        <Card className="trivia-card">
-          <div className="trivia-card-div">
-            <img src="" alt="" className="trivia-card-image" />
-            <h2 className="trivia-question"></h2>
-
-            <FormControl component="fieldset" className="trivia-answers">
-              <RadioGroup
-                className="trivia-radio-group"
-                row
-                aria-label=""
-                name=""
-                value={}
-                onChange={(e) => set(e.target.value)}
-              >
-                <FormControlLabel
-                  value=""
-                  control={<Radio style={{ color: "red" }} />}
-                  label=""
-                  style={{ color: "red" }}
-                />
-                <FormControlLabel
-                  value=""
-                  control={<Radio style={{ color: "red" }} />}
-                  label=""
-                  style={{ color: "red" }}
-                />
-                <FormControlLabel
-                  value=""
-                  control={<Radio style={{ color: "red" }} />}
-                  label=""
-                  style={{ color: "red" }}
-                />
-                <FormControlLabel
-                  value=""
-                  control={<Radio style={{ color: "red" }} />}
-                  label=""
-                  style={{ color: "red" }}
-                />
-              </RadioGroup>
-            </FormControl>
-          </div>
-        </Card> */}
-              <Button variant="contained" color="secondary">Submit Answers</Button>
+        </Card>  */}
+        <Button variant="contained" color="secondary">
+          Submit Answers
+        </Button>
       </div>
     </Page>
   );
