@@ -21,19 +21,13 @@ export default function Trivia(props) {
             <img
               src="https://upload.wikimedia.org/wikipedia/en/7/7a/Chief_Wiggum.png"
               alt="chief wiggums"
-              style={{ height: "100px" }}
+              className="trivia-card-image"
             />
-            <h2 style={{ color: "blue" }}>
+            <h2 className="trivia-question">
               If you've committed a crime and want to confess, click 'Yes'.
               Otherwise, click 'No'
             </h2>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-evenly",
-                width: "100%",
-              }}
-            >
+            <div className="trivia-answers">
               <Button variant="outlined" color="secondary" onClick={yes}>
                 Yes
               </Button>

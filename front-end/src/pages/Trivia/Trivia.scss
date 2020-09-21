@@ -1,21 +1,35 @@
 @import "../../Sass/mixins.scss";
 
 .trivia-main {
-    width: 100vw;
-    @include flex(space-evenly);
-    text-align: center;
-    color: red;
-    background-color: #f8f8ff;
-}
+  width: 100vw;
+  @include flex(space-evenly);
+  text-align: center;
+  color: red;
+  background-color: #f8f8ff;
 
-.trivia-card {
+  .trivia-card {
     @include flex(center);
     width: 500px;
     height: 300px;
     margin-bottom: 20px;
+
+    .trivia-card-div {
+      @include flex(space-evenly);
+      height: 100%;
+    }
+  }
 }
 
-.trivia-card-div {
-    @include flex(space-evenly);
-    height: 100%;
+.trivia-card-image {
+  height: 100px;
+}
+
+.trivia-question {
+  color: blue;
+}
+
+.trivia-answers {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
 }
