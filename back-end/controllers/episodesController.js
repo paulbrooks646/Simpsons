@@ -81,6 +81,13 @@ const updateRatingAndReview = async (req, res) => {
     ]).then(() => res.sendStatus(200));
 };
 
+const deleteRatingAndReview = (req, res) => {
+  const db = req.app.get("db");
+  const { episode_name } = req.params;
+  const { id } = req.session.user;
+  db.delete_rating_review([id, episode_name]).then(() => res.sendStatus(200));
+};
+
 const getEpisodes = (req, res) => {
   const db = req.app.get("db");
 
@@ -207,6 +214,7 @@ const getFavorites = (req, res) => {
 
 exports.getEpisode = getEpisode;
 exports.updateRatingAndReview = updateRatingAndReview;
+exports.deleteRatingAndReview = deleteRatingAndReview;
 exports.getEpisodes = getEpisodes;
 exports.addToWatchlist = addToWatchlist;
 exports.getWatchlist = getWatchlist;
