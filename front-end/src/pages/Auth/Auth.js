@@ -32,6 +32,8 @@ function Auth(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [loginHasErrors, setLoginHasErrors] = useState(false);
+  const [loginErrorMessage, setLoginErrorMessage] = useState("");
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -96,7 +98,8 @@ function Auth(props) {
         props.history.push("/Dashboard");
       })
       .catch((err) => {
-        alert(err.response.data);
+        setLoginHasErrors(true);
+        setLoginErrorMessage(err.response.data);
       });
   };
 
@@ -134,6 +137,7 @@ function Auth(props) {
                 <InputLabel htmlFor="username">Username or Email</InputLabel>
                 <Input
                   required
+                  error={loginHasErrors}
                   value={username}
                   id="username"
                   placeholder="Enter username or email"
@@ -149,6 +153,7 @@ function Auth(props) {
                 <InputLabel htmlFor="password">Password</InputLabel>
                 <Input
                   required
+                  error={loginHasErrors}
                   value={password}
                   placeholder="Enter password"
                   id="password"
@@ -160,6 +165,9 @@ function Auth(props) {
                   onChange={(e) => setPassword(e.target.value)}
                   type="password"
                 />
+                {loginHasErrors && (
+                  <FormHelperText error>{loginErrorMessage}</FormHelperText>
+                )}
               </FormControl>
               <Button variant="contained" color="primary" type="submit">
                 Submit
