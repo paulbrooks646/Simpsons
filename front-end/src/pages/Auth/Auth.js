@@ -41,45 +41,53 @@ function Auth(props) {
     false
   );
   const [forgotPasswordEmail, setForgotPasswordEmail] = useState("");
-  const [infoSnackbarIsOpen, setInfoSnackbarIsOpen] = useState(false);
-  const [errorSnackbarIsOpen, setErrorSnackbarIsOpen] = useState(false);
+  const [snackbarAlertType, setSnackbarAlertType] = useState("info");
+  const [snackbarAlertText, setSnackbarAlertText] = useState("");
+  const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
 
-  function handleInfoSnackbarOpen() {
-    setInfoSnackbarIsOpen(true);
-  }
+  const handleSnackbarOpen = (alertType, alertText) => {
+    setSnackbarIsOpen(true);
+    setSnackbarAlertType(alertType);
+    setSnackbarAlertText(alertText);
+  };
 
-  function handleInfoSnackbarClose() {
-    setInfoSnackbarIsOpen(false);
-  }
+  const handleSnackbarClose = () => {
+    setSnackbarIsOpen(false);
+    setSnackbarAlertType("info");
+    setSnackbarAlertText("");
+  };
 
-  // function handleErrorSnackbarOpen() {
-  //   setErrorSnackbarIsOpen(true);
-  // }
-
-  function handleErrorSnackbarClose() {
-    setErrorSnackbarIsOpen(false);
-  }
-
-  function handleForgotPasswordDialogOpen() {
+  const handleForgotPasswordDialogOpen = () => {
     setForgotPasswordDialogIsOpen(true);
-  }
+  };
 
-  function handleForgotPasswordDialogClose() {
+  const handleForgotPasswordDialogClose = () => {
     setForgotPasswordDialogIsOpen(false);
-  }
-
-  function handlePasswordResetRequest() {
-    handleInfoSnackbarOpen();
     setForgotPasswordEmail("");
-    handleForgotPasswordDialogClose();
-  }
+  };
 
-  function toggleAccount(event) {
+  const handlePasswordResetRequest = () => {
+    // * Temporary email check
+    if (forgotPasswordEmail.length) {
+      handleSnackbarOpen(
+        "info",
+        "Password reset link sent. Please check your email"
+      );
+    } else {
+      handleSnackbarOpen(
+        "error",
+        "No user with that email exists. Please try again."
+      );
+    }
+    handleForgotPasswordDialogClose();
+  };
+
+  const toggleAccount = (event) => {
     event.preventDefault();
     setAccount(!account);
-  }
+  };
 
-  function handleLogin(event) {
+  const handleLogin = (event) => {
     event.preventDefault();
     axios
       .post("/login", { username, password })
@@ -90,9 +98,9 @@ function Auth(props) {
       .catch((err) => {
         alert(err.response.data);
       });
-  }
+  };
 
-  function handleRegister(event) {
+  const handleRegister = (event) => {
     event.preventDefault();
     if (newPassword !== confirmPassword) {
       setPasswordsMatch(false);
@@ -108,7 +116,7 @@ function Auth(props) {
           alert(err.response.data);
         });
     }
-  }
+  };
   return (
     <>
       <div className="auth-main" style={{ backgroundImage: `url(${Clouds})` }}>
@@ -305,30 +313,16 @@ function Auth(props) {
       </Dialog>
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        open={infoSnackbarIsOpen}
+        open={snackbarIsOpen}
         autoHideDuration={4000}
-        onClose={handleInfoSnackbarClose}
+        onClose={handleSnackbarClose}
       >
         <Alert
-          onClose={handleInfoSnackbarClose}
+          onClose={handleSnackbarClose}
           variant="filled"
-          severity="info"
+          severity={snackbarAlertType}
         >
-          Password reset link sent. Please check your email.
-        </Alert>
-      </Snackbar>
-      <Snackbar
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        open={errorSnackbarIsOpen}
-        autoHideDuration={4000}
-        onClose={handleErrorSnackbarClose}
-      >
-        <Alert
-          onClose={handleErrorSnackbarClose}
-          variant="filled"
-          severity="error"
-        >
-          No user with that email exists. Please try again.
+          {snackbarAlertText}
         </Alert>
       </Snackbar>
     </>

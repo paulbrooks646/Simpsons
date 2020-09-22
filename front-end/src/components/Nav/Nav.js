@@ -9,13 +9,13 @@ import Avatar from "@material-ui/core/Avatar";
 import Drawer from "@material-ui/core/Drawer";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Hamburger from "../../images/icons8-hamburger-64.png";
+import placeholderProfilePic from "../../images/placeholder-profile-pic.jpg";
 import "./Nav.scss";
 
 function Nav(props) {
   const [hamburger, setHamburger] = useState(false);
-  const [avatar, setAvatar] = useState(
-    "https://realsic.com/wp-content/uploads/2016/11/donut-enamel-pin-simpsons-donut-pin-by-real-sic-pink-4-1.jpg"
-  );
+  const [avatar, setAvatar] = useState(placeholderProfilePic);
+
   useEffect(() => {
     getUser();
     if (props.user.info.profile_pic) {
