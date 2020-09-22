@@ -12,8 +12,8 @@ export default function Dashboard(props) {
         className="dashboard-main"
         style={{ backgroundImage: `url(${Background})` }}
       >
-        {/* <h1 className="dashboard-title">Welcome to The Android's Dungeon</h1> */}
-        <Card className="dashboard-card"><h2>Man Getting Hit By Football!</h2></Card>
+        <h1 className="dashboard-title">Welcome to The Android's Dungeon</h1>
+        {/* <Card className="dashboard-card"><h2>Man Getting Hit By Football!</h2></Card> */}
       </div>
     </Page>
   );
