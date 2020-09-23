@@ -1,4 +1,5 @@
 @import "../../Sass/mixins.scss";
+@import "../../Sass/colors.scss";
 
 .episode-main {
   display: flex;
@@ -49,4 +50,10 @@
 
 #dialog-rating-title {
   padding-bottom: 0;
+}
+
+.star-rating-error-text {
+  color: $secondary-red;
+  font-weight: bolder;
+  margin: 0 0 16px 5px;
 }

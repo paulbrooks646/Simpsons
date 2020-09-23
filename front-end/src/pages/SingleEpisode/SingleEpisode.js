@@ -38,6 +38,7 @@ function SingleEpisode(props) {
   const [isRating, setIsRating] = useState(false);
   const [isDeletingReview, setIsDeletingReview] = useState(false);
   const [rating, setRating] = useState(0);
+  const [ratingHasError, setRatingHasError] = useState(false);
   const [review, setReview] = useState("");
   const [snackbarAlertType, setSnackbarAlertType] = useState("info");
   const [snackbarAlertText, setSnackbarAlertText] = useState("");
@@ -86,10 +87,16 @@ function SingleEpisode(props) {
       username: props.user.info.username,
       profile_pic: props.user.info.profile_pic,
     };
-    axios.put(`/rating-review/${props.user.info.id}`, data).then(() => {
-      handleCloseReviewDialog();
-      handleSnackbarOpen("success", "RATING AND REVIEW SUBMITTED!");
-    });
+
+    if (rating) {
+      axios.put(`/rating-review/${props.user.info.id}`, data).then(() => {
+        setRatingHasError(false);
+        handleCloseReviewDialog();
+        handleSnackbarOpen("success", "RATING AND REVIEW SUBMITTED");
+      });
+    } else {
+      setRatingHasError(true);
+    }
   };
 
   const deleteReview = () => {
@@ -250,10 +257,15 @@ function SingleEpisode(props) {
                 emptyIcon={<StarBorderIcon fontSize="inherit" />}
                 precision={0.5}
                 size="large"
-                style={{ marginBottom: "20px" }}
+                style={{ marginBottom: ratingHasError ? "0" : "20px" }}
                 onChange={(e) => setRating(e.target.value)}
                 value={+rating}
               />
+              {ratingHasError && (
+                <p className="star-rating-error-text">
+                  Please give a star rating
+                </p>
+              )}
               <TextField
                 label="Write review here"
                 multiline
