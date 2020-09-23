@@ -26,3 +26,13 @@ values (,,,,,)
 
 insert into characters (name, picture, description, quote, voice_actor, first_appearance)
 values (,,,,,)
+
+create table trivia (
+question_id serial,
+question text,
+option_one text,
+option_two text,
+option_three text,
+option_four text,
+answer text
+)
