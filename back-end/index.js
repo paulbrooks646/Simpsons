@@ -6,6 +6,7 @@ const session = require("express-session");
 const userRoutes = require("./routes/userRoutes");
 const episodesRoutes = require("./routes/episodesRoutes");
 const charactersRouters = require("./routes/charactersRoutes");
+const triviaRoutes = require("./routes/triviaRoutes")
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(
 app.use(userRoutes);
 app.use(episodesRoutes);
 app.use(charactersRouters);
+app.use(triviaRoutes)
 
 const port = 5000;
 
