@@ -28,9 +28,10 @@ const login = async (req, res) => {
   const db = req.app.get("db");
   const { username, password } = req.body;
   const user = await db.check_user([username, username]);
+  const loginFailMessage = "Invalid login credentials.";
 
   if (!user[0]) {
-    return res.status(409).send("User doesn't exist!");
+    return res.status(409).send(loginFailMessage);
   } else {
     const authenticated = bcrypt.compareSync(password, user[0].password);
     if (authenticated) {
@@ -42,7 +43,7 @@ const login = async (req, res) => {
       };
       res.status(200).send(req.session.user);
     } else {
-      res.status(409).send("Username or password incorrect!");
+      res.status(409).send(loginFailMessage);
     }
   }
 };

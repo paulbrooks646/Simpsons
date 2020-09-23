@@ -32,6 +32,8 @@ function Auth(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [loginHasErrors, setLoginHasErrors] = useState(false);
+  const [loginErrorMessage, setLoginErrorMessage] = useState("");
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -41,45 +43,53 @@ function Auth(props) {
     false
   );
   const [forgotPasswordEmail, setForgotPasswordEmail] = useState("");
-  const [infoSnackbarIsOpen, setInfoSnackbarIsOpen] = useState(false);
-  const [errorSnackbarIsOpen, setErrorSnackbarIsOpen] = useState(false);
+  const [snackbarAlertType, setSnackbarAlertType] = useState("info");
+  const [snackbarAlertText, setSnackbarAlertText] = useState("");
+  const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
 
-  function handleInfoSnackbarOpen() {
-    setInfoSnackbarIsOpen(true);
-  }
+  const handleSnackbarOpen = (alertType, alertText) => {
+    setSnackbarIsOpen(true);
+    setSnackbarAlertType(alertType);
+    setSnackbarAlertText(alertText);
+  };
 
-  function handleInfoSnackbarClose() {
-    setInfoSnackbarIsOpen(false);
-  }
+  const handleSnackbarClose = () => {
+    setSnackbarIsOpen(false);
+    setSnackbarAlertType("info");
+    setSnackbarAlertText("");
+  };
 
-  // function handleErrorSnackbarOpen() {
-  //   setErrorSnackbarIsOpen(true);
-  // }
-
-  function handleErrorSnackbarClose() {
-    setErrorSnackbarIsOpen(false);
-  }
-
-  function handleForgotPasswordDialogOpen() {
+  const handleForgotPasswordDialogOpen = () => {
     setForgotPasswordDialogIsOpen(true);
-  }
+  };
 
-  function handleForgotPasswordDialogClose() {
+  const handleForgotPasswordDialogClose = () => {
     setForgotPasswordDialogIsOpen(false);
-  }
-
-  function handlePasswordResetRequest() {
-    handleInfoSnackbarOpen();
     setForgotPasswordEmail("");
-    handleForgotPasswordDialogClose();
-  }
+  };
 
-  function toggleAccount(event) {
+  const handlePasswordResetRequest = () => {
+    // * Temporary email check
+    if (forgotPasswordEmail.length) {
+      handleSnackbarOpen(
+        "info",
+        "Password reset link sent. Please check your email"
+      );
+    } else {
+      handleSnackbarOpen(
+        "error",
+        "No user with that email exists. Please try again."
+      );
+    }
+    handleForgotPasswordDialogClose();
+  };
+
+  const toggleAccount = (event) => {
     event.preventDefault();
     setAccount(!account);
-  }
+  };
 
-  function handleLogin(event) {
+  const handleLogin = (event) => {
     event.preventDefault();
     axios
       .post("/login", { username, password })
@@ -88,11 +98,12 @@ function Auth(props) {
         props.history.push("/Dashboard");
       })
       .catch((err) => {
-        alert(err.response.data);
+        setLoginHasErrors(true);
+        setLoginErrorMessage(err.response.data);
       });
-  }
+  };
 
-  function handleRegister(event) {
+  const handleRegister = (event) => {
     event.preventDefault();
     if (newPassword !== confirmPassword) {
       setPasswordsMatch(false);
@@ -108,7 +119,7 @@ function Auth(props) {
           alert(err.response.data);
         });
     }
-  }
+  };
   return (
     <>
       <div className="auth-main" style={{ backgroundImage: `url(${Clouds})` }}>
@@ -126,6 +137,7 @@ function Auth(props) {
                 <InputLabel htmlFor="username">Username or Email</InputLabel>
                 <Input
                   required
+                  error={loginHasErrors}
                   value={username}
                   id="username"
                   placeholder="Enter username or email"
@@ -141,6 +153,7 @@ function Auth(props) {
                 <InputLabel htmlFor="password">Password</InputLabel>
                 <Input
                   required
+                  error={loginHasErrors}
                   value={password}
                   placeholder="Enter password"
                   id="password"
@@ -152,6 +165,9 @@ function Auth(props) {
                   onChange={(e) => setPassword(e.target.value)}
                   type="password"
                 />
+                {loginHasErrors && (
+                  <FormHelperText error>{loginErrorMessage}</FormHelperText>
+                )}
               </FormControl>
               <Button variant="contained" color="primary" type="submit">
                 Submit
@@ -305,30 +321,16 @@ function Auth(props) {
       </Dialog>
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        open={infoSnackbarIsOpen}
+        open={snackbarIsOpen}
         autoHideDuration={4000}
-        onClose={handleInfoSnackbarClose}
+        onClose={handleSnackbarClose}
       >
         <Alert
-          onClose={handleInfoSnackbarClose}
+          onClose={handleSnackbarClose}
           variant="filled"
-          severity="info"
+          severity={snackbarAlertType}
         >
-          Password reset link sent. Please check your email.
-        </Alert>
-      </Snackbar>
-      <Snackbar
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        open={errorSnackbarIsOpen}
-        autoHideDuration={4000}
-        onClose={handleErrorSnackbarClose}
-      >
-        <Alert
-          onClose={handleErrorSnackbarClose}
-          variant="filled"
-          severity="error"
-        >
-          No user with that email exists. Please try again.
+          {snackbarAlertText}
         </Alert>
       </Snackbar>
     </>
