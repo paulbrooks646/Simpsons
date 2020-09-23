@@ -2,7 +2,7 @@ import React from "react";
 import Page from "../../components/Page";
 import "./Dashboard.scss";
 import Background from "../../images/androids-dungeon-bg.png";
-import Card from "@material-ui/core/Card"
+// import Card from "@material-ui/core/Card"
 
 
 export default function Dashboard(props) {
