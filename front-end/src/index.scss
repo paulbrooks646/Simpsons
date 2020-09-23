@@ -1,10 +1,15 @@
-@import './Sass/colors.scss';
-
+@import "./Sass/colors.scss";
 
 body {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+}
+
+button.MuiButton-contained,
+button.MuiFab-primary,
+button.MuiFab-secondary {
+  color: #fff;
 }
 
 @font-face {
