@@ -8,69 +8,83 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import axios from "axios";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 export default function Trivia(props) {
+
+    const [questions, setQuestions] = useState([]);
+    const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    axios.get("/trivia").then(res => setQuestions(res.data));
+    axios.get("/trivia").then((res) => setQuestions(res.data));
+    setLoading(false);
   });
 
-  const [questions, setQuestions] = useState();
+
+  const questionList = questions.map((e, index) => {
+    return (
+      <Card className="trivia-card">
+        <div className="trivia-card-div">
+          <img
+            src={e.question_picture}
+            alt="Maggie Simpson"
+            className="trivia-card-image"
+          />
+          <h2 className="trivia-question">
+            {e.question}
+          </h2>
+
+          <FormControl component="fieldset" className="trivia-answers">
+            <RadioGroup
+              className="trivia-radio-group"
+              row
+              aria-label="maggie"
+              name="maggie"
+            >
+              <FormControlLabel
+                value={e.option_one}
+                control={<Radio style={{ color: "red" }} />}
+                label={e.option_one}
+                style={{ color: "red" }}
+              />
+              <FormControlLabel
+                value={e.option_two}
+                control={<Radio style={{ color: "red" }} />}
+                label={e.option_two}
+                style={{ color: "red" }}
+              />
+              <FormControlLabel
+                value={e.option_three}
+                control={<Radio style={{ color: "red" }} />}
+                label={e.option_three}
+                style={{ color: "red" }}
+              />
+              <FormControlLabel
+                value={e.option_four}
+                control={<Radio style={{ color: "red" }} />}
+                label={e.option_four}
+                style={{ color: "red" }}
+              />
+            </RadioGroup>
+          </FormControl>
+        </div>
+      </Card>
+    );
+  });
 
   return (
     <Page>
-      <div className="trivia-main">
-        <h1>Trivia</h1>
-        <Card className="trivia-card">
-          <div className="trivia-card-div">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/en/9/9d/Maggie_Simpson.png"
-              alt="Maggie Simpson"
-              className="trivia-card-image"
-            />
-            <h2 className="trivia-question">
-              When Maggie is scanned in the supermarket how much does she cost?
-            </h2>
-
-            <FormControl component="fieldset" className="trivia-answers">
-              <RadioGroup
-                className="trivia-radio-group"
-                row
-                aria-label="maggie"
-                name="maggie"
-              >
-                <FormControlLabel
-                  value="$1"
-                  control={<Radio style={{ color: "red" }} />}
-                  label="$1"
-                  style={{ color: "red" }}
-                />
-                <FormControlLabel
-                  value="$2"
-                  control={<Radio style={{ color: "red" }} />}
-                  label="$2"
-                  style={{ color: "red" }}
-                />
-                <FormControlLabel
-                  value="$3"
-                  control={<Radio style={{ color: "red" }} />}
-                  label="$3"
-                  style={{ color: "red" }}
-                />
-                <FormControlLabel
-                  value="$847.63"
-                  control={<Radio style={{ color: "red" }} />}
-                  label="$847.63"
-                  style={{ color: "red" }}
-                />
-              </RadioGroup>
-            </FormControl>
-          </div>
-        </Card>
-
-        <Button variant="contained" color="secondary">
-          Submit Answers
-        </Button>
-      </div>
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <div className="trivia-main">
+          <h1>Trivia</h1>
+          {questionList}
+          <Button variant="contained" color="secondary">
+            Submit Answers
+          </Button>
+        </div>
+      )}
     </Page>
   );
 }
