@@ -25,7 +25,7 @@ const getEpisode = (req, res) => {
         if (episodes[i].episode_name === element.episode_name) {
           avg += 1;
           total += +element.rating;
-          if (element.review) {
+          if (element.review || element.rating) {
             combined.reviews.push([
               element.rating,
               element.review,
@@ -116,7 +116,7 @@ const getEpisodes = (req, res) => {
         if (episodes[i].episode_name === element.episode_name) {
           avg += 1;
           total += +element.rating;
-          if (element.review) {
+          if (element.review || element.rating) {
             combined.reviews.push([
               element.review,
               element.username,
