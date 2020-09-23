@@ -1,3 +1,4 @@
 - immediately update DOM on Single Episode page when peforming CRUD operations on watchlist, favorites, and ratings/reviews
 - client-side form validation (with Formik or Formik Material-UI?)
 - chat feature (probably with Socket.io)
+- password reset feature
