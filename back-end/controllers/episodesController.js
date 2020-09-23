@@ -94,6 +94,8 @@ const getEpisodes = (req, res) => {
   db.get_episodes().then((episodes) => {
     let newArr = [];
 
+    console.log(episodes)
+
     for (let i = 0; i < episodes.length; i++) {
       let total = 0;
       let avg = 0;
