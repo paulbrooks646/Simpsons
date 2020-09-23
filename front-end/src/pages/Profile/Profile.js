@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import Page from "../../components/Page";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
@@ -28,6 +28,7 @@ import RemoveFromQueueIcon from "@material-ui/icons/RemoveFromQueue";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Link from "@material-ui/core/Link";
 import placeholderProfilePic from "../../images/placeholder-profile-pic.jpg";
 import "./Profile.scss";
 
@@ -109,13 +110,13 @@ function Profile(props) {
             <h1>Your Watchlist</h1>
             {watchlistLoading ? (
               <CircularProgress thickness={4} />
-            ) : (
+            ) : watchlist.length ? (
               <List>
                 {watchlist.map((episode) => (
                   <ListItem
                     button
                     key={episode.watchlist_id}
-                    component={Link}
+                    component={RouterLink}
                     to={`/episodes/${episode.episode_name.replace(/ /g, "_")}`}
                   >
                     <ListItemText primary={episode.episode_name} />
@@ -135,19 +136,26 @@ function Profile(props) {
                   </ListItem>
                 ))}
               </List>
+            ) : (
+              <>
+                <h4>Your Watchlist Is Empty!</h4>
+                <Link component={RouterLink} to="/episodes">
+                  Add Episodes To Your Watchlist
+                </Link>
+              </>
             )}
           </div>
           <div className="profile-list-heading">
-            <h1>Favorites</h1>
+            <h1>Your Favorites</h1>
             {favoritesLoading ? (
               <CircularProgress thickness={4} />
-            ) : (
+            ) : favorites.length ? (
               <List>
                 {favorites.map((episode) => (
                   <ListItem
                     button
                     key={episode.favorites_id}
-                    component={Link}
+                    component={RouterLink}
                     to={`/episodes/${episode.episode_name.replace(/ /g, "_")}`}
                   >
                     <ListItemText primary={episode.episode_name} />
@@ -166,6 +174,13 @@ function Profile(props) {
                   </ListItem>
                 ))}
               </List>
+            ) : (
+              <>
+                <h4>Your Favorites List Is Empty!</h4>
+                <Link component={RouterLink} to="/episodes">
+                  Add Episodes To Your Favorites
+                </Link>
+              </>
             )}
           </div>
         </div>
