@@ -1,0 +1,4 @@
+- server-side validation (probably with express-validator)
+- persist user session
+- chat feature (probably with Socket.io)
+- password reset feature
