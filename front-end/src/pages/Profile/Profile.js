@@ -22,13 +22,14 @@ import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import RemoveFromQueueIcon from "@material-ui/icons/RemoveFromQueue";
 import IconButton from "@material-ui/core/IconButton";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Link from "@material-ui/core/Link";
 import placeholderProfilePic from "../../images/placeholder-profile-pic.jpg";
 import "./Profile.scss";
 
@@ -110,77 +111,87 @@ function Profile(props) {
             <h1>Your Watchlist</h1>
             {watchlistLoading ? (
               <CircularProgress thickness={4} />
-            ) : watchlist.length ? (
-              <List>
-                {watchlist.map((episode) => (
-                  <ListItem
-                    button
-                    key={episode.watchlist_id}
-                    component={RouterLink}
-                    to={`/episodes/${episode.episode_name.replace(/ /g, "_")}`}
-                  >
-                    <ListItemText primary={episode.episode_name} />
-                    <ListItemSecondaryAction>
-                      <Tooltip title="Remove From Watchlist">
-                        <IconButton
-                          color="secondary"
-                          edge="end"
-                          onClick={() =>
-                            removeFromWatchlist(episode.episode_name)
-                          }
-                        >
-                          <RemoveFromQueueIcon />
-                        </IconButton>
-                      </Tooltip>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                ))}
-              </List>
             ) : (
-              <>
-                <h4>Your Watchlist Is Empty!</h4>
-                <Link component={RouterLink} to="/episodes">
-                  Add Episodes To Your Watchlist
-                </Link>
-              </>
+              <List>
+                {watchlist.length ? (
+                  watchlist.map((episode) => (
+                    <ListItem
+                      button
+                      key={episode.watchlist_id}
+                      component={RouterLink}
+                      to={`/episodes/${episode.episode_name.replace(
+                        / /g,
+                        "_"
+                      )}`}
+                    >
+                      <ListItemText primary={episode.episode_name} />
+                      <ListItemSecondaryAction>
+                        <Tooltip title="Remove From Watchlist">
+                          <IconButton
+                            color="secondary"
+                            edge="end"
+                            onClick={() =>
+                              removeFromWatchlist(episode.episode_name)
+                            }
+                          >
+                            <RemoveFromQueueIcon />
+                          </IconButton>
+                        </Tooltip>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  ))
+                ) : (
+                  <ListItem button component={RouterLink} to="/episodes">
+                    <ListItemIcon>
+                      <AddCircleIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Add Episodes To Your Watchlist" />
+                  </ListItem>
+                )}
+              </List>
             )}
           </div>
           <div className="profile-list-heading">
             <h1>Your Favorites</h1>
             {favoritesLoading ? (
               <CircularProgress thickness={4} />
-            ) : favorites.length ? (
-              <List>
-                {favorites.map((episode) => (
-                  <ListItem
-                    button
-                    key={episode.favorites_id}
-                    component={RouterLink}
-                    to={`/episodes/${episode.episode_name.replace(/ /g, "_")}`}
-                  >
-                    <ListItemText primary={episode.episode_name} />
-                    <ListItemSecondaryAction>
-                      <Tooltip title="Remove From Favorites">
-                        <IconButton
-                          edge="end"
-                          onClick={() =>
-                            removeFromFavorites(episode.episode_name)
-                          }
-                        >
-                          <FavoriteIcon className="favorite-icon" />
-                        </IconButton>
-                      </Tooltip>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                ))}
-              </List>
             ) : (
-              <>
-                <h4>Your Favorites List Is Empty!</h4>
-                <Link component={RouterLink} to="/episodes">
-                  Add Episodes To Your Favorites
-                </Link>
-              </>
+              <List>
+                {favorites.length ? (
+                  favorites.map((episode) => (
+                    <ListItem
+                      button
+                      key={episode.favorites_id}
+                      component={RouterLink}
+                      to={`/episodes/${episode.episode_name.replace(
+                        / /g,
+                        "_"
+                      )}`}
+                    >
+                      <ListItemText primary={episode.episode_name} />
+                      <ListItemSecondaryAction>
+                        <Tooltip title="Remove From Favorites">
+                          <IconButton
+                            edge="end"
+                            onClick={() =>
+                              removeFromFavorites(episode.episode_name)
+                            }
+                          >
+                            <FavoriteIcon className="favorite-icon" />
+                          </IconButton>
+                        </Tooltip>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  ))
+                ) : (
+                  <ListItem button component={RouterLink} to="/episodes">
+                    <ListItemIcon>
+                      <AddCircleIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Add Episodes To Your Favorites" />
+                  </ListItem>
+                )}
+              </List>
             )}
           </div>
         </div>
