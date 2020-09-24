@@ -13,7 +13,10 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 export default function Trivia(props) {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
-  let [i, setI] = useState(0);
+  const [i, setI] = useState(0);
+  const [totalCorrect, setTotalCorrect] = useState(0);
+    const [selectedAnswer, setSelectedAnswer] = useState("");
+    const [isLastQuestion, setIsLastQuestion] = useState(false)
 
   useEffect(() => {
     axios.get("/trivia").then((res) => {
@@ -21,6 +24,31 @@ export default function Trivia(props) {
       setLoading(false);
     });
   }, []);
+
+  const scoreTest = () => {
+    alert(
+      `Congratulations! You answered ${totalCorrect} questions correctly, you are one pathetic loser!`
+    );
+  };
+
+  const iterateQuestion = () => {
+    if (i < 2) {
+      setI(i + 1);
+    } else {
+      setIsLastQuestion(!isLastQuestion)
+    }
+  };
+
+  const scoreAnswer = () => {
+    if (selectedAnswer === questions[i].answer) {
+      setTotalCorrect(totalCorrect + 1);
+    }
+    iterateQuestion();
+  };
+
+  const handleNextQuestion = () => {
+    scoreAnswer();
+  };
 
   //   const questionList = questions.map((e, index) => {
   //     return (
@@ -93,6 +121,8 @@ export default function Trivia(props) {
                   row
                   aria-label="maggie"
                   name="maggie"
+                  value={selectedAnswer}
+                  onChange={(e) => setSelectedAnswer(e.target.value)}
                 >
                   <FormControlLabel
                     value={questions[i].option_one}
@@ -120,8 +150,25 @@ export default function Trivia(props) {
                   />
                 </RadioGroup>
               </FormControl>
-              <Button variant="contained" color="secondary" onClick={() => setI(i++)}>
+              <Button
+                variant="contained"
+                color="secondary"
+                className={`${
+                  isLastQuestion ? "trivia-next-button-closed" : "trivia-next-button"
+                }`}
+                onClick={handleNextQuestion}
+              >
                 Next Question
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={handleNextQuestion}
+                className={`${
+                  isLastQuestion ? "trivia-submit-button" : "trivia-submit-button-closed"
+                }`}
+              >
+                Submit Quiz
               </Button>
             </div>
           </Card>
