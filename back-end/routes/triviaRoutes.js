@@ -4,6 +4,6 @@ const triviaController = require("../controllers/triviaController");
 
 const router = express.Router();
 
-router.get("/trivia", triviaController.getTrivia);
+router.get("/trivia/:quiz_number", triviaController.getTrivia);
 
 module.exports = router;

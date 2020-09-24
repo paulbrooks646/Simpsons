@@ -19,7 +19,7 @@ export default function Quiz(props) {
   const [isLastQuestion, setIsLastQuestion] = useState(false);
 
   useEffect(() => {
-    axios.get("/trivia").then((res) => {
+    axios.get(`/trivia/${props.match.params.quiz_number}`).then((res) => {
       setQuestions(res.data);
       setLoading(false);
     });
