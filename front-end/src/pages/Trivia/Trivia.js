@@ -28,7 +28,7 @@ export default function trivia() {
           <Link to="/trivia/6">
             <Card className="trivia-card">Who Said That</Card>
           </Link>
-          <Link to="/trivia/7">
+          <Link to="/personality-test">
             <Card className="trivia-card">
               Which Simpsons Charater are You?
             </Card>

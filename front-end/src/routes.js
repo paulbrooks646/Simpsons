@@ -10,6 +10,7 @@ import Characters from "./pages/Characters/Characters";
 import SingleCharacter from "./pages/SingleCharacter/SingleCharacter";
 import Trivia from "./pages/Trivia/Trivia";
 import Quiz from "./pages/Quiz/Quiz"
+import PersonalityTest from "./pages/PersonalityTest/PersonalityTest"
 
 export default (
   <Switch>
@@ -22,7 +23,8 @@ export default (
     <Route path="/characters/:character" component={SingleCharacter} />
     <Route path="/error" component={Error} />
     <Route exact path="/trivia" component={Trivia} />
-    <Route path="/trivia/:quiz_number" component={Quiz}/>
+    <Route path="/trivia/:quiz_number" component={Quiz} />
+    <Route path="/personality-test" component={PersonalityTest}/>
     <Route path="*" component={Error} />
   </Switch>
 );
