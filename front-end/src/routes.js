@@ -9,6 +9,7 @@ import Error from "./pages/Error/Error";
 import Characters from "./pages/Characters/Characters";
 import SingleCharacter from "./pages/SingleCharacter/SingleCharacter";
 import Trivia from "./pages/Trivia/Trivia";
+import Quiz from "./pages/Quiz/Quiz"
 
 export default (
   <Switch>
@@ -21,6 +22,7 @@ export default (
     <Route path="/characters/:character" component={SingleCharacter} />
     <Route path="/error" component={Error} />
     <Route exact path="/trivia" component={Trivia} />
+    <Route path="/trivia/:quiz_number" component={Quiz}/>
     <Route path="*" component={Error} />
   </Switch>
 );
