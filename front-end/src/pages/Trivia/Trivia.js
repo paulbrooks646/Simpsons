@@ -7,16 +7,20 @@ export default function trivia() {
 
     return (
       <Page>
-            <div>
-                <h1>Trivia</h1>
-                <h2>Choose a quiz!</h2>
-          <Card className="trivia-options">Beginner</Card>
-          <Card>Advanced</Card>
-          <Card>Expert</Card>
-          <Card>Name that Character</Card>
-          <Card>Finish the Quote</Card>
-          <Card>Who Said That</Card>
-          <Card>Which Simpsons Charater are You?</Card>
+        <div className="trivia-main">
+          {/* <h1 className="trivia-title">Trivia</h1> */}
+          <h2 className="trivia-subtitle">Choose a quiz!</h2>
+          <div className="trivia-card-div">
+            <Card className="trivia-card">Beginner</Card>
+            <Card className="trivia-card">Advanced</Card>
+            <Card className="trivia-card">Expert</Card>
+            <Card className="trivia-card">Name that Character</Card>
+            <Card className="trivia-card">Finish the Quote</Card>
+            <Card className="trivia-card">Who Said That</Card>
+            <Card className="trivia-card">
+              Which Simpsons Charater are You?
+            </Card>
+          </div>
         </div>
       </Page>
     );
