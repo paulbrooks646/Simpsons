@@ -23,7 +23,7 @@ export default function Quiz(props) {
       setQuestions(res.data);
       setLoading(false);
     });
-  }, []);
+  });
 
   const scoreTest = () => {
     alert(
