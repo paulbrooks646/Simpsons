@@ -9,10 +9,10 @@
   background-color: #f8f8ff;
 
   .trivia-title {
-      margin-bottom: 15vh;
+    margin-bottom: 15vh;
   }
 
-  .trivia-card {
+  #trivia-card {
     @include flex(center);
     width: 500px;
     height: 350px;
@@ -45,18 +45,20 @@
   justify-content: space-evenly;
 }
 
-.trivia-next-button {
-
+#trivia-next-button {
 }
 
-.trivia-next-button-closed {
+#trivia-next-button-closed {
+  display: none;
+}
+
+#trivia-submit-button {
+}
+
+#trivia-submit-button-closed {
+  display: none;
+}
+
+#trivia-card-closed {
     display: none;
 }
-
-.trivia-submit-button-closed {
-    display: none;
-}
-.trivia-submit-button {
-
-}
-

@@ -15,8 +15,8 @@ export default function Trivia(props) {
   const [loading, setLoading] = useState(true);
   const [i, setI] = useState(0);
   const [totalCorrect, setTotalCorrect] = useState(0);
-    const [selectedAnswer, setSelectedAnswer] = useState("");
-    const [isLastQuestion, setIsLastQuestion] = useState(false)
+  const [selectedAnswer, setSelectedAnswer] = useState("");
+  const [isLastQuestion, setIsLastQuestion] = useState(false);
 
   useEffect(() => {
     axios.get("/trivia").then((res) => {
@@ -35,7 +35,7 @@ export default function Trivia(props) {
     if (i < 2) {
       setI(i + 1);
     } else {
-      setIsLastQuestion(!isLastQuestion)
+      setIsLastQuestion(!isLastQuestion);
     }
   };
 
@@ -106,7 +106,7 @@ export default function Trivia(props) {
       ) : (
         <div className="trivia-main">
           <h1 className="trivia-title">Trivia</h1>
-          <Card className="trivia-card">
+          <Card id={`${isLastQuestion ? "trivia-card-closed" : "trivia-card"}`}>
             <div className="trivia-card-div">
               <img
                 src={questions[i].question_picture}
@@ -153,27 +153,34 @@ export default function Trivia(props) {
               <Button
                 variant="contained"
                 color="secondary"
-                className={`${
-                  isLastQuestion ? "trivia-next-button-closed" : "trivia-next-button"
-                }`}
+                id="trivia-next-button"
                 onClick={handleNextQuestion}
               >
                 Next Question
               </Button>
+            </div>
+          </Card>
+          <Card id={`${isLastQuestion ? "trivia-card" : "trivia-card-closed"}`}>
+            <div className="trivia-card-div">
+              <img
+                src="https://www.googlecover.com/_asset/_cover/Happy-Homer-Simpson_676.jpg"
+                alt="Happy Homer Simpson"
+                className="trivia-card-image"
+              />
+              <h2 className="trivia-question">
+                Thank you for taking our quiz!
+              </h2>
+
               <Button
                 variant="contained"
                 color="secondary"
-                onClick={handleNextQuestion}
-                className={`${
-                  isLastQuestion ? "trivia-submit-button" : "trivia-submit-button-closed"
-                }`}
+                onClick={scoreTest}
+                id="trivia-submit-button"
               >
-                Submit Quiz
+                Get Your Results
               </Button>
             </div>
           </Card>
-
-          {/* {questionList} */}
         </div>
       )}
     </Page>
