@@ -47,6 +47,7 @@ function SingleEpisode(props) {
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
+    let isMounted = true;
     const episode = props.match.params.episode.replace(/_/g, " ");
     const fetchData = async () => {
       const getEpisode = await axios.get(`/episode/${episode}`);
@@ -54,13 +55,22 @@ function SingleEpisode(props) {
         `/watchlist/${props.user.info.id}`
       );
       const getFavorites = await axios.get(`/favorites/${props.user.info.id}`);
-      setInfo(getEpisode.data[0]);
-      setUserWatchlist(getUserWatchlist.data);
-      setFavorites(getFavorites.data);
-      setLoading(false);
+      if (isMounted) {
+        setInfo(getEpisode.data[0]);
+        setUserWatchlist(getUserWatchlist.data);
+        setFavorites(getFavorites.data);
+        setLoading(false);
+      }
     };
     fetchData();
-  }, [props.match.params.episode, props.user.info.id]);
+    return () => (isMounted = false);
+  }, [
+    props.match.params.episode,
+    props.user.info.id,
+    info.reviews,
+    userWatchlist,
+    favorites,
+  ]);
 
   const handleOpenReviewDialog = () => setIsRating(true);
   const handleCloseReviewDialog = () => setIsRating(false);
