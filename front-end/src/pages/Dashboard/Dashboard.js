@@ -2,9 +2,11 @@ import React from "react";
 import "./Dashboard.scss";
 import Background from "../../images/androids-dungeon-bg.png";
 import Card from "@material-ui/core/Card";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { logoutUser, getUser } from "../../redux/userReducer";
+import { connect } from "react-redux";
 
-export default function Dashboard(props) {
+function Dashboard(props) {
   return (
     <div
       className="dashboard-main"
@@ -18,16 +20,18 @@ export default function Dashboard(props) {
             className="dashboard-main"
             style={{ backgroundImage: `url(${Background})` }}
           >
-            <h1
-              style={{
-                border: "solid",
-                width: "180px",
-                position: "relative",
-                top: "25px",
-              }}
-            >
-              Profile
-            </h1>
+            <Link to={`/profile/${props.user.info.username}`} style={{textDecoration: 'none', color: 'black'}}>
+              <h1
+                style={{
+                  border: "solid",
+                  width: "180px",
+                  position: "relative",
+                  top: "25px",
+                }}
+              >
+                Profile
+              </h1>
+            </Link>
           </Card>
           <Card
             id="dashboard-card-top"
@@ -84,3 +88,9 @@ export default function Dashboard(props) {
     </div>
   );
 }
+
+const mapStateToProps = (reduxState) => reduxState;
+
+export default withRouter(
+  connect(mapStateToProps, { logoutUser, getUser })(Dashboard)
+);
