@@ -27,7 +27,7 @@ export default function Quiz(props) {
 
   const scoreTest = () => {
     alert(
-      `Congratulations! You answered ${totalCorrect} questions correctly, you are one pathetic loser!`
+      `Congratulations! You answered ${totalCorrect} questions correctly!`
     );
   };
 
