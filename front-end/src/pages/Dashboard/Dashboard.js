@@ -23,15 +23,18 @@ function Dashboard(props) {
       className="dashboard-main"
       style={{ backgroundImage: `url(${Background})` }}
     >
-      <h1 className="dashboard-title">The Android's Dungeon</h1>
-      <Button
-        variant="contained"
-        color="secondary"
-        endIcon={<ExitToAppIcon />}
-        onClick={logout}
-      >
-        Logout
-      </Button>
+      <div className="title-div">
+        <h1 className="dashboard-title">The Android's Dungeon</h1>
+        <Button
+          variant="contained"
+          color="secondary"
+          endIcon={<ExitToAppIcon />}
+          onClick={logout}
+          style={{marginRight: '20px'}}
+        >
+          Logout
+        </Button>
+      </div>
       <div className="dashboard-card-div">
         <div className="top-div-cards">
           <Card
