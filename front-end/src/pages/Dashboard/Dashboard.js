@@ -10,10 +10,32 @@ export default function Dashboard(props) {
       style={{ backgroundImage: `url(${Background})` }}
     >
       <h1 className="dashboard-title">The Android's Dungeon</h1>
-      <Card className="dashboard-card"></Card>
-      <Card className="dashboard-card"></Card>
-      <Card className="dashboard-card"></Card>
-      <Card className="dashboard-card"></Card>
+      <div className="dashboard-card-div">
+        <div className="top-div-cards">
+          <Card
+            id="dashboard-card"
+            className="dashboard-main"
+            style={{ backgroundImage: `url(${Background})` }}
+          ></Card>
+          <Card
+            id="dashboard-card"
+            className="dashboard-main"
+            style={{ backgroundImage: `url(${Background})` }}
+          ></Card>
+        </div>
+        <div className="bottom-div-cards">
+          <Card
+            id="dashboard-card"
+            className="dashboard-main"
+            style={{ backgroundImage: `url(${Background})` }}
+          ></Card>
+          <Card
+            id="dashboard-card"
+            className="dashboard-main"
+            style={{ backgroundImage: `url(${Background})` }}
+          ></Card>
+        </div>
+      </div>
     </div>
   );
 }
