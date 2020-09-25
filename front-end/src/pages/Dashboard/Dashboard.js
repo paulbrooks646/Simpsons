@@ -20,7 +20,10 @@ function Dashboard(props) {
             className="dashboard-main"
             style={{ backgroundImage: `url(${Background})` }}
           >
-            <Link to={`/profile/${props.user.info.username}`} style={{textDecoration: 'none', color: 'black'}}>
+            <Link
+              to={`/profile/${props.user.info.username}`}
+              style={{ textDecoration: "none", color: "black" }}
+            >
               <h1
                 style={{
                   border: "solid",
@@ -38,16 +41,21 @@ function Dashboard(props) {
             className="dashboard-main"
             style={{ backgroundImage: `url(${Background})` }}
           >
-            <h1
-              style={{
-                border: "solid",
-                width: "180px",
-                position: "relative",
-                top: "25px",
-              }}
+            <Link
+              to={`/episodes`}
+              style={{ textDecoration: "none", color: "black" }}
             >
-              Episodes
-            </h1>
+              <h1
+                style={{
+                  border: "solid",
+                  width: "180px",
+                  position: "relative",
+                  top: "25px",
+                }}
+              >
+                Episodes
+              </h1>
+            </Link>
           </Card>
         </div>
         <div className="bottom-div-cards">
@@ -56,32 +64,42 @@ function Dashboard(props) {
             className="dashboard-main"
             style={{ backgroundImage: `url(${Background})` }}
           >
-            <h1
-              style={{
-                border: "solid",
-                width: "180px",
-                position: "relative",
-                top: "60px",
-              }}
+            <Link
+              to={`/characters`}
+              style={{ textDecoration: "none", color: "black" }}
             >
-              Characters
-            </h1>
+              <h1
+                style={{
+                  border: "solid",
+                  width: "180px",
+                  position: "relative",
+                  top: "60px",
+                }}
+              >
+                Characters
+              </h1>
+            </Link>
           </Card>
           <Card
             id="dashboard-card-bottom"
             className="dashboard-main"
             style={{ backgroundImage: `url(${Background})` }}
           >
-            <h1
-              style={{
-                border: "solid",
-                width: "180px",
-                position: "relative",
-                top: "60px",
-              }}
+            <Link
+              to={`/trivia`}
+              style={{ textDecoration: "none", color: "black" }}
             >
-              Trivia
-            </h1>
+              <h1
+                style={{
+                  border: "solid",
+                  width: "180px",
+                  position: "relative",
+                  top: "60px",
+                }}
+              >
+                Trivia
+              </h1>
+            </Link>
           </Card>
         </div>
       </div>
