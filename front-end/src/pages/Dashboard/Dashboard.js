@@ -5,14 +5,33 @@ import Card from "@material-ui/core/Card";
 import { Link, withRouter } from "react-router-dom";
 import { logoutUser, getUser } from "../../redux/userReducer";
 import { connect } from "react-redux";
+import Button from "@material-ui/core/Button"
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import axios from "axios"
 
 function Dashboard(props) {
+
+
+  const logout = () => {
+    axios.delete("/logout").then(() => {
+      props.history.push("/");
+    });
+  };
+
   return (
     <div
       className="dashboard-main"
       style={{ backgroundImage: `url(${Background})` }}
     >
       <h1 className="dashboard-title">The Android's Dungeon</h1>
+      <Button
+        variant="contained"
+        color="secondary"
+        endIcon={<ExitToAppIcon />}
+        onClick={logout}
+      >
+        Logout
+      </Button>
       <div className="dashboard-card-div">
         <div className="top-div-cards">
           <Card
