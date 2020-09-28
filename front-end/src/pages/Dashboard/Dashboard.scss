@@ -11,6 +11,7 @@
   background-attachment: fixed;
   background-clip: content-box;
   @include flex(flex-start);
+  background-image: url("../../images/androids-dungeon-bg.png");
 }
 
 .dashboard-title {
@@ -37,6 +38,16 @@
   width: 100%;
 }
 
+.dashboard-card-link {
+  text-decoration: none;
+  color: black;
+  &-header {
+    border: solid;
+    width: 180px;
+    position: relative;
+  }
+}
+
 #dashboard-card-bottom {
   width: 300px;
   height: 300px;
@@ -47,6 +58,9 @@
   justify-content: center;
   align-items: center;
   box-shadow: none;
+  .dashboard-card-link-header {
+    top: 60px;
+  }
 }
 
 #dashboard-card-top {
@@ -59,6 +73,9 @@
   justify-content: flex-start;
   align-items: center;
   box-shadow: none;
+  .dashboard-card-link-header {
+    top: 25px;
+  }
 }
 
 .title-div {
@@ -66,4 +83,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  .dashboard-logout-button {
+    margin-right: 20px;
+  }
 }
