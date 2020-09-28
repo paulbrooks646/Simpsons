@@ -18,23 +18,22 @@
   margin-left: 31%;
 }
 
+.title-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  .dashboard-title {
+    margin-left: 31%;
+  }
+}
+
 .dashboard-card-div {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  width: 100%;
-}
-
-.top-div-cards {
-  display: flex;
-  justify-content: space-evenly;
-  width: 100%;
-}
-
-.bottom-div-cards {
-  display: flex;
-  justify-content: space-evenly;
   width: 100%;
 }
 
