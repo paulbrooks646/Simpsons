@@ -46,7 +46,6 @@ function Dashboard(props) {
             >
               <h1
                 style={{
-                  border: "solid",
                   width: "180px",
                   position: "relative",
                   top: "25px",
@@ -67,7 +66,6 @@ function Dashboard(props) {
             >
               <h1
                 style={{
-                  border: "solid",
                   width: "180px",
                   position: "relative",
                   top: "25px",
@@ -90,7 +88,6 @@ function Dashboard(props) {
             >
               <h1
                 style={{
-                  border: "solid",
                   width: "180px",
                   position: "relative",
                   top: "60px",
@@ -111,7 +108,6 @@ function Dashboard(props) {
             >
               <h1
                 style={{
-                  border: "solid",
                   width: "180px",
                   position: "relative",
                   top: "60px",
