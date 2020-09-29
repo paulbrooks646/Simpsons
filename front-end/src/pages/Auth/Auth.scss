@@ -1,4 +1,5 @@
 @import "../../Sass/colors.scss";
+@import "../../Sass/mixins.scss";
 
 .auth-main {
   width: 100vw;
@@ -27,18 +28,14 @@
     .auth-card {
       width: 500px;
       height: 500px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-evenly;
-      position: relative;
+      @include flex(space-evenly);
       top: 100px;
 
       .login-form {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
+        @include flex(space-evenly);
+        align-items: initial;
         height: 60%;
+
         .forgot-password-btn {
           text-transform: capitalize;
         }
@@ -55,17 +52,12 @@
   .auth-card {
     width: 500px;
     height: 500px;
-    position: relative;
     top: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
+    @include flex(space-evenly);
 
     .register-form {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
+      @include flex(space-evenly);
+      align-items: initial;
       height: 70%;
     }
   }
