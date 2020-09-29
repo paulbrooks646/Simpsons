@@ -54,7 +54,7 @@ export default function PersonalityTest(props) {
         <LoadingSpinner />
       ) : (
         <div className="quiz-main">
-          <h1 className="quiz-title">Trivia</h1>
+          <h1 className="quiz-title">Which Simpson's Charater are you?</h1>
           <Card id={`${isLastQuestion ? "quiz-card-closed" : "quiz-card"}`}>
             <div className="quiz-card-div">
               <img
