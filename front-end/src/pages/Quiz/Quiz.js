@@ -26,9 +26,7 @@ export default function Quiz(props) {
   });
 
   const scoreTest = () => {
-    alert(
-      `Congratulations! You answered ${totalCorrect} questions correctly!`
-    );
+    alert(`Congratulations! You answered ${totalCorrect} questions correctly!`);
   };
 
   const iterateQuestion = () => {

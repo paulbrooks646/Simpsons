@@ -36,3 +36,11 @@ option_three text,
 option_four text,
 answer text
 )
+
+create table personality_test_questions (
+personality_test_id serial,
+question text,
+option_one text,
+option_two text,
+question_picture text
+)

@@ -1,0 +1,1 @@
+select * from personality_test_questions;
