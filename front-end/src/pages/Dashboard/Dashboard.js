@@ -34,7 +34,7 @@ function Dashboard(props) {
         </Button>
       </div>
       <div className="dashboard-card-div">
-        <div className="top-div-cards">
+        <div className="card-div-row">
           <Card
             id="dashboard-card-top"
             className="dashboard-main"
@@ -51,7 +51,7 @@ function Dashboard(props) {
                   top: "25px",
                 }}
               >
-                Profile
+                My Profile
               </h1>
             </Link>
           </Card>
@@ -76,7 +76,7 @@ function Dashboard(props) {
             </Link>
           </Card>
         </div>
-        <div className="bottom-div-cards">
+        <div className="card-div-row">
           <Card
             id="dashboard-card-bottom"
             className="dashboard-main"
