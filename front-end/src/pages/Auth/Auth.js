@@ -25,7 +25,6 @@ import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 
 import { loginUser, registerUser } from "../../redux/userReducer";
-import Clouds from "../../images/clouds.jpg";
 import "./Auth.scss";
 
 function Auth(props) {
@@ -122,7 +121,7 @@ function Auth(props) {
   };
   return (
     <>
-      <div className="auth-main" style={{ backgroundImage: `url(${Clouds})` }}>
+      <div className="auth-main">
         <Typography variant="h2" align="center" className="auth-title">
           The Android<span className="sans-serif">'</span>s Dungeon
         </Typography>
