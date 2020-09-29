@@ -1,18 +1,19 @@
 @import "../../Sass/colors.scss";
+@import "../../Sass/mixins.scss";
 
 .trivia-main {
   height: calc(100vh - 75px);
   width: 100vw;
   background-color: #f8f8ff;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    @include flex(initial);
+
   .trivia-carousel {
     min-width: 33%;
     &-link-wrapper {
       text-decoration: none;
       color: $primary-blue;
+      
       .trivia-carousel-image {
         padding-top: 56.25%;
       }
