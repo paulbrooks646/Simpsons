@@ -3,7 +3,8 @@
 .dashboard-main {
   height: 100vh;
   width: 100vw;
-  background: center/100vw 100vh no-repeat content-box fixed;
+  background: url("../../images/androids-dungeon-bg.png") center/100vw 100vh
+    no-repeat content-box fixed;
   text-align: center;
   overflow: hidden;
   @include flex(flex-start);
@@ -56,7 +57,7 @@
         .dashboard-link {
           text-decoration: none;
           color: black;
-          
+
           .bottom-div-title {
             width: 180px;
             position: relative;

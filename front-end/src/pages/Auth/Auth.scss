@@ -4,9 +4,10 @@
 .auth-main {
   width: 100vw;
   height: 100vh;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
+  background: url("../../images/clouds.jpg") center center/cover no-repeat;
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  // background-position: center center;
   min-height: 100%;
 
   .auth-title,
@@ -98,8 +99,4 @@
       font-size: 15px;
     }
   }
-}
-
-.san-serif {
-  font-family: sans-serif;
 }
