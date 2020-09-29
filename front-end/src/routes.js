@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+// import PrivateRoute from "./components/PrivateRoute";
 import Auth from "./pages/Auth/Auth";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Episodes from "./pages/Episodes/Episodes";
@@ -9,8 +10,8 @@ import Error from "./pages/Error/Error";
 import Characters from "./pages/Characters/Characters";
 import SingleCharacter from "./pages/SingleCharacter/SingleCharacter";
 import Trivia from "./pages/Trivia/Trivia";
-import Quiz from "./pages/Quiz/Quiz"
-import PersonalityTest from "./pages/PersonalityTest/PersonalityTest"
+import Quiz from "./pages/Quiz/Quiz";
+import PersonalityTest from "./pages/PersonalityTest/PersonalityTest";
 
 export default (
   <Switch>
@@ -24,7 +25,7 @@ export default (
     <Route path="/error" component={Error} />
     <Route exact path="/trivia" component={Trivia} />
     <Route path="/trivia/:quiz_number" component={Quiz} />
-    <Route path="/personality-test" component={PersonalityTest}/>
+    <Route path="/personality-test" component={PersonalityTest} />
     <Route path="*" component={Error} />
   </Switch>
 );

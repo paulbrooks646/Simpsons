@@ -95,7 +95,7 @@ function Auth(props) {
       .post("/login", { username, password })
       .then((res) => {
         props.loginUser(res.data);
-        props.history.push("/Dashboard");
+        props.history.push("/dashboard");
       })
       .catch((err) => {
         setLoginHasErrors(true);
