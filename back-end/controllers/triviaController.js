@@ -12,5 +12,16 @@ const getPersonalityTest = (req, res) => {
     db.get_personality_test().then((test) => res.status(200).send(test))
 }
 
+const getNextQuestion = (req, res) => {
+  const db = req.app.get("db");
+
+  console.log(req.params)
+
+  const { next_question } = req.params
+
+  db.get_next_question(next_question).then((question) => res.status(200).send(question))
+}
+
 exports.getTrivia = getTrivia;
 exports.getPersonalityTest = getPersonalityTest
+exports.getNextQuestion = getNextQuestion

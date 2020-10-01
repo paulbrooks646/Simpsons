@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.get("/trivia/:quiz_number", triviaController.getTrivia);
 router.get("/personality-test", triviaController.getPersonalityTest)
-router.get("/personality-test/:next_question")
+router.get("/personality-test/:next_question", triviaController.getNextQuestion)
 
 module.exports = router;
