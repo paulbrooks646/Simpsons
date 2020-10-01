@@ -2,9 +2,9 @@ const bcrypt = require("bcrypt");
 
 const register = async (req, res) => {
   const db = req.app.get("db");
-  const { newUsername, email, newPassword } = req.body;
+  const { newUsername, newEmail, newPassword } = req.body;
 
-  const existingUser = await db.check_user([email, newUsername]);
+  const existingUser = await db.check_user([newEmail, newUsername]);
 
   if (existingUser[0]) {
     return res.status(409).send("Username or email already exists!");
@@ -13,7 +13,7 @@ const register = async (req, res) => {
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(newPassword, salt);
 
-  const newUser = await db.register_user([newUsername, email, hash]);
+  const newUser = await db.register_user([newUsername, newEmail, hash]);
 
   req.session.user = {
     id: newUser[0].user_id,
@@ -26,8 +26,8 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   const db = req.app.get("db");
-  const { username, password } = req.body;
-  const user = await db.check_user([username, username]);
+  const { userIdentifier, password } = req.body;
+  const user = await db.check_user([userIdentifier, userIdentifier]);
   const loginFailMessage = "Invalid login credentials.";
 
   if (!user[0]) {
