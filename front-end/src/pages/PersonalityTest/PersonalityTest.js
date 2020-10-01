@@ -14,7 +14,6 @@ export default function PersonalityTest(props) {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [i, setI] = useState(0);
-  const [totalCorrect, setTotalCorrect] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [isLastQuestion, setIsLastQuestion] = useState(false);
 
@@ -25,28 +24,9 @@ export default function PersonalityTest(props) {
     });
   });
 
-  const scoreTest = () => {
-    alert(`Congratulations! You answered ${totalCorrect} questions correctly!`);
-  };
-
-  const iterateQuestion = () => {
-    if (i < 2) {
-      setI(i + 1);
-    } else {
-      setIsLastQuestion(!isLastQuestion);
-    }
-  };
-
-  const scoreAnswer = () => {
-    if (selectedAnswer === questions[i].answer) {
-      setTotalCorrect(totalCorrect + 1);
-    }
-    iterateQuestion();
-  };
-
   const handleNextQuestion = () => {
-    scoreAnswer();
-  };
+
+  }
 
   return (
     <Page>
@@ -74,15 +54,15 @@ export default function PersonalityTest(props) {
                   onChange={(e) => setSelectedAnswer(e.target.value)}
                 >
                   <FormControlLabel
-                    value={questions[i].option_one}
+                    value={questions[i].answer_one}
                     control={<Radio style={{ color: "red" }} />}
-                    label={questions[i].option_one}
+                    label={questions[i].answer_one}
                     style={{ color: "red" }}
                   />
                   <FormControlLabel
-                    value={questions[i].option_two}
+                    value={questions[i].answer_two}
                     control={<Radio style={{ color: "red" }} />}
-                    label={questions[i].option_two}
+                    label={questions[i].answer_two}
                     style={{ color: "red" }}
                   />
                 </RadioGroup>
@@ -97,25 +77,7 @@ export default function PersonalityTest(props) {
               </Button>
             </div>
           </Card>
-          <Card id={`${isLastQuestion ? "quiz-card" : "quiz-card-closed"}`}>
-            <div className="quiz-card-div">
-              <img
-                src="https://www.googlecover.com/_asset/_cover/Happy-Homer-Simpson_676.jpg"
-                alt="Happy Homer Simpson"
-                className="quiz-card-image"
-              />
-              <h2 className="quiz-question">Thank you for taking our quiz!</h2>
-
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={scoreTest}
-                id="quiz-submit-button"
-              >
-                Get Your Results
-              </Button>
-            </div>
-          </Card>
+          
         </div>
       )}
     </Page>
