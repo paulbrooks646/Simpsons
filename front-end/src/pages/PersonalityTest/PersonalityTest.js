@@ -11,25 +11,27 @@ import axios from "axios";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 export default function PersonalityTest(props) {
-  const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState();
   const [loading, setLoading] = useState(true);
-  const [i, setI] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState("");
+  const [selectedAnswer, setSelectedAnswer] = useState(1);
   const [isLastQuestion, setIsLastQuestion] = useState(false);
 
   useEffect(() => {
-    axios.get('/personality-test').then((res) => {
-      setQuestions(res.data);
-      setLoading(false);
-    });
+    if (!questions) {
+      axios.get('/personality-test').then((res) => {
+        setQuestions(res.data);
+        setLoading(false);
+      })
+    };
   });
 
-  const handleNextQuestion = () => {
-  
-    axios.get(`personality-test/${selectedAnswer}`).then((res) => {
-      setQuestions(res.data)
-    })
 
+
+  const handleNextQuestion = () => {
+        axios.get(`personality-test/${selectedAnswer}`).then((res) => {
+          setQuestions(res.data);
+          setLoading(false);
+        });
   }
 
   return (

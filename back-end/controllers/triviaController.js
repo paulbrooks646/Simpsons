@@ -19,7 +19,7 @@ const getNextQuestion = (req, res) => {
 
   const { next_question } = req.params
 
-  db.get_next_question(next_question).then((question) => res.status(200).send(question))
+  db.get_next_question(+next_question).then((question) => res.status(200).send(question))
 }
 
 exports.getTrivia = getTrivia;
