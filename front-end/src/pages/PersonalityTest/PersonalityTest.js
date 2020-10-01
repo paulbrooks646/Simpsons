@@ -25,6 +25,10 @@ export default function PersonalityTest(props) {
   });
 
   const handleNextQuestion = () => {
+  
+    axios.get(`personality-test/${selectedAnswer}`).then((res) => {
+      setQuestions(res.data)
+    })
 
   }
 
@@ -38,11 +42,11 @@ export default function PersonalityTest(props) {
           <Card id={`${isLastQuestion ? "quiz-card-closed" : "quiz-card"}`}>
             <div className="quiz-card-div">
               <img
-                src={questions[i].question_picture}
+                src={questions[0].question_picture}
                 alt="Maggie Simpson"
                 className="quiz-card-image"
               />
-              <h2 className="quiz-question">{questions[i].question}</h2>
+              <h2 className="quiz-question">{questions[0].question}</h2>
 
               <FormControl component="fieldset" className="trivia-answers">
                 <RadioGroup
@@ -54,15 +58,15 @@ export default function PersonalityTest(props) {
                   onChange={(e) => setSelectedAnswer(e.target.value)}
                 >
                   <FormControlLabel
-                    value={questions[i].answer_one}
+                    value={questions[0].answer_one_path}
                     control={<Radio style={{ color: "red" }} />}
-                    label={questions[i].answer_one}
+                    label={questions[0].answer_one}
                     style={{ color: "red" }}
                   />
                   <FormControlLabel
-                    value={questions[i].answer_two}
+                    value={questions[0].answer_two_path}
                     control={<Radio style={{ color: "red" }} />}
-                    label={questions[i].answer_two}
+                    label={questions[0].answer_two}
                     style={{ color: "red" }}
                   />
                 </RadioGroup>
