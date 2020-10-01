@@ -10,7 +10,6 @@ import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 
 const Forgot = (props) => {
-  const [dialogIsOpen, setDialogIsOpen] = useState(false);
   const [forgotPasswordEmail, setForgotPasswordEmail] = useState("");
   const [snackbarAlertType, setSnackbarAlertType] = useState("info");
   const [snackbarAlertText, setSnackbarAlertText] = useState("");
@@ -28,37 +27,39 @@ const Forgot = (props) => {
     setSnackbarAlertText("");
   };
 
-  // eslint-disable-next-line
-  const handleForgotPasswordDialogOpen = () => {
-    setDialogIsOpen(true);
-  };
-
-  const handleForgotPasswordDialogClose = () => {
-    setDialogIsOpen(false);
+  const handleForgotDialogClose = () => {
+    props.setForgotDialogIsOpen(false);
     setForgotPasswordEmail("");
   };
 
-  const handlePasswordResetRequest = () => {
-    // * Temporary email check
-    if (forgotPasswordEmail.length) {
-      handleSnackbarOpen(
-        "info",
-        "Password reset link sent. Please check your email"
-      );
-    } else {
-      handleSnackbarOpen(
-        "error",
-        "No user with that email exists. Please try again."
-      );
-    }
-    handleForgotPasswordDialogClose();
+  // * Temporary email check
+  const checkEmail = () => {
+    return new Promise((resolve, reject) => {
+      if (forgotPasswordEmail.length) {
+        handleSnackbarOpen(
+          "info",
+          `A Password reset link has been sent to ${forgotPasswordEmail}`
+        );
+      } else {
+        handleSnackbarOpen(
+          "error",
+          "No user with that email exists. Please try again."
+        );
+      }
+      resolve();
+    });
+  };
+
+  const handlePasswordResetRequest = async () => {
+    await checkEmail();
+    handleForgotDialogClose();
   };
 
   return (
     <>
       <Dialog
-        open={dialogIsOpen}
-        onClose={handleForgotPasswordDialogClose}
+        open={props.open}
+        onClose={handleForgotDialogClose}
         disableBackdropClick={true}
         aria-labelledby="forgot-password-dialog"
       >
@@ -79,7 +80,7 @@ const Forgot = (props) => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleForgotPasswordDialogClose} color="secondary">
+          <Button onClick={handleForgotDialogClose} color="secondary">
             Cancel
           </Button>
           <Button onClick={handlePasswordResetRequest} color="primary">

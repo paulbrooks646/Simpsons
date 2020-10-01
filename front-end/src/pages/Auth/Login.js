@@ -79,10 +79,7 @@ const Login = (props) => {
         size="small"
         color="secondary"
         className="forgot-password-btn"
-        // onClick={handleForgotPasswordDialogOpen}
-        onClick={() =>
-          alert("This should open the 'forgot password' dialog...")
-        }
+        onClick={() => props.setForgotDialogIsOpen(true)}
       >
         Forgot Password?
       </Button>

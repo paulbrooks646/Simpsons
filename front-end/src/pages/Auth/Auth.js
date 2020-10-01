@@ -10,6 +10,7 @@ import "./Auth.scss";
 
 const Auth = (props) => {
   const [isLoggingIn, setIsLoggingIn] = useState(true);
+  const [forgotDialogIsOpen, setForgotDialogIsOpen] = useState(false);
 
   const switchAuthType = (event) => {
     event.preventDefault();
@@ -30,7 +31,11 @@ const Auth = (props) => {
             <Typography variant="h4">
               {isLoggingIn ? "Login" : "Register"}
             </Typography>
-            {isLoggingIn ? <Login /> : <Register />}
+            {isLoggingIn ? (
+              <Login setForgotDialogIsOpen={setForgotDialogIsOpen} />
+            ) : (
+              <Register />
+            )}
             <Typography variant="h6">
               {isLoggingIn ? "No account? " : "Already have an account? "}
               <Link href="#" onClick={switchAuthType}>
@@ -40,7 +45,10 @@ const Auth = (props) => {
           </Card>
         </div>
       </div>
-      <Forgot />
+      <Forgot
+        open={forgotDialogIsOpen}
+        setForgotDialogIsOpen={setForgotDialogIsOpen}
+      />
     </>
   );
 };
