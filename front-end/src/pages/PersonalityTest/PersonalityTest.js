@@ -38,6 +38,7 @@ export default function PersonalityTest(props) {
     } else {
       setIsLastQuestion(!isLastQuestion);
     }
+    setSelectedAnswer("")
   };
 
   const handleNextQuestion = () => {
