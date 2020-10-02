@@ -13,26 +13,47 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 export default function PersonalityTest(props) {
   const [questions, setQuestions] = useState();
   const [loading, setLoading] = useState(true);
-  const [selectedAnswer, setSelectedAnswer] = useState(1);
+  const [selectedAnswer, setSelectedAnswer] = useState("");
+  const [currentTheme, setCurrentTheme] = useState("");
   const [isLastQuestion, setIsLastQuestion] = useState(false);
+  const [characters, setCharacters] = useState();
+  const [i, setI] = useState(0);
 
   useEffect(() => {
-    if (!questions) {
-      axios.get('/personality-test').then((res) => {
+    if (!characters) {
+      axios.get("/personality-test").then((res) => {
         setQuestions(res.data);
+      });
+      axios.get("/characters").then((res) => {
+        setCharacters(res.data);
         setLoading(false);
-      })
-    };
+      });
+    }
   });
 
-
+  const iterateQuestion = () => {
+    if (i < questions.length - 1) {
+      setI(i + 1);
+      setCurrentTheme(questions[i].theme);
+    } else {
+      setIsLastQuestion(!isLastQuestion);
+    }
+  };
 
   const handleNextQuestion = () => {
-        axios.get(`personality-test/${selectedAnswer}`).then((res) => {
-          setQuestions(res.data);
-          setLoading(false);
-        });
-  }
+    if (!selectedAnswer) {
+      alert("You have to select an answer");
+    } else {
+      if (characters.length > 1) {
+        setCharacters(
+          characters.filter((row) => row.currentTheme === selectedAnswer)
+        );
+      } else {
+        setIsLastQuestion(questions[0].question_name_one);
+      }
+      iterateQuestion();
+    }
+  };
 
   return (
     <Page>
@@ -44,32 +65,30 @@ export default function PersonalityTest(props) {
           <Card id={`${isLastQuestion ? "quiz-card-closed" : "quiz-card"}`}>
             <div className="quiz-card-div">
               <img
-                src={questions[0].question_picture}
-                alt="Maggie Simpson"
+                src={questions[i].question_picture}
+                alt="Quiz card image"
                 className="quiz-card-image"
               />
-              <h2 className="quiz-question">{questions[0].question}</h2>
+              <h2 className="quiz-question">{questions[i].question}</h2>
 
               <FormControl component="fieldset" className="trivia-answers">
                 <RadioGroup
                   className="quiz-radio-group"
                   row
-                  aria-label="maggie"
-                  name="maggie"
+                  aria-label={`Question ${questions[i].question_id}`}
+                  name={`Question ${questions[i].question_id}`}
                   value={selectedAnswer}
                   onChange={(e) => setSelectedAnswer(e.target.value)}
                 >
                   <FormControlLabel
-                    value={questions[0].answer_one_path}
-                    control={<Radio style={{ color: "red" }} />}
-                    label={questions[0].answer_one}
-                    style={{ color: "red" }}
+                    value="Yes"
+                    control={<Radio color="primary" />}
+                    label="Yes"
                   />
                   <FormControlLabel
-                    value={questions[0].answer_two_path}
-                    control={<Radio style={{ color: "red" }} />}
-                    label={questions[0].answer_two}
-                    style={{ color: "red" }}
+                    value="No"
+                    control={<Radio color="primary" />}
+                    label="No"
                   />
                 </RadioGroup>
               </FormControl>
@@ -83,7 +102,6 @@ export default function PersonalityTest(props) {
               </Button>
             </div>
           </Card>
-          
         </div>
       )}
     </Page>

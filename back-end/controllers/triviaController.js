@@ -15,8 +15,6 @@ const getPersonalityTest = (req, res) => {
 const getNextQuestion = (req, res) => {
   const db = req.app.get("db");
 
-  console.log(req.params)
-
   const { next_question } = req.params
 
   db.get_next_question(+next_question).then((question) => res.status(200).send(question))
