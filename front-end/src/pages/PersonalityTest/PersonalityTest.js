@@ -28,16 +28,13 @@ export default function PersonalityTest(props) {
         axios.get("/characters").then((res) => {
           setCharacters(res.data);
           setLoading(false);
-        })
+        });
       });
     } else if (characters.length > 1) {
-     
-        console.log("blahblahblah")
-      
-    }
-    else if (characters.length === 1) {
-      console.log("we did it")
-      setIsLastQuestion(true)
+      console.log("blahblahblah");
+    } else if (characters.length === 1) {
+      console.log("we did it");
+      setIsLastQuestion(true);
     }
   }, [characters]);
 
@@ -45,14 +42,6 @@ export default function PersonalityTest(props) {
     setI((i += 1));
     setCurrentTheme(questions[i].theme);
     setSelectedAnswer("");
-  };
-
-  const blahblahblah = () => {
-    if (characters.length >= 2) {
-      iterateQuestion();
-    } else {
-      setIsLastQuestion(true);
-    }
   };
 
   const handleNextQuestion = () => {
@@ -65,7 +54,7 @@ export default function PersonalityTest(props) {
         })
       );
     }
-    blahblahblah();
+    iterateQuestion();
   };
 
   return (
