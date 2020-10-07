@@ -17,42 +17,52 @@ export default function PersonalityTest(props) {
   const [currentTheme, setCurrentTheme] = useState("");
   const [isLastQuestion, setIsLastQuestion] = useState(false);
   const [characters, setCharacters] = useState();
-  const [i, setI] = useState(0);
+  let [i, setI] = useState(0);
 
   useEffect(() => {
     if (!characters) {
       axios.get("/personality-test").then((res) => {
         setQuestions(res.data);
-      });
-      axios.get("/characters").then((res) => {
-        setCharacters(res.data);
-        setLoading(false);
+        setCurrentTheme(res.data[0].theme);
+
+        axios.get("/characters").then((res) => {
+          setCharacters(res.data);
+          setLoading(false);
+        });
       });
     }
   });
 
   const iterateQuestion = () => {
-    if (i < questions.length - 1) {
-      setI(i + 1);
-      setCurrentTheme(questions[i].theme);
-    } else {
-      setIsLastQuestion(!isLastQuestion);
-    }
-    setSelectedAnswer("")
+    setI(i += 1);
+    setCurrentTheme(questions[i].theme);
+    setSelectedAnswer("");
   };
 
-  const handleNextQuestion = () => {
-    if (!selectedAnswer) {
-      alert("You have to select an answer");
-    } else {
-      if (characters.length > 1) {
-        setCharacters(
-          characters.filter((row) => row.currentTheme === selectedAnswer)
-        );
+  const checkLastQuestion = () => {
+    return new Promise((resolve, reject) => {
+      if (!selectedAnswer) {
+        alert("You have to select an answer");
       } else {
-        setIsLastQuestion(questions[0].question_name_one);
+        console.log(characters.length)
+        setCharacters(
+          characters.filter((row) => {
+            return row[currentTheme] === selectedAnswer;
+          })
+        );
       }
+      console.log(characters.length)
+      resolve();
+    });
+  };
+
+  const handleNextQuestion = async () => {
+    await checkLastQuestion();
+    console.log(characters.length)
+    if (characters.length >= 2) {
       iterateQuestion();
+    } else {
+      setIsLastQuestion(true);
     }
   };
 
@@ -62,16 +72,15 @@ export default function PersonalityTest(props) {
         <LoadingSpinner />
       ) : (
         <div className="quiz-main">
-          <h1 className="quiz-title">Which Simpson's Charater are you?</h1>
+          <h1 className="quiz-title">Which Simpsons Character are you?</h1>
           <Card id={`${isLastQuestion ? "quiz-card-closed" : "quiz-card"}`}>
             <div className="quiz-card-div">
               <img
                 src={questions[i].question_picture}
-                alt="Quiz card image"
+                alt={questions[i].question}
                 className="quiz-card-image"
               />
               <h2 className="quiz-question">{questions[i].question}</h2>
-
               <FormControl component="fieldset" className="trivia-answers">
                 <RadioGroup
                   className="quiz-radio-group"
@@ -102,6 +111,9 @@ export default function PersonalityTest(props) {
                 Next Question
               </Button>
             </div>
+          </Card>
+          <Card id={`${isLastQuestion ? "quiz-card" : "quiz-card-closed"}`}>
+            <h1>You are Hans Moleman!</h1>
           </Card>
         </div>
       )}
