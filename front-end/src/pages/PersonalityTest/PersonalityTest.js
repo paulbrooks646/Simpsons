@@ -20,19 +20,25 @@ export default function PersonalityTest(props) {
   let [i, setI] = useState(0);
 
   useEffect(() => {
+    let isMounted = true;
     if (!characters) {
       axios.get("/personality-test").then((res) => {
-        setQuestions(res.data);
-        setCurrentTheme(res.data[0].theme);
+        if (isMounted) {
+          setQuestions(res.data);
+          setCurrentTheme(res.data[0].theme);
+        }
 
         axios.get("/characters").then((res) => {
-          setCharacters(res.data);
-          setLoading(false);
+          if (isMounted) {
+            setCharacters(res.data);
+            setLoading(false);
+          }
         });
       });
     } else if (characters.length === 1) {
       setIsLastQuestion(true);
     }
+    return () => (isMounted = false);
   }, [characters]);
 
   const iterateQuestion = () => {
