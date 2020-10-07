@@ -30,10 +30,7 @@ export default function PersonalityTest(props) {
           setLoading(false);
         });
       });
-    } else if (characters.length > 1) {
-      console.log("blahblahblah");
     } else if (characters.length === 1) {
-      console.log("we did it");
       setIsLastQuestion(true);
     }
   }, [characters]);
@@ -49,9 +46,7 @@ export default function PersonalityTest(props) {
       alert("You have to select an answer");
     } else {
       setCharacters(() =>
-        characters.filter((row) => {
-          return row[currentTheme] === selectedAnswer;
-        })
+        characters.filter((row) => row[currentTheme] === selectedAnswer)
       );
     }
     iterateQuestion();
@@ -64,53 +59,58 @@ export default function PersonalityTest(props) {
       ) : (
         <div className="quiz-main">
           <h1 className="quiz-title">Which Simpsons Character are you?</h1>
-          {!isLastQuestion && (
-            <Card id="quiz-card">
-              <div className="quiz-card-div">
-                <img
-                  src={questions[i].question_picture}
-                  alt={questions[i].question}
-                  className="quiz-card-image"
-                />
-                <h2 className="quiz-question">{questions[i].question}</h2>
-                <FormControl component="fieldset" className="trivia-answers">
-                  <RadioGroup
-                    className="quiz-radio-group"
-                    row
-                    aria-label={`Question ${questions[i].question_id}`}
-                    name={`Question ${questions[i].question_id}`}
-                    value={selectedAnswer}
-                    onChange={(e) => setSelectedAnswer(e.target.value)}
+          <Card id="quiz-card">
+            <div className="quiz-card-div">
+              {!isLastQuestion ? (
+                <>
+                  <img
+                    src={questions[i].question_picture}
+                    alt={`Question ${i + 1}`}
+                    className="quiz-card-image"
+                  />
+                  <h2 className="quiz-question">{questions[i].question}</h2>
+                  <FormControl component="fieldset" className="trivia-answers">
+                    <RadioGroup
+                      className="quiz-radio-group"
+                      row
+                      aria-label={`Question ${questions[i].question_id}`}
+                      name={`Question ${questions[i].question_id}`}
+                      value={selectedAnswer}
+                      onChange={(e) => setSelectedAnswer(e.target.value)}
+                    >
+                      <FormControlLabel
+                        value="Yes"
+                        control={<Radio color="primary" />}
+                        label="Yes"
+                      />
+                      <FormControlLabel
+                        value="No"
+                        control={<Radio color="primary" />}
+                        label="No"
+                      />
+                    </RadioGroup>
+                  </FormControl>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    id="quiz-next-button"
+                    onClick={handleNextQuestion}
                   >
-                    <FormControlLabel
-                      value="Yes"
-                      control={<Radio color="primary" />}
-                      label="Yes"
-                    />
-                    <FormControlLabel
-                      value="No"
-                      control={<Radio color="primary" />}
-                      label="No"
-                    />
-                  </RadioGroup>
-                </FormControl>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  id="quiz-next-button"
-                  onClick={handleNextQuestion}
-                >
-                  Next Question
-                </Button>
-              </div>
-            </Card>
-          )}
-          {isLastQuestion && (
-            <Card id="quiz-card">
-              <h1>You are {characters[0].name}!</h1>
-              <img src={characters[0].picture} className="quiz-card-image" />
-            </Card>
-          )}
+                    Next Question
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <h1>You are {characters[0].name}!</h1>
+                  <img
+                    src={characters[0].picture}
+                    alt={characters[0].name}
+                    className="quiz-card-image"
+                  />
+                </>
+              )}
+            </div>
+          </Card>
         </div>
       )}
     </Page>

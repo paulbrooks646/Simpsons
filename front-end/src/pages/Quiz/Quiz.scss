@@ -1,11 +1,12 @@
 @import "../../Sass/mixins.scss";
+@import "../../Sass/colors.scss";
 
 .quiz-main {
   width: 100vw;
   height: calc(100vh - 75px);
   @include flex(flex-start);
   text-align: center;
-  color: blue;
+  color: $primary-blue;
   background-color: #f8f8ff;
 
   .quiz-title {
@@ -27,7 +28,7 @@
       }
 
       .quiz-question {
-        color: blue;
+        color: $primary-dark-blue;
         width: 90%;
       }
 
@@ -43,8 +44,4 @@
 .quiz-radio-group {
   display: flex;
   justify-content: space-evenly;
-}
-
-#quiz-card-closed {
-  display: none;
 }
