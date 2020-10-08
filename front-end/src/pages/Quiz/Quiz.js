@@ -50,7 +50,11 @@ export default function Quiz(props) {
   };
 
   const handleNextQuestion = () => {
-    scoreAnswer();
+    if (selectedAnswer) {
+      scoreAnswer();
+    } else {
+      alert('You have to select an answer')
+    }
   };
 
   return (
