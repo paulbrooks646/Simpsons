@@ -2,7 +2,8 @@
 
 .characters-body {
   background-color: #f8f8ff;
-  height: calc(100vh - 75px);
+  // height: calc(100vh - 75px);
+  height: 100%;
   display: flex;
   justify-content: space-evenly;
   align-items: flex-start;
@@ -11,6 +12,7 @@
   .character-list {
     @include flex(center);
     top: 20px;
+  
     
 
     .character-card {
@@ -22,6 +24,7 @@
       @include flex(center);
       flex-direction: row;
       align-items: flex-start;
+      margin-bottom: 20px;
 
       .character-image {
         height: 100px;
