@@ -47,18 +47,24 @@ function Profile(props) {
   const [favoritesLoading, setFavoritesLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true
     getUser();
     if (profile_pic) {
       setPic(profile_pic);
       axios.get(`/watchlist/${props.user.info.id}`).then((res) => {
-        setWatchlist(res.data);
-        setWatchlistLoading(false);
+        if (isMounted) {
+          setWatchlist(res.data);
+          setWatchlistLoading(false);
+        }
       });
       axios.get(`/favorites/${props.user.info.id}`).then((res) => {
-        setFavorites(res.data);
-        setFavoritesLoading(false);
+        if (isMounted) {
+          setFavorites(res.data);
+          setFavoritesLoading(false);
+        }
       });
     }
+    return () => isMounted = false
   }, [profile_pic, props.user.info.id]);
 
   const handleOpenUpdatingProfile = () => setUpdatingProfile(true);

@@ -11,10 +11,14 @@ export default function Characters(props) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true
     axios.get("/characters").then((res) => {
-      setCharacters(res.data);
-      setLoading(false);
+      if (isMounted) {
+        setCharacters(res.data);
+        setLoading(false);
+      }
     });
+    return () => isMounted = false
   }, []);
 
   const characterList = characters.map((e, index) => {
