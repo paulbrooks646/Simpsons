@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
-import "./PersonalityTest.scss";
-import Page from "../../components/Page";
+import { Link as RouterLink } from "react-router-dom";
+import axios from "axios";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-import axios from "axios";
+import Link from "@material-ui/core/Link";
+import Page from "../../components/Page";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 export default function PersonalityTest(props) {
@@ -107,7 +108,18 @@ export default function PersonalityTest(props) {
                 </>
               ) : (
                 <>
-                  <h1>You are {characters[0].name}!</h1>
+                  <h1>
+                    You are{" "}
+                    <Link
+                      component={RouterLink}
+                      to={`/characters/${characters[0].name.replace(
+                        / /g,
+                        "_"
+                      )}`}
+                    >
+                      {characters[0].name}!
+                    </Link>
+                  </h1>
                   <img
                     src={characters[0].picture}
                     alt={characters[0].name}
