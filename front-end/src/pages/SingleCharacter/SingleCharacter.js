@@ -11,15 +11,19 @@ export default function SingleCharacter(props) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true
     axios
       .get(`/characters/${props.match.params.character.replace(/_/g, " ")}`)
       .then((res) => {
-        setCharacter(res.data);
+        if (isMounted) {
+          setCharacter(res.data);
         setLoading(false);
+        }
       })
       .catch((err) => {
         props.history.push("/error");
       });
+      return () => isMounted = false
   });
 
   return (

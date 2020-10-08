@@ -17,10 +17,14 @@ function Episodes(props) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true
     axios.get("/episodes").then((res) => {
-      getEpisodes(res.data);
-      setLoading(false);
+      if (isMounted) {
+        getEpisodes(res.data);
+        setLoading(false);
+      }
     });
+    return () => isMounted = false
   }, [getEpisodes]);
 
   const handleChange = (event, value) => {
