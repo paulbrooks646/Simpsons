@@ -22,6 +22,11 @@
         width: 100%;
       }
 
+      .episode-image {
+        width: 450px;
+        height: 280px;
+      }
+
       .episode-quote {
         white-space: pre-wrap;
         text-align: left;
@@ -33,7 +38,6 @@
 
 .reviews-div {
   @include flex(space-evenly);
-  
 }
 
 .user-review-avatar {

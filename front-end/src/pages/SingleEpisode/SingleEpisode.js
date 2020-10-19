@@ -189,8 +189,12 @@ function SingleEpisode(props) {
                 ({info.reviews.length}{" "}
                 {info.reviews.length === 1 ? "rating" : "ratings"})
               </p>
-              <img src={info.episode_image} alt={info.episode_name} />
-              <p style={{width: "90%"}}>{info.episode_synopsis}</p>
+              <img
+                className="episode-image"
+                src={info.episode_image}
+                alt={info.episode_name}
+              />
+              <p style={{ width: "90%" }}>{info.episode_synopsis}</p>
               <h2>Air Date: {formatDate(info.air_date)}</h2>
               <p className="episode-quote">{info.episode_quote}</p>
               <h2>Season: {info.season}</h2>
