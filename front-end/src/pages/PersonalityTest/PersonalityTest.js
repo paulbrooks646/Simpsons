@@ -55,8 +55,8 @@ export default function PersonalityTest(props) {
       setCharacters(() =>
         characters.filter((row) => row[currentTheme] === selectedAnswer)
       );
+      iterateQuestion();
     }
-    iterateQuestion();
   };
 
   return (
