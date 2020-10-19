@@ -8,6 +8,8 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Link from "@material-ui/core/Link";
+import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "@material-ui/lab/Alert";
 import Page from "../../components/Page";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
@@ -18,6 +20,7 @@ export default function PersonalityTest(props) {
   const [currentTheme, setCurrentTheme] = useState("");
   const [isLastQuestion, setIsLastQuestion] = useState(false);
   const [characters, setCharacters] = useState();
+  const [errorSnackbarIsOpen, setErrorSnackbarIsOpen] = useState(false);
   let [i, setI] = useState(0);
 
   useEffect(() => {
@@ -50,86 +53,106 @@ export default function PersonalityTest(props) {
 
   const handleNextQuestion = () => {
     if (!selectedAnswer) {
-      alert("You have to select an answer");
+      setErrorSnackbarIsOpen(true);
     } else {
       setCharacters(() =>
         characters.filter((row) => row[currentTheme] === selectedAnswer)
       );
+      iterateQuestion();
     }
-    iterateQuestion();
   };
+
+  const handleErrorSnackbarClose = () => setErrorSnackbarIsOpen(false);
 
   return (
     <Page>
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div className="quiz-main">
-          <h1 className="quiz-title">Which Simpsons Character are you?</h1>
-          <Card id="quiz-card">
-            <div className="quiz-card-div">
-              {!isLastQuestion ? (
-                <>
-                  <img
-                    src={questions[i].question_picture}
-                    alt={`Question ${i + 1}`}
-                    className="quiz-card-image"
-                  />
-                  <h2 className="quiz-question">{questions[i].question}</h2>
-                  <FormControl component="fieldset" className="trivia-answers">
-                    <RadioGroup
-                      className="quiz-radio-group"
-                      row
-                      aria-label={`Question ${questions[i].question_id}`}
-                      name={`Question ${questions[i].question_id}`}
-                      value={selectedAnswer}
-                      onChange={(e) => setSelectedAnswer(e.target.value)}
+        <>
+          <div className="quiz-main">
+            <h1 className="quiz-title">Which Simpsons Character are you?</h1>
+            <Card id="quiz-card">
+              <div className="quiz-card-div">
+                {!isLastQuestion ? (
+                  <>
+                    <img
+                      src={questions[i].question_picture}
+                      alt={`Question ${i + 1}`}
+                      className="quiz-card-image"
+                    />
+                    <h2 className="quiz-question">{questions[i].question}</h2>
+                    <FormControl
+                      component="fieldset"
+                      className="trivia-answers"
                     >
-                      <FormControlLabel
-                        value="Yes"
-                        control={<Radio color="primary" />}
-                        label="Yes"
-                      />
-                      <FormControlLabel
-                        value="No"
-                        control={<Radio color="primary" />}
-                        label="No"
-                      />
-                    </RadioGroup>
-                  </FormControl>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    id="quiz-next-button"
-                    onClick={handleNextQuestion}
-                  >
-                    Next Question
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <h1>
-                    You are{" "}
-                    <Link
-                      component={RouterLink}
-                      to={`/characters/${characters[0].name.replace(
-                        / /g,
-                        "_"
-                      )}`}
+                      <RadioGroup
+                        className="quiz-radio-group"
+                        row
+                        aria-label={`Question ${questions[i].question_id}`}
+                        name={`Question ${questions[i].question_id}`}
+                        value={selectedAnswer}
+                        onChange={(e) => setSelectedAnswer(e.target.value)}
+                      >
+                        <FormControlLabel
+                          value="Yes"
+                          control={<Radio color="primary" />}
+                          label="Yes"
+                        />
+                        <FormControlLabel
+                          value="No"
+                          control={<Radio color="primary" />}
+                          label="No"
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      id="quiz-next-button"
+                      onClick={handleNextQuestion}
                     >
-                      {characters[0].name}!
-                    </Link>
-                  </h1>
-                  <img
-                    src={characters[0].picture}
-                    alt={characters[0].name}
-                    className="quiz-card-image"
-                  />
-                </>
-              )}
-            </div>
-          </Card>
-        </div>
+                      Next Question
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <h1>
+                      You are{" "}
+                      <Link
+                        component={RouterLink}
+                        to={`/characters/${characters[0].name.replace(
+                          / /g,
+                          "_"
+                        )}`}
+                      >
+                        {characters[0].name}!
+                      </Link>
+                    </h1>
+                    <img
+                      src={characters[0].picture}
+                      alt={characters[0].name}
+                      className="quiz-card-image"
+                    />
+                  </>
+                )}
+              </div>
+            </Card>
+          </div>
+          <Snackbar
+            open={errorSnackbarIsOpen}
+            autoHideDuration={5000}
+            onClose={handleErrorSnackbarClose}
+          >
+            <Alert
+              onClose={handleErrorSnackbarClose}
+              severity="error"
+              variant="filled"
+            >
+              You have to select an answer
+            </Alert>
+          </Snackbar>
+        </>
       )}
     </Page>
   );
