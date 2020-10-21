@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/userReducer";
 import Page from "../../components/Page";
@@ -31,6 +32,7 @@ import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import DeleteIcon from "@material-ui/icons/Delete";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 function SingleEpisode(props) {
   const [info, setInfo] = useState([]);
@@ -147,6 +149,11 @@ function SingleEpisode(props) {
             <div className="episode-div">
               <div className="title-div">
                 <h2>{info.episode_name}</h2>
+                <Tooltip title="Back To All Episodes">
+                  <IconButton component={Link} to="/episodes">
+                    <ArrowBackIcon />
+                  </IconButton>
+                </Tooltip>
                 {userWatchlist
                   .map((episode) => episode.episode_name)
                   .includes(info.episode_name) ? (
