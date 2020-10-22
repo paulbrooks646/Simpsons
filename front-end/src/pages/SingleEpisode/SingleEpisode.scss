@@ -7,11 +7,12 @@
   align-items: center;
   background-color: #f8f8ff;
   text-align: center;
+  padding-bottom: 20px;
 
   .episode-card {
     width: 600px;
     @include flex(space-evenly);
-    top: 15px;
+    margin-top: 20px;
 
     .episode-div {
       @include flex(space-evenly);
