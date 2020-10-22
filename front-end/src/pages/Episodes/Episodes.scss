@@ -2,7 +2,8 @@
 
 .episodes-body {
   background-color: #f8f8ff;
-  height: calc(100vh - 75px);
+  height: calc(100% - 75px);
+  padding-bottom: 20px;
 
   .episodes-main {
     display: flex;
@@ -12,7 +13,7 @@
 
     .episodes-link {
       text-decoration: none;
-      
+
       .episodes-card {
         margin-top: 20px;
 
