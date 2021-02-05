@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config({ path: __dirname + "/.env" });
 const express = require("express");
 const massive = require("massive");
 const { CONNECTION_STRING, SESSION_SECRET } = process.env;
@@ -7,6 +7,7 @@ const userRoutes = require("./routes/userRoutes");
 const episodesRoutes = require("./routes/episodesRoutes");
 const charactersRouters = require("./routes/charactersRoutes");
 const triviaRoutes = require("./routes/triviaRoutes")
+const path = require("path")
 
 const app = express();
 
@@ -25,6 +26,12 @@ app.use(userRoutes);
 app.use(episodesRoutes);
 app.use(charactersRouters);
 app.use(triviaRoutes)
+
+app.use(express.static(__dirname + "/../build"));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../build/index.html"));
+});
 
 const port = 5000;
 
